@@ -13,7 +13,7 @@ ul {
 
 .list-menu-item {
   @apply py-4 w-full flex justify-center cursor-pointer hover:bg-lightGreen
-  transition duration-300 ease-in-out;
+  transition duration-300 ease-in-out capitalize;
 }
 
 

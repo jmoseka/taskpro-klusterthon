@@ -1,11 +1,26 @@
+import Dashboard from "../Dashboard/Dashboard";
+import Invoice from "../Invoices/Invoice,";
+import Manage from "../Manage/Manage";
 
-function Mainbar() {
+function Mainbar({ selectedMenu }) {
+    const component = selectedMenu;
+
     return (
-        <div className="">
-            <h1 className='text-3xl'>Dashboard</h1>
+        <div className="p-6 border w-full border-purple-800">
+            {
+                component === 'dashboard'?
+                <Dashboard />
+                :
+                component === 'manage' ?
+                <Manage /> 
+                :
+                component === 'invoices' ?
+                <Invoice /> 
+                :
+                <Dashboard />
+            }
         </div>
     );
 }
 
-export default Mainbar
-    ;
+export default Mainbar;

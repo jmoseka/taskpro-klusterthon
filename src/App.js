@@ -1,11 +1,11 @@
 
 import './App.css';
-import Dashboard from './components/Dashboard/Dashboard';
+import Home from './components/Home/Home';
 
 function App() {
   return (
     <div className="App font-poppins">
-     <Dashboard />
+      <Home />
     </div>
   );
 }
