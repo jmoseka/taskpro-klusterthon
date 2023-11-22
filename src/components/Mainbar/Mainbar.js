@@ -1,23 +1,24 @@
 import Dashboard from "../Dashboard/Dashboard";
 import Invoice from "../Invoices/Invoice,";
 import Manage from "../Manage/Manage";
+import './Mainbar.css';
 
 function Mainbar({ selectedMenu }) {
     const component = selectedMenu;
 
     return (
-        <div className="p-6 border w-full border-purple-800">
+        <div className="px-10 pt-6 w-full">
             {
-                component === 'dashboard'?
-                <Dashboard />
-                :
-                component === 'manage' ?
-                <Manage /> 
-                :
-                component === 'invoices' ?
-                <Invoice /> 
-                :
-                <Dashboard />
+                component === 'dashboard' ?
+                    <Dashboard />
+                    :
+                    component === 'manage' ?
+                        <Manage />
+                        :
+                        component === 'invoices' ?
+                            <Invoice />
+                            :
+                            <Dashboard />
             }
         </div>
     );
