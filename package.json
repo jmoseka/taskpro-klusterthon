@@ -9,7 +9,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@tailwindcss/forms": "0.4.0",
+    "react-router-hash-link": "^2.4.3",
+    "react-router-dom": "6.0.2",
+    "react-datepicker": "^4.5.0",
+    "prop-types": "^15.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
