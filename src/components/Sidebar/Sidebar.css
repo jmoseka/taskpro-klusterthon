@@ -12,13 +12,15 @@ ul {
 }
 
 .list-menu-item {
-  @apply py-4 w-full flex justify-center cursor-pointer;
+  @apply py-4 w-full flex justify-center cursor-pointer hover:bg-lightGreen
+  transition duration-300 ease-in-out;
 }
 
-.list-menu-item:hover {
-  background: rgba(#048929, 0.8);
-}
 
 .menu-text-icon {
   @apply flex items-center gap-2;
+}
+
+.active-menu {
+    @apply bg-green hover:bg-green;
 }

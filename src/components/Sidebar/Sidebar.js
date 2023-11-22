@@ -1,33 +1,45 @@
 import logo from '../../icons/0.75x/logo.png'
 import support from '../../icons/0.75x/support.png';
 import logout from '../../icons/0.75x/logout.png';
+import settings from '../../icons/0.75x/settings.png';
+import manage from '../../icons/0.75x/manage.png';
+import dashboard from '../../icons/0.75x/dashboard.png';
+import invoice from '../../icons/0.75x/invoices.png';
+import project from '../../icons/0.75x/project.png';
 
 import './Sidebar.css';
+import { useState } from 'react';
 
 function Sidebar() {
+  const [activeMenu, setActiveMenu] = useState(null);
+
   const menuArray = [
     {
       text: 'Dashboard',
-      icon: { support },
+      icon: dashboard,
     },
     {
       text: 'Manage',
-      icon: { support }
+      icon: manage,
     },
     {
       text: 'invoices',
-      icon: { support }
+      icon: invoice,
     },
     {
       text: 'projects',
-      icon: { support }
+      icon: project,
     },
     {
       text: 'settings',
-      icon: { support }
+      icon: settings,
     },
 
   ]
+
+  const handleMenuLink = (index) => {
+    setActiveMenu(index)
+  }
 
   return (
     <div className="sidebar max-w-[336px] capitalize h-[100%] 
@@ -44,15 +56,16 @@ function Sidebar() {
         <ul className="list-menu">
 
           {
-            menuArray.map((menu) => (
-              <li key={menu.text.toLowerCase} className='list-menu-item '>
+            menuArray.map((menu, index) => (
+              <button onClick={()=> handleMenuLink(index)} type='button' key={index}
+               className={`list-menu-item ${activeMenu === index  ? 'active-menu' : '' }`}>
                 <div className='w-32'>
                   <div className='menu-text-icon'>
-                    <span><img src={support} alt='icon-support' /></span>
+                    <span><img src={menu.icon} alt={`icon-${menu.icon}`} /></span>
                     <span>{menu.text}</span>
                   </div>
                 </div>
-              </li>
+              </button>
             ))
           }
 
@@ -74,7 +87,7 @@ function Sidebar() {
             <li className='list-menu-item '>
               <div className='w-32'>
                 <div className='menu-text-icon'>
-                  <span><img src={support} alt='icon-support' /></span>
+                  <span><img src={logout} alt='icon-support' /></span>
                   <span>logout</span>
                 </div>
               </div>
