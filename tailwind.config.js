@@ -18,6 +18,8 @@ module.exports = {
         black: '#333333',
         lightBlue: '#BCF6F3',
         grey: '#E6E6E6',
+        borderColor: '#7878781A',
+        red: '#FD0404'
         
 
       }
