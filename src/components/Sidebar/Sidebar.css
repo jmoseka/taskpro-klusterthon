@@ -1,0 +1,26 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  box-shadow: -1px 0px 6px 0px rgba(0, 0, 0, 0.22);
+}
+
+.list-menu {
+  @apply p-0 m-0 w-full;
+}
+
+.list-menu-item {
+  @apply py-4 w-full flex justify-center cursor-pointer hover:bg-lightGreen
+  transition duration-300 ease-in-out;
+}
+
+
+.menu-text-icon {
+  @apply flex items-center gap-2;
+}
+
+.active-menu {
+    @apply bg-green hover:bg-green;
+}
