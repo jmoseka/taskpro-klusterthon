@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import bell from '../../icons/0.75x/bell.png';
 import calendar from '../../icons/0.75x/calendar.png';
+import arrowdown from '../../icons/0.75x/arrow-down.png';
 import search from '../../icons/0.75x/search-status.png';
 
 import './Dashboard.css';
+import MessageBoard from '../MessageBoard/MessageBoard';
 
 function Dashboard() {
-    const name = 'Hussein';
-    const msg = `Let's help you simplify your business.`
     const clientsArr = [
         'Dangote refineries',
         'Nigerian totlas energy',
@@ -17,6 +17,14 @@ function Dashboard() {
         'Omo Company limited group'
     ]
 
+
+    const data = [
+        { invoice: 'INV001', date: '2023-11-20', title: 'Product A', amount: '$50.00' },
+        { invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
+        // ... more data objects
+    ];
+
+
     const [clientClick, setClientClick] = useState(0);
 
     const handleClientClick = (index) => {
@@ -25,27 +33,7 @@ function Dashboard() {
 
     return (
         <div className=" h-full flex flex-col gap-5">
-            <div className="card w-full flex text-start flex-col py-2 px-7 ">
-                <p className='font-medium text-lg'>Hello, {name}!</p>
-
-                <div className='flex items-center gap-2 self-end text-sm'>
-
-                    <span className='profile-spans px-3 border-r-[1px] '>
-                        <span><img src={calendar} alt='calendar icon' /></span>
-                        <span className='profile-date'>Nov - 25 - 2023</span>
-                    </span>
-
-                    <span className='profile-spans'>
-                        <span><img src={bell} alt='no notification icon' /></span>
-                        <span className='text-white rounded-full h-8 w-8 bg-yellow flex justify-center items-center'>
-                            <p className='mx-auto text-sm'>{name[0]}</p>
-                        </span>
-                    </span>
-                </div>
-
-
-                <p className='font-normal text-sm'>{msg}</p>
-            </div>
+            <MessageBoard />
 
             <div className='card'>
                 <div className='flex flex-col gap-2 pt-3 px-8 '>
@@ -77,22 +65,50 @@ function Dashboard() {
 
 
 
-            <div className='card py-3 capitalize'>
+            <div className='card py-3 capitaliz flex flex-col gap-2'>
                 <div className='px-8 flex flex-col gap-2 items-start'>
-                    <div className='flex justify-between'>
+                    <div className='w-full flex justify-between'>
                         <span className='font-medium text-base'>Overview of payment status</span>
 
-                        <span className=''>
-                            <p className='text-sm'>Filter:</p>
-                            <span>
+                        <span className='flex text-sm gap-1 items-center text-blackGray'>
+                            <span className='text-sm'>Filter:</span>
+                            <span className='flex items-center justify-between
+                             border border-grey  rounded-3xl py-2 px-2 w-[200px]  '>
                                 <p>All</p>
-                                <img src='' alt='arrow-down' />
+                                <img src={arrowdown} alt='arrow-down' />
                             </span>
                         </span>
                     </div>
-
-
                     <span className='py-[0.1px] bg-grey w-full'></span>
+                </div>
+
+                <div className='text-start'>
+                    <table border="1" className='w-full table-invoice'>
+                        <thead>
+                            <tr className='bg-grey'>
+                                <th className='w-32'></th>
+                                <th>Invoice no</th>
+                                <th>Date</th>
+                                <th>Title</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+
+
+
+                        <tbody>
+                            {data.map((item, index) => (
+                                <tr className='text-start text-sm' key={index}>
+                                    <td className='text-center'>jk</td>
+                                    <td>{item.invoice}</td>
+                                    <td>{item.date}</td>
+                                    <td>{item.title}</td>
+                                    <td>{item.amount}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
                 </div>
 
 

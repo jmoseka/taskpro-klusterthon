@@ -1,3 +1,11 @@
 .profile-spans {
     @apply flex items-center justify-center gap-2;
 }
+
+.table-invoice {
+
+}
+
+.table-invoice th {
+    @apply text-start normal-case text-sm py-1 font-normal;
+}
