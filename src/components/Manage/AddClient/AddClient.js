@@ -5,7 +5,7 @@ import cancel from '../../../icons/0.75x/trash.png';
 
 function AddClient({ onCloseClient, onSaveClient }) {
     return (
-        <div className="card py-8">
+        <div className="card pt-8 pb-4">
             <div className="flex flex-col gap-3">
                 <div className="flex flex-col items-start px-7 gap-2">
                     <p className="normal-case font-semibold">New client </p>

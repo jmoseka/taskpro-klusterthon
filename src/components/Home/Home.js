@@ -3,7 +3,7 @@ import Mainbar from "../Mainbar/Mainbar";
 import Sidebar from "../Sidebar/Sidebar";
 
 function Home() {
-  const [selectedMenu, setSelectedMenu] = useState('invoice');
+  const [selectedMenu, setSelectedMenu] = useState('invoices');
 
   const handleMenuClick = (menuItem) => {
     setSelectedMenu(menuItem);
