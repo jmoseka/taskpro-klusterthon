@@ -27,8 +27,9 @@ function ListInvoice({ onAddInvoice }) {
             </div>
 
             <div className="px-7 py-3">
-                <button type="button" className="flex items-center gap-2 rounded-lg border p-2">
-                    <span className="font-medium text-sm capitalize">Dangote refineries</span>
+                <button type="button" className="w-64 flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
+                    <span className="font-medium text-sm capitalize">Dangote </span>
+                    <span><img src={arrowdown} alt="add client" /></span>
                 </button>
             </div>
 

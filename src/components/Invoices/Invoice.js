@@ -4,7 +4,7 @@ import AddInvoice from "./AddInvoice/AddInvoice";
 import ListInvoice from "./ListInvoice/ListInvoice";
 
 function Invoice() {
-    const [openInvoice, setOpenInvoice] = useState(false)
+    const [openInvoice, setOpenInvoice] = useState(true)
 
     const handleOpenInvoice = (selection) => {
         setOpenInvoice(selection);
