@@ -6,6 +6,7 @@ import search from '../../icons/0.75x/search-status.png';
 
 import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
+import TableInvoice from './TableInvoice/TableInvoice';
 
 function Dashboard() {
     const clientsArr = [
@@ -17,12 +18,6 @@ function Dashboard() {
         'Omo Company limited group'
     ]
 
-
-    const data = [
-        { invoice: 'INV001', date: '2023-11-20', title: 'Product A', amount: '$50.00' },
-        { invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
-        // ... more data objects
-    ];
 
 
     const [clientClick, setClientClick] = useState(0);
@@ -83,31 +78,7 @@ function Dashboard() {
                 </div>
 
                 <div className='text-start'>
-                    <table border="1" className='w-full table-invoice'>
-                        <thead>
-                            <tr className='bg-grey'>
-                                <th className='w-32'></th>
-                                <th>Invoice no</th>
-                                <th>Date</th>
-                                <th>Title</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-
-
-
-                        <tbody>
-                            {data.map((item, index) => (
-                                <tr className='text-start text-sm' key={index}>
-                                    <td className='text-center'>jk</td>
-                                    <td>{item.invoice}</td>
-                                    <td>{item.date}</td>
-                                    <td>{item.title}</td>
-                                    <td>{item.amount}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <TableInvoice />
 
                 </div>
 

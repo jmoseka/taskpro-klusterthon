@@ -9,3 +9,7 @@
 .table-invoice th {
     @apply text-start normal-case text-sm py-1 font-normal;
 }
+
+.table-invoice-body td {
+    @apply text-start normal-case text-sm py-1 font-normal;
+}
