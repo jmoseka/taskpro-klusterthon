@@ -45,7 +45,7 @@ function ListInvoice({ onAddInvoice }) {
             <div className=' py-3 capitalize  flex flex-col gap-2'>
 
 
-                <div className='h-[150px] overflow-y-scroll listinvoice'>
+                <div className='h-auto overflow-y-scroll listinvoice'>
                     <TableInvoice />
                 </div>
 

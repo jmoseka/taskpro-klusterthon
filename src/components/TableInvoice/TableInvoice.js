@@ -12,6 +12,10 @@ function TableInvoice() {
         { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
         { status: true, invoice: 'INV001', date: '2023-11-20', title: 'Product A', amount: '$50.00' },
         { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
+        { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
+        { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
+        { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
+        { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
 
     ];
 
