@@ -7,8 +7,12 @@
 }
 
 body {
+  font-family: 'Poppins';
   margin: 0;
   padding:0;
+}
+main form{
+  background: rgba(188, 246, 243, 0.50);
 }
 
 code {
