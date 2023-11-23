@@ -4,7 +4,7 @@ import search from '../../icons/0.75x/search-status.png';
 
 import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
-import TableInvoice from './TableInvoice/TableInvoice';
+import TableInvoice from '../TableInvoice/TableInvoice';
 
 function Dashboard() {
     const clientsArr = [

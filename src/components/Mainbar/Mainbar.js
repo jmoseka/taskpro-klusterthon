@@ -1,5 +1,5 @@
 import Dashboard from "../Dashboard/Dashboard";
-import Invoice from "../Invoices/Invoice,";
+import Invoice from "../Invoices/Invoice";
 import Manage from "../Manage/Manage";
 import './Mainbar.css';
 

@@ -1,7 +1,5 @@
 import MessageBoard from "../MessageBoard/MessageBoard";
 
-import './Manage.css';
-
 import { useState } from "react";
 import AddClient from "./AddClient/AddClient";
 import ManageClient from "./ManageClient/ManageClient";

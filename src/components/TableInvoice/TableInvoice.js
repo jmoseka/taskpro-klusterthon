@@ -1,5 +1,7 @@
-import paid from '../../../icons/0.75x/paid.png';
-import unpaid from '../../../icons/0.75x/unpaid.png';
+import paid from '../../icons/0.75x/paid.png';
+import unpaid from '../../icons/0.75x/unpaid.png';
+
+import './TableInvoice.css';
 
 function TableInvoice() {
     const data = [
@@ -16,7 +18,7 @@ function TableInvoice() {
     return (
         <table className='w-full table-invoice'>
             <thead>
-                <tr className='bg-grey'>
+                <tr className='bg-grey '>
                     <th className='w-32'></th>
                     <th>Invoice no</th>
                     <th>Date</th>
