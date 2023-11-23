@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import bell from '../../icons/0.75x/bell.png';
-import calendar from '../../icons/0.75x/calendar.png';
 import arrowdown from '../../icons/0.75x/arrow-down.png';
 import search from '../../icons/0.75x/search-status.png';
 
@@ -60,9 +58,9 @@ function Dashboard() {
 
 
 
-            <div className='card py-3 capitaliz flex flex-col gap-2'>
+            <div className='card py-3 capitalize  flex flex-col gap-2'>
                 <div className='px-8 flex flex-col gap-2 items-start'>
-                    <div className='w-full flex justify-between'>
+                    <div className='w-full flex items-center justify-between'>
                         <span className='font-medium text-base'>Overview of payment status</span>
 
                         <span className='flex text-sm gap-1 items-center text-blackGray'>
@@ -77,7 +75,7 @@ function Dashboard() {
                     <span className='py-[0.1px] bg-grey w-full'></span>
                 </div>
 
-                <div className='text-start'>
+                <div className='h-[150px] overflow-y-scroll'>
                     <TableInvoice />
 
                 </div>
