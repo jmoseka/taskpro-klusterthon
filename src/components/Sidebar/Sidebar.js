@@ -10,8 +10,9 @@ import project from '../../icons/0.75x/project.png';
 import './Sidebar.css';
 import { useState } from 'react';
 
-function Sidebar() {
-  const [activeMenu, setActiveMenu] = useState(null);
+function Sidebar({ onMenuClick }) {
+  const [activeMenu, setActiveMenu] = useState(0);
+
 
   const menuArray = [
     {
@@ -37,12 +38,13 @@ function Sidebar() {
 
   ]
 
-  const handleMenuLink = (index) => {
+  const handleMenuLink = (index, menutext) => {
     setActiveMenu(index)
+    onMenuClick(menutext)
   }
 
   return (
-    <div className="sidebar max-w-[336px] capitalize h-[100%] 
+    <div className="sidebar w-[336px] max-w-[336px] capitalize h-[100%] 
     flex flex-col justify-center text-base font-medium text-black 
     ">
       {/* logo*/}
@@ -57,7 +59,7 @@ function Sidebar() {
 
           {
             menuArray.map((menu, index) => (
-              <button onClick={()=> handleMenuLink(index)} type='button' key={index}
+              <button onClick={()=> handleMenuLink(index, menu.text.toLocaleLowerCase())} type='button' key={index}
                className={`list-menu-item ${activeMenu === index  ? 'active-menu' : '' }`}>
                 <div className='w-32'>
                   <div className='menu-text-icon'>
