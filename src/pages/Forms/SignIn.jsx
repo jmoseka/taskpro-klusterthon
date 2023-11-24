@@ -1,8 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { getAuth, signInWithEmailAndPassword,GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
-import {app} from '../../firebase'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
