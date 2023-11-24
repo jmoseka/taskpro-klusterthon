@@ -23,7 +23,6 @@ function DashboardTableInvoice({ clientName, invoiceStatus }) {
 
     if (invoiceStatus === 2) {
         filterArray = listInvoice.filter(invoice => invoice.status === false);
-        console.log(filterArray);
     } else if (invoiceStatus === 1) {
         filterArray = listInvoice.filter(invoice => invoice.status === true);
     } else {
