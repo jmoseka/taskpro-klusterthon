@@ -6,7 +6,7 @@ const ClientData = [
             {
                 invoiceId: 'INV001',
                 date: '12-04-2024',
-                title: '',
+                title: 'Petroleum',
                 amount: '$50.45',
                 status: true,
             },
@@ -22,7 +22,7 @@ const ClientData = [
             {
                 invoiceId: 'INV001',
                 date: '12-04-2024',
-                title: '',
+                title: 'Diesel',
                 amount: '$50.45',
                 status: false,
             },

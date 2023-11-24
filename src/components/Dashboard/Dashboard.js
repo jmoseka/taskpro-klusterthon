@@ -14,6 +14,7 @@ function Dashboard() {
     const [searchClient, setSearchClient] = useState('');
     const [clientName, setClientName] = useState(clientsArr[0]);
     const [initialName, setInitialName] = useState(clientName);
+    const [filterIndex, setFilterIndex] = useState(null);
 
 
     const filteredClients = clientsArr.filter((client) =>
@@ -28,7 +29,7 @@ function Dashboard() {
     }
 
     const handleSearchClient = (event) => {
-        
+
         const namesearch = event.target.value
         setSearchClient(event.target.value);
         setClientName(event.target.value)
@@ -37,6 +38,18 @@ function Dashboard() {
             setClientName(initialName)
         }
     }
+
+    const handleFilterClick = (i) => {
+        setFilterIndex(i);
+    }
+
+    const filterOptions = [
+        'Paid',
+        'Invoice no',
+        'Date',
+        'Title',
+        'Amount'
+    ]
 
     return (
         <div className=" h-full flex flex-col gap-5">
@@ -90,13 +103,35 @@ function Dashboard() {
                     <div className='w-full flex items-center justify-between'>
                         <span className='font-medium text-base'>Overview of payment status</span>
 
-                        <span className='flex text-sm gap-1 items-center text-blackGray'>
-                            <span className='text-sm'>Filter:</span>
-                            <span className='flex items-center justify-between
-                             border border-grey  rounded-3xl py-2 px-2 w-[200px]  '>
-                                <p>All</p>
-                                <img src={arrowdown} alt='arrow-down' />
-                            </span>
+                        <span className='flex flex-col'>
+                            <div className='flex text-sm gap-1 items-center text-blackGray'>
+                                <span className='text-sm'>Filter:</span>
+                                <div>
+
+                                    <button type='button' className='relative flex items-center justify-between
+                                        border border-grey  rounded-3xl py-2 px-4 w-[180px]  '>
+                                        <p>All</p>
+                                        <img src={arrowdown} alt='arrow-down' />
+                                    </button>
+
+                                    <div className='overflow-auto absolute text-start bg-white w-[180px] text-[13px] translate-y-2 modal'>
+                                        <span className='filter-invoices'>
+                                            {
+                                                filterOptions.map((e, index) => (
+                                                    <button onClick={()=>handleFilterClick(index)} className={`filterChoice ${index === filterIndex ? 'bg-grey' : ''}`} index={index} type='button'>{e}</button>
+
+                                                ))
+                                            }
+
+
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
                         </span>
                     </div>
                     <span className='py-[0.1px] bg-grey w-full'></span>
