@@ -11,7 +11,7 @@ function getClientInvoices(clientName) {
     }
 }
 
-function TableInvoice({ clientName }) {
+function TableInvoice({ clientName ,  filterOption }) {
     let listInvoice = {}
 
     if (getClientInvoices(clientName) !== undefined) {

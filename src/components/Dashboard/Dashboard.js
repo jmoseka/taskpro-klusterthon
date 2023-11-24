@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import arrowdown from '../../icons/0.75x/arrow-down.png';
 import search from '../../icons/0.75x/search-status.png';
 
@@ -14,7 +14,8 @@ function Dashboard() {
     const [searchClient, setSearchClient] = useState('');
     const [clientName, setClientName] = useState(clientsArr[0]);
     const [initialName, setInitialName] = useState(clientName);
-    const [filterIndex, setFilterIndex] = useState(null);
+    const [filterIndex, setFilterIndex] = useState(0);
+    const [filteredOption, setFilteredOption] = useState('All');
 
 
     const filteredClients = clientsArr.filter((client) =>
@@ -39,11 +40,34 @@ function Dashboard() {
         }
     }
 
-    const handleFilterClick = (i) => {
+    const handleFilterClick = (i, listOption) => {
         setFilterIndex(i);
+        setFilteredOption(listOption)
     }
 
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
     const filterOptions = [
+        'All',
         'Paid',
         'Invoice no',
         'Date',
@@ -108,23 +132,27 @@ function Dashboard() {
                                 <span className='text-sm'>Filter:</span>
                                 <div>
 
-                                    <button type='button' className='relative flex items-center justify-between
+                                    <button onClick={() => toggleDropdown()} ref={dropdownRef} type='button' className='relative flex items-center justify-between
                                         border border-grey  rounded-3xl py-2 px-4 w-[180px]  '>
-                                        <p>All</p>
+                                        <p>{filteredOption}</p>
                                         <img src={arrowdown} alt='arrow-down' />
                                     </button>
 
                                     <div className='overflow-auto absolute text-start bg-white w-[180px] text-[13px] translate-y-2 modal'>
-                                        <span className='filter-invoices'>
-                                            {
-                                                filterOptions.map((e, index) => (
-                                                    <button onClick={()=>handleFilterClick(index)} className={`filterChoice ${index === filterIndex ? 'bg-grey' : ''}`} index={index} type='button'>{e}</button>
+                                        {
+                                            isOpen && (
+                                                <span className='filter-invoices'>
+                                                    {
+                                                        filterOptions.map((e, index) => (
+                                                            <button onClick={() => handleFilterClick(index,e)} className={`filterChoice ${index === filterIndex ? 'bg-grey' : ''}`} index={index} type='button'>{e}</button>
 
-                                                ))
-                                            }
+                                                        ))
+                                                    }
 
 
-                                        </span>
+                                                </span>
+                                            )
+                                        }
                                     </div>
 
                                 </div>
@@ -138,7 +166,7 @@ function Dashboard() {
                 </div>
 
                 <div className='h-[150px] overflow-y-scroll'>
-                    <TableInvoice clientName={clientName} />
+                    <TableInvoice clientName={clientName} filterOption={filteredOption} />
 
                 </div>
 
