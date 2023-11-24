@@ -14,8 +14,6 @@ function getClientInvoices(clientName) {
 
 function DashboardTableInvoice({ clientName, invoiceStatus }) {
 
-    const [filterStatus, setFilterStatus] = useState();
-
     let listInvoice = {}
     let filterArray = {};
 

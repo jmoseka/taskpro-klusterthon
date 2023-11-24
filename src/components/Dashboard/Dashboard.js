@@ -81,7 +81,7 @@ function Dashboard() {
                     <div className='flex items-center justify-between'>
                         <span className='font-medium text-base'>Clients</span>
                         <span className='rounded-3xl px-3 py-2 border-grey border flex items-center gap-2'>
-                            <span className=''><img src={search} alt='search client icon' /></span>
+                            <span className='animation-ease'><img src={search} alt='search client icon' /></span>
                             <input maxLength={30} onChange={handleSearchClient}
                                 className='outline-none rounded-r-lg text-sm' type='text' placeholder='search client...' />
                         </span>
@@ -129,7 +129,7 @@ function Dashboard() {
                                 <span className='text-sm'>Filter:</span>
                                 <div>
 
-                                    <button onClick={() => toggleDropdown()} ref={dropdownRef} type='button' className='relative flex items-center justify-between
+                                    <button onClick={() => toggleDropdown()} ref={dropdownRef} type='button' className='animation-ease relative flex items-center justify-between
                                         border border-grey  rounded-3xl py-2 px-4 w-[200px]  '>
                                         <p>{filteredOption}</p>
                                         <img src={arrowdown} alt='arrow-down' />
