@@ -4,8 +4,8 @@ import search from '../../icons/0.75x/search-status.png';
 
 import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
-import TableInvoice from '../TableInvoice/TableInvoice';
 import data from '../../Database/ClientsData'
+import DashboardTableInvoice from './DashboardTableInvoice';
 
 function Dashboard() {
     const clientsArr = data.map(client => client.name);
@@ -68,11 +68,8 @@ function Dashboard() {
 
     const filterOptions = [
         'All',
-        'Paid',
-        'Invoice no',
-        'Date',
-        'Title',
-        'Amount'
+        'Payed Invoices',
+        'Outstanding Invoices',
     ]
 
     return (
@@ -133,18 +130,18 @@ function Dashboard() {
                                 <div>
 
                                     <button onClick={() => toggleDropdown()} ref={dropdownRef} type='button' className='relative flex items-center justify-between
-                                        border border-grey  rounded-3xl py-2 px-4 w-[180px]  '>
+                                        border border-grey  rounded-3xl py-2 px-4 w-[200px]  '>
                                         <p>{filteredOption}</p>
                                         <img src={arrowdown} alt='arrow-down' />
                                     </button>
 
-                                    <div className='overflow-auto absolute text-start bg-white w-[180px] text-[13px] translate-y-2 modal'>
+                                    <div className='overflow-auto absolute text-start bg-white w-[200px] text-[13px] translate-y-2 modal'>
                                         {
                                             isOpen && (
                                                 <span className='filter-invoices'>
                                                     {
                                                         filterOptions.map((e, index) => (
-                                                            <button onClick={() => handleFilterClick(index,e)} className={`filterChoice ${index === filterIndex ? 'bg-grey' : ''}`} index={index} type='button'>{e}</button>
+                                                            <button onClick={() => handleFilterClick(index, e)} className={`filterChoice ${index === filterIndex ? 'bg-grey' : ''}`} key={index} index={index} type='button'>{e}</button>
 
                                                         ))
                                                     }
@@ -166,7 +163,7 @@ function Dashboard() {
                 </div>
 
                 <div className='h-[150px] overflow-y-scroll'>
-                    <TableInvoice clientName={clientName} filterOption={filteredOption} />
+                    <DashboardTableInvoice clientName={clientName} invoiceStatus={filterIndex} />
 
                 </div>
 

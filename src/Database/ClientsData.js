@@ -6,7 +6,7 @@ const ClientData = [
             {
                 invoiceId: 'INV001',
                 date: '12-04-2024',
-                title: 'Petroleum',
+                title: 'Invoice for Supplies',
                 amount: '$50.45',
                 status: true,
             },
@@ -14,7 +14,7 @@ const ClientData = [
             {
                 invoiceId: 'INV001',
                 date: '12-04-2024',
-                title: '',
+                title: 'Invoice for Supplies',
                 amount: '$50.45',
                 status: true,
             },
@@ -22,7 +22,7 @@ const ClientData = [
             {
                 invoiceId: 'INV001',
                 date: '12-04-2024',
-                title: 'Diesel',
+                title: 'Invoice for Supplies',
                 amount: '$50.45',
                 status: false,
             },
@@ -30,7 +30,7 @@ const ClientData = [
             {
                 invoiceId: 'INV001',
                 date: '12-04-2024',
-                title: '',
+                title: 'Invoice for Supplies',
                 amount: '$50.45',
                 status: true,
             }
@@ -45,7 +45,7 @@ const ClientData = [
             {
                 invoiceId: 'INV002',
                 date: '2023-11-24',
-                title: 'Supplies',
+                title: 'Invoice for Supplies',
                 amount: '$80.20',
                 status: false
             },
@@ -53,12 +53,33 @@ const ClientData = [
             {
                 invoiceId: 'INV002',
                 date: '2023-11-24',
-                title: 'Supplies',
+                title: 'Invoice for Supplies',
                 amount: '$80.20',
                 staus: true
             },
-            
-]
+        ]
+    },
+
+    {
+        name: 'Bidco Company Limited',
+        id: 'NM002',
+        invoice: [
+            {
+                invoiceId: 'INV002',
+                date: '2023-11-24',
+                title: 'Invoice for Supplies',
+                amount: '$80.20',
+                status: false
+            },
+
+            {
+                invoiceId: 'INV002',
+                date: '2023-11-24',
+                title: 'Invoice for Supplies',
+                amount: '$80.20',
+                staus: true
+            },
+        ]
     },
 
 
