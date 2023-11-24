@@ -17,7 +17,6 @@ function Dashboard() {
     ]
 
 
-
     const [clientClick, setClientClick] = useState(0);
 
     const handleClientClick = (index) => {
