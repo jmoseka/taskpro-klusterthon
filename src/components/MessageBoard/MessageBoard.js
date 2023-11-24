@@ -5,28 +5,35 @@ function MessageBoard() {
     const name = 'Hussein';
     const msg = `Let's help you simplify your business.`
 
+    const today = new Date();
+    const options = { year: 'numeric', month: 'short', day: '2-digit' };
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+
+    const formattedDate = formatter.format(today);
+
+
     return (
         <div className="card w-full flex text-start flex-col py-2 px-7 ">
-                <p className='font-medium text-lg'>Hello, {name}!</p>
+            <p className='font-medium text-lg'>Hello, {name}!</p>
 
-                <div className='flex items-center gap-2 self-end text-sm'>
+            <div className='flex items-center gap-2 self-end text-sm'>
 
-                    <span className='profile-spans px-3 border-r-[1px] '>
-                        <span><img src={calendar} alt='calendar icon' /></span>
-                        <span className='profile-date'>Nov - 25 - 2023</span>
+                <span className='profile-spans px-3 border-r-[1px] '>
+                    <span><img src={calendar} alt='calendar icon' /></span>
+                    <span className='profile-date text-sm'>{formattedDate}</span>
+                </span>
+
+                <span className='profile-spans'>
+                    <span><img src={bell} alt='no notification icon' /></span>
+                    <span className='text-white rounded-full h-8 w-8 bg-yellow flex justify-center items-center'>
+                        <p className='mx-auto text-sm'>{name[0]}</p>
                     </span>
-
-                    <span className='profile-spans'>
-                        <span><img src={bell} alt='no notification icon' /></span>
-                        <span className='text-white rounded-full h-8 w-8 bg-yellow flex justify-center items-center'>
-                            <p className='mx-auto text-sm'>{name[0]}</p>
-                        </span>
-                    </span>
-                </div>
-
-
-                <p className='font-normal text-sm'>{msg}</p>
+                </span>
             </div>
+
+
+            <p className='font-normal text-sm'>{msg}</p>
+        </div>
     )
 }
 
