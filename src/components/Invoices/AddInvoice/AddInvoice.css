@@ -1,0 +1,33 @@
+.form-ctrl-group {
+  @apply flex w-full justify-between gap-20;
+}
+
+.form-ctrl {
+  @apply w-full flex items-center;
+}
+
+.form-ctrl label {
+  @apply  text-start font-medium w-48;
+}
+
+.form-ctrl input {
+  @apply w-full border outline-none rounded-lg px-4 py-2;
+  border: 1.2px solid rgba(51, 51, 51, 0.22);
+}
+
+.duedate-group {
+  @apply w-full flex items-center;
+}
+
+.duedate-group label {
+    @apply w-48 font-medium text-start;
+}
+
+.due-date {
+  @apply outline-none rounded-lg px-4 py-2 text-xs;
+  border: 1.2px solid rgba(51, 51, 51, 0.22);
+}
+
+.form-ctrl input:focus {
+  border: 1.2px solid rgba(51, 51, 51, 0.7);
+}

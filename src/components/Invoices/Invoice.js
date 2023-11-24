@@ -19,13 +19,13 @@ function Invoice() {
     }
 
     return (
-        <div className="h-fit flex flex-col gap-5 ">
+        <div className=" flex flex-col gap-5  ">
             <MessageBoard />
 
     
                 {
                     openInvoice === true ?
-                    <AddInvoice onCloseInvoice={handleCloseInvoice} onSaveClient={handleSaveInvoice} />
+                    <AddInvoice onCloseInvoice={handleCloseInvoice} onSaveInvoice={handleSaveInvoice} />
                     :
                     <ListInvoice onAddInvoice={handleOpenInvoice} />
             }
