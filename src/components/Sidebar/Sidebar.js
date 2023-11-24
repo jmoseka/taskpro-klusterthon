@@ -28,10 +28,6 @@ function Sidebar({ onMenuClick }) {
       icon: invoice,
     },
     {
-      text: 'projects',
-      icon: project,
-    },
-    {
       text: 'settings',
       icon: settings,
     },

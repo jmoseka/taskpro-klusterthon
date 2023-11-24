@@ -2,6 +2,9 @@ const ClientData = [
     {
         name: 'Dangote refineries',
         id: 'NM001',
+        email: 'dangoteref@gmail.com',
+        address: 'Rwanda',
+        task: '345 barrels of gasoline',
         invoice: [
             {
                 invoiceId: 'INV001',
@@ -41,6 +44,9 @@ const ClientData = [
     {
         name: 'Chevron',
         id: 'NM002',
+        email: 'cheveron@gmail.com',
+        address: 'Rwanda',
+        task: '1000 tones of plastic cup, plates and other utenstils',
         invoice: [
             {
                 invoiceId: 'INV002',
@@ -63,6 +69,9 @@ const ClientData = [
     {
         name: 'Bidco Company Limited',
         id: 'NM002',
+        email: 'bidico@gmail.com',
+        address: 'Rwanda',
+        task: '1000 tones of plastic cup, plates and other utenstils',
         invoice: [
             {
                 invoiceId: 'INV002',

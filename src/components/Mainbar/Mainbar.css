@@ -12,3 +12,7 @@
 .card-padding {
     @apply py-3 px-7;
 }
+
+.animation-ease {
+  @apply transition duration-300 ease-in-out;
+}

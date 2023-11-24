@@ -7,6 +7,7 @@ import ManageClient from "./ManageClient/ManageClient";
 function Manage() {
 
     const [openClient, setOpenClient] = useState(false)
+    const [editClient, setEditClient] = useState('')
 
     const handleOpenClient = (selection) => {
         setOpenClient(selection);
@@ -14,10 +15,17 @@ function Manage() {
 
     const handleCloseClient = (selection) => {
         setOpenClient(selection);
+        setEditClient('')
     }
 
     const handleSaveClient = (selection) => {
         setOpenClient(selection)
+        setEditClient('')
+    }
+
+    const handleEditClient = (selection, name) => {
+        setOpenClient(selection)
+        setEditClient(name)
     }
 
 
@@ -27,9 +35,9 @@ function Manage() {
             <MessageBoard />
             {
                 openClient === true ?
-                    <AddClient  onCloseClient={handleCloseClient} onSaveClient={handleSaveClient}  />
+                    <AddClient editClient={editClient}   onCloseClient={handleCloseClient} onSaveClient={handleSaveClient}  />
                     :
-                    <ManageClient onAddClient={handleOpenClient} />
+                    <ManageClient editClient={editClient} onEditClient={handleEditClient}  onAddClient={handleOpenClient} />
             }
 
 

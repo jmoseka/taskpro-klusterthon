@@ -3,7 +3,7 @@ import unpaid from '../../icons/0.75x/unpaid.png';
 
 import './TableInvoice.css';
 import data from '../../Database/ClientsData';
-import { useState } from 'react';
+
 
 function getClientInvoices(clientName) {
     const client = data.find(client => client.name.toLowerCase() === clientName.toLowerCase());
@@ -14,8 +14,6 @@ function getClientInvoices(clientName) {
 
 function DashboardTableInvoice({ clientName, invoiceStatus }) {
 
-    const [filterStatus, setFilterStatus] = useState();
-
     let listInvoice = {}
     let filterArray = {};
 
@@ -25,7 +23,6 @@ function DashboardTableInvoice({ clientName, invoiceStatus }) {
 
     if (invoiceStatus === 2) {
         filterArray = listInvoice.filter(invoice => invoice.status === false);
-        console.log(filterArray);
     } else if (invoiceStatus === 1) {
         filterArray = listInvoice.filter(invoice => invoice.status === true);
     } else {
