@@ -5,17 +5,10 @@ import search from '../../icons/0.75x/search-status.png';
 import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
 import TableInvoice from '../TableInvoice/TableInvoice';
+import data from './ClientsData'
 
 function Dashboard() {
-    const clientsArr = [
-        'Dangote refineries',
-        'Nigerian totlas energy',
-        'Gifti Texttile indsutry',
-        'zayn bank',
-        'Wmarie Candy',
-        'Omo Company limited group'
-    ]
-
+    const clientsArr = data;
 
     const [clientClick, setClientClick] = useState(0);
 
@@ -41,13 +34,16 @@ function Dashboard() {
                 </div>
 
                 <div className='client-list h-[120px]  overflow-y-scroll'>
-                    <ul className='p-0 m-0 h-full flex flex-col gap-1 '>
+                    <ul className={`p-0 m-0 h-full flex flex-col gap-1 ${clientsArr.length > 1 ? 'justify-center' : ''} `}>
                         {
+                            clientsArr.length > 1 ?
                             clientsArr.map((client, index) => (
                                 <button onClick={() => handleClientClick(index)} key={`${index}client`}
                                     className={`capitalize text-left text-sm px-7 py-2 w-full outline-0 ${clientClick === index ?
                                         'bg-lightBlue' : ''} `}>{client}</button>
                             ))
+                            :
+                            <p className='mx-auto'>You have no clients</p>
                         }
 
                     </ul>
