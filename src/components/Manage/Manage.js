@@ -15,10 +15,12 @@ function Manage() {
 
     const handleCloseClient = (selection) => {
         setOpenClient(selection);
+        setEditClient('')
     }
 
     const handleSaveClient = (selection) => {
         setOpenClient(selection)
+        setEditClient('')
     }
 
     const handleEditClient = (selection, name) => {
