@@ -23,3 +23,11 @@
 .gray-twentypercent {
     border: 1.2px solid rgba(51, 51, 51, 0.22);
 }
+
+.addClientTextarea {
+  @apply  w-full rounded-lg border border-grey outline-none px-4 py-2 ;
+}
+
+.addClientTextarea :focus {
+  border: 1.2px solid rgba(51, 51, 51, 0.7);
+}

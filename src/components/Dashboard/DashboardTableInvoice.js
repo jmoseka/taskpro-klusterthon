@@ -3,7 +3,7 @@ import unpaid from '../../icons/0.75x/unpaid.png';
 
 import './TableInvoice.css';
 import data from '../../Database/ClientsData';
-import { useState } from 'react';
+
 
 function getClientInvoices(clientName) {
     const client = data.find(client => client.name.toLowerCase() === clientName.toLowerCase());
