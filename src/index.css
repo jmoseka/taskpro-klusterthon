@@ -11,9 +11,18 @@ body {
   margin: 0;
   padding:0;
 }
-main form{
+main .signin{
   background: rgba(188, 246, 243, 0.50);
 }
 
 code {
+}
+.input{
+  border-radius: 12px;
+  border: 1.4px solid rgba(0, 0, 0, 0.22);
+
+
+}
+.input:focus-within{
+  border: 2px solid rgba(0, 0, 0, 0.50);
 }
