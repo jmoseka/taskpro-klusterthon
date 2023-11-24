@@ -1,13 +1,13 @@
-import { useState } from "react";
+
 import ClientList from "./ClientList";
 import add from '../../../icons/0.75x/pluswhite.png';
+import { useState } from "react";
 
 function ManageClient({ onAddClient }) {
-    // const [activeTab, setActiveTab] = useState('1');
-    const activeTab = '1'
+    const [activeTab, setActiveTab] = useState('1');
 
     const handleTabClick = (index) => {
-        // setActiveTab(index)
+        setActiveTab(index)
     }
 
     return (

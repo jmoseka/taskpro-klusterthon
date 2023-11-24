@@ -1,8 +1,0 @@
-.tab-buttons {
-    @apply pb-2 border-b-[2px] transition duration-200 ease-linear;
-    
-}
-
-.text-icon-container { 
-    @apply flex items-center justify-center;
-}

@@ -1,5 +1,7 @@
-import paid from '../../../icons/0.75x/paid.png';
-import unpaid from '../../../icons/0.75x/unpaid.png';
+import paid from '../../icons/0.75x/paid.png';
+import unpaid from '../../icons/0.75x/unpaid.png';
+
+import './TableInvoice.css';
 
 function TableInvoice() {
     const data = [
@@ -10,13 +12,17 @@ function TableInvoice() {
         { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
         { status: true, invoice: 'INV001', date: '2023-11-20', title: 'Product A', amount: '$50.00' },
         { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
+        { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
+        { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
+        { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
+        { status: false, invoice: 'INV002', date: '2023-11-21', title: 'Product B', amount: '$75.00' },
 
     ];
 
     return (
         <table className='w-full table-invoice'>
             <thead>
-                <tr className='bg-grey'>
+                <tr className='bg-grey '>
                     <th className='w-32'></th>
                     <th>Invoice no</th>
                     <th>Date</th>
