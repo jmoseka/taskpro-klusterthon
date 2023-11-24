@@ -5,15 +5,37 @@ import search from '../../icons/0.75x/search-status.png';
 import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
 import TableInvoice from '../TableInvoice/TableInvoice';
-import data from './ClientsData'
+import data from '../../Database/ClientsData'
 
 function Dashboard() {
-    const clientsArr = data;
+    const clientsArr = data.map(client => client.name);
 
     const [clientClick, setClientClick] = useState(0);
+    const [searchClient, setSearchClient] = useState('');
+    const [clientName, setClientName] = useState(clientsArr[0]);
+    const [initialName, setInitialName] = useState(clientName);
 
-    const handleClientClick = (index) => {
+
+    const filteredClients = clientsArr.filter((client) =>
+        client.toLowerCase().includes(searchClient.toLowerCase())
+    );
+
+
+    const handleClientClick = (index, name) => {
         setClientClick(index);
+        setClientName(name.toLowerCase());
+        setInitialName(name);
+    }
+
+    const handleSearchClient = (event) => {
+        
+        const namesearch = event.target.value
+        setSearchClient(event.target.value);
+        setClientName(event.target.value)
+
+        if (!namesearch) {
+            setClientName(initialName)
+        }
     }
 
     return (
@@ -26,7 +48,8 @@ function Dashboard() {
                         <span className='font-medium text-base'>Clients</span>
                         <span className='rounded-3xl px-3 py-2 border-grey border flex items-center gap-2'>
                             <span className=''><img src={search} alt='search client icon' /></span>
-                            <input maxLength={30} className='outline-none rounded-r-lg text-sm' type='text' placeholder='search client...' />
+                            <input maxLength={30} onChange={handleSearchClient}
+                                className='outline-none rounded-r-lg text-sm' type='text' placeholder='search client...' />
                         </span>
                     </div>
 
@@ -34,16 +57,25 @@ function Dashboard() {
                 </div>
 
                 <div className='client-list h-[120px]  overflow-y-scroll'>
-                    <ul className={`p-0 m-0 h-full flex flex-col gap-1 ${clientsArr.length > 1 ? 'justify-center' : ''} `}>
+                    <ul className={`p-0 m-0 h-full flex flex-col gap-1 ${clientsArr.length <= 0 || filteredClients.length <= 0 ? 'justify-center' : ''} `}>
                         {
-                            clientsArr.length > 1 ?
-                            clientsArr.map((client, index) => (
-                                <button onClick={() => handleClientClick(index)} key={`${index}client`}
-                                    className={`capitalize text-left text-sm px-7 py-2 w-full outline-0 ${clientClick === index ?
-                                        'bg-lightBlue' : ''} `}>{client}</button>
-                            ))
-                            :
-                            <p className='mx-auto'>You have no clients</p>
+                            clientsArr.length > 0 ?
+                                filteredClients.length > 0 ?
+
+                                    filteredClients.map((client, index) => (
+                                        <button onClick={() => handleClientClick(index, client)} key={`${index}client`}
+                                            className={`capitalize text-left text-sm px-7 py-2 w-full outline-0 ${clientClick === index ?
+                                                'bg-lightBlue' : ''} `}>{client}</button>
+
+                                    ))
+
+                                    :
+
+                                    <p>Not found client</p>
+                                :
+                                <p className='mx-auto'>You have no clients </p>
+
+
                         }
 
                     </ul>
@@ -71,7 +103,7 @@ function Dashboard() {
                 </div>
 
                 <div className='h-[150px] overflow-y-scroll'>
-                    <TableInvoice />
+                    <TableInvoice clientName={clientName} />
 
                 </div>
 
