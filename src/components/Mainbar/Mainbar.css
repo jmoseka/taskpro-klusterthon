@@ -30,5 +30,6 @@ textarea {
 }
 
 .modal-blur {
-  background: rgba(0,0,0, 0.2)
+  @apply absolute w-full h-full rounded-3xl;
+  background: rgba(255,255,255, 0.3)
 }

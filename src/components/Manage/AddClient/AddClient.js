@@ -3,11 +3,15 @@ import save from '../../../icons/0.75x/save.png';
 import cancel from '../../../icons/0.75x/trash.png';
 import data from '../../../Database/ClientsData'
 import success from '../../../icons/1x/check_small.png'
+import { useState } from 'react';
 
 
 const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
 
     const client = data.find(client => client.name.toLowerCase() === editClient.toLowerCase());
+    const [loadMessage, setLoadMessage] = useState(false)
+    const [loadingAnime, setLoadingAnime] = useState(false);
+
 
     let emailClient = ''
     let addressClient = ''
@@ -20,18 +24,38 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
         taskClient = task;
     }
 
+    const handleInputChange = () => {
+
+    }
+
+
+    const handleCreateClient = (event) => {
+        event.preventDefault();
+        setLoadMessage(!loadMessage)
+        setLoadingAnime(true);
+        setTimeout(() => {
+            setLoadingAnime(false);
+            setTimeout(() => {
+                onSaveClient(false)
+            }, 1000);
+        }, 3000);
+    }
 
 
     return (
         <div className="card relative">
+            <div className={`modal-blur ${loadMessage === true ? 'block' : 'hidden'}`}>
+                <div className='modal-window addmodal '>
 
-            <div className='modal-blur absolute w-full h-full rounded-3xl'>
-                <div className='modal-window addmodal flex flex-col justify-center items-center gap-6'>
-                    <span>
-                        Client created successfully
-                    </span>
+                    {
+                        loadingAnime ? <span>Loading anime</span>
+                            :
 
-                    <span><img src={success} alt='green check tick box' /></span>
+                            <span className='flex  flex-col justify-center items-center gap-4'>
+                                <span>Client created successfully</span>
+                                <span><img src={success} alt='green check tick box' /></span>
+                            </span>
+                    }
                 </div>
             </div>
 
@@ -46,7 +70,7 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                     <span className="line h-[1px] w-full bg-grey"></span>
                 </div>
 
-                <form className="py-4 flex flex-col items-start px-7  gap-4">
+                <form onSubmit={handleCreateClient} className="py-4 flex flex-col items-start px-7  gap-4">
 
                     <div className='form-control'>
                         <label htmlFor='clientName'>Client name </label>
@@ -54,7 +78,8 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             type='text'
                             id='clientName'
                             name='clientName'
-                            value={editClient ? editClient : null}
+                            value={editClient ? editClient : ''}
+                            onChange={handleInputChange}
                         />
 
                     </div>
@@ -65,7 +90,8 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             type='text'
                             id='emailAddress'
                             name='emailAddress'
-                            value={emailClient ? emailClient : null}
+                            value={emailClient ? emailClient : ''}
+                            onChange={handleInputChange}
 
                         />
 
@@ -78,7 +104,8 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             id='addressClient'
                             name='addressClient'
                             className="h-[70px] addClientTextarea "
-                            value={addressClient ? addressClient : null}
+                            value={addressClient ? addressClient : ''}
+                            onChange={handleInputChange}
 
                         />
 
@@ -91,7 +118,8 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             id='taskDetails'
                             name='taskDetails'
                             className="h-[120px] addClientTextarea "
-                            value={taskClient ? taskClient : null}
+                            value={taskClient ? taskClient : ''}
+                            onChange={handleInputChange}
                         />
 
                     </div>
@@ -109,7 +137,7 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
 
 
                     <div className='pt-6 mx-auto flex gap-5'>
-                        <button onClick={() => onSaveClient(false)} className='bg-green p-2 rounded-lg flex items-center justify-center gap-1'>
+                        <button type='submit' onSubmit={handleCreateClient} className='bg-green p-2 rounded-lg flex items-center justify-center gap-1'>
                             <span><img src={save} alt='save client' /></span>
                             <span className='capitalize text-[0.85rem] font-semibold'>save client</span>
                         </button>

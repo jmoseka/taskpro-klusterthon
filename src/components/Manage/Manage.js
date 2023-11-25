@@ -6,7 +6,7 @@ import ManageClient from "./ManageClient/ManageClient";
 
 function Manage() {
 
-    const [openClient, setOpenClient] = useState(false)
+    const [openClient, setOpenClient] = useState(true)
     const [editClient, setEditClient] = useState('')
 
     const handleOpenClient = (selection) => {
