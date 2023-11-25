@@ -3,7 +3,9 @@ import './App.css';
 import Home from './components/Home/Home';
 import SignIn from './pages/Forms/SignIn';
 import SignUp from './pages/Forms/SignUp';
-import {Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom';
+
+
 
 function App() {
   return (
