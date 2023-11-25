@@ -2,6 +2,8 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
   let navigate = useNavigate()
@@ -15,14 +17,10 @@ const SignUp = () => {
     },
     validationSchema: Yup.object({
       first_name: Yup.string().required("*Please Enter Your First Name"),
-      last_name: Yup.string()
-        .min(3, "Minimum of Three Letters")
-        .required("*Please Enter Your Last Name"),
+      last_name: Yup.string().min(3, "Minimum of Three Letters").required("*Please Enter Your Last Name"),
       business_name: Yup.string().required("*Please Enter Your Company Name"),
       password: Yup.string().required("*Please Enter your password"),
-      email: Yup.string()
-        .email("Invalid email address!!")
-        .required("*Required"),
+      email: Yup.string().email("Invalid email address!!").required("*Required"),
     }),
     onSubmit: (values) => {
       let formdata = new FormData()
@@ -40,10 +38,15 @@ const SignUp = () => {
           },
         }).then(res => res.json())
         .then(data =>{
-          if(data.created){
-            navigate('/signin')
-          }else{
+          console.log(data)
+          if(data.success){
+            toast.success('Account Created Successfully')
+            setTimeout(()=>{
+              navigate('/signin')
+            },2500)
+          }else if(data.failure){
             console.log(data)
+            toast.error('Email or Company Already Exist')
           }
         })
         .catch(err => console.error(err))
@@ -59,7 +62,7 @@ const SignUp = () => {
         </header>
         <main className="mt-16">
           <h2 className="text-3xl font-semibold mb-6">
-            Sign In To Biz Hub
+            Sign Up To Biz Hub
           </h2>
           <form className="text-black p-8 " onSubmit={(e)=>{
             e.preventDefault()
@@ -69,7 +72,7 @@ const SignUp = () => {
               <img src="assets/googleIcon.png" alt="Google Logo" />
               <div className="w-[90%]">
                 <h4 className="text-xl md:text-2xl font-medium">
-                  Sign In With Google
+                  Sign Up With Google
                 </h4>
               </div>
             </div>
@@ -155,10 +158,11 @@ const SignUp = () => {
               <div className="text-red text-start font-medium italic">{formik.errors.password}</div>
             ) : null }
             </div>
-            <button className="bg-veryGreen w-full text-lg text-white py-3 font-medium rounded-xl" disabled={formik.isValid ? false : true}>
+            <button className="bg-veryGreen w-full text-lg text-white py-3 font-medium rounded-xl" type="submit">
               Sign Up
             </button>
           </form>
+          <ToastContainer/>
           <div>
           <p className="text-start text-xl">Already a Customer? 
             <Link to='/signin' className="text-veryGreen "> Sign in</Link>
