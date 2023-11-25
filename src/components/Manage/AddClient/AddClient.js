@@ -27,7 +27,7 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
 
     }
 
-    
+
 
     const handleCreateClient = (event) => {
         event.preventDefault();
@@ -50,9 +50,9 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                 <div className='modal-window addmodal '>
 
                     {
-                        loadingAnime ? 
-                            <span className='animate-spin'>Loading spinner</span>
-                        
+                        loadingAnime ?
+                            <div className='mx-auto custom-loader'></div>
+
                             :
 
                             <span className='flex  flex-col justify-center items-center gap-4'>

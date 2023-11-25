@@ -89,7 +89,9 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
                 <div className='modal-window addmodal '>
 
                     {
-                        loadingAnime ? <span className='anime-spinner'>Loading spinner</span>
+                        loadingAnime ? 
+                            <div className='mx-auto custom-loader'></div>
+                        
                             :
 
                             <span className='flex  flex-col justify-center items-center gap-4'>
