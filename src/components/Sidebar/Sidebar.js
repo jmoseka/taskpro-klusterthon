@@ -5,7 +5,6 @@ import settings from '../../icons/0.75x/settings.png';
 import manage from '../../icons/0.75x/manage.png';
 import dashboard from '../../icons/0.75x/dashboard.png';
 import invoice from '../../icons/0.75x/invoices.png';
-import project from '../../icons/0.75x/project.png';
 
 import './Sidebar.css';
 import { useState } from 'react';
