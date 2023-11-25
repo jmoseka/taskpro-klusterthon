@@ -36,6 +36,12 @@
   @apply py-2 absolute flex flex-col gap-1  items-start text-sm;
 }
 
+
+.itemTypeModal button {
+  z-index: 100;
+  @apply px-3;
+}
+
 .addclientmodal button {
   @apply px-3 w-full py-2 text-start;
 }

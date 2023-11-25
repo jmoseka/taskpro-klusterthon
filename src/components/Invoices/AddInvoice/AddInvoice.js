@@ -12,13 +12,31 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
     const allClients = getAllClients();
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const typeRef = useRef(null);
     const [clientName, setClientName] = useState(allClients.length > 0 ? allClients[0] : 'No client found');
     const [clientIndex, setClientIndex] = useState(0);
+    const [isTypeOpen, setIsTypeOpen] = useState(false)
+    const [itemTypeIndex, setItemTypeIndex] = useState(0);
+    const [itemTypeName, setItemTypeName] = useState('Supplies');
 
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+
+    const itemType = [
+        'Supplies',
+        'Sales'
+    ]
+
+    const toggleTypeDropdown = () => {
+        setIsTypeOpen(!isOpen);
+    };
+
+    const handleItemTypeClick = (index, n) => {
+        setItemTypeIndex(index)
+        setItemTypeName(n)
+    }
 
     const handleClientClick = (index, name) => {
         setClientIndex(index)
@@ -29,7 +47,12 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setIsOpen(false);
         }
+
+        if (typeRef.current && !typeRef.current.contains(event.target)) {
+            setIsTypeOpen(false);
+        }
     };
+
 
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
@@ -159,16 +182,30 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
 
                     <tbody>
 
-                        <tr>
-                            <td className='w-48 flex items-start pt-3'>
-                                <div className='flex justify-between gap-6'>
+                        <tr className='h-full'>
+                            <td className='w-48 h-40 relative flex items-start pt-3'>
+                                <div className='w-40 flex flex-col'>
 
-
-                                    <button type="button" className="w-full flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
-                                        <span className="font-medium text-sm capitalize">Service </span>
+                                    <button ref={typeRef} onClick={() => toggleTypeDropdown()} type="button" className="w-full flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
+                                        <span className="font-medium text-sm capitalize">{itemTypeName} </span>
                                         <span><img src={arrowdown} alt="add client" /></span>
                                     </button>
+
+
+                                    {
+                                        isTypeOpen && (
+                                            <span className='modal py-2 w-full flex flex-col gap-1 text-sm translate-y-2 text-start'>
+                                        {
+                                            itemType.map((e, index) => (
+                                                <button className={`${index === itemTypeIndex ? 'bg-grey' : '' } w-full py-2 text-start px-3`} type='button' onClick={() => handleItemTypeClick(index, e) }>{e}</button>
+                                            ))
+                                        }
+                                    </span>
+                                        )
+                                    }
                                 </div>
+
+
 
                             </td>
 
