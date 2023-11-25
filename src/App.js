@@ -1,6 +1,5 @@
 
 import './App.css';
-import Dashboard from './components/Dashboard/Dashboard';
 import Home from './components/Home/Home';
 import SignIn from './pages/Forms/SignIn';
 import SignUp from './pages/Forms/SignUp';
@@ -12,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/signin" element={<SignIn/>}/>
-        <Route path="/dashboard" element={<Home />}/>
+        <Route path="/" element={<Home />}/>
       </Routes>
     </div>
   );
