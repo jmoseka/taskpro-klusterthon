@@ -13,7 +13,7 @@ textarea {
 }
 
 .card-padding {
-    @apply py-3 px-7;
+  @apply py-3 px-7;
 }
 
 .animation-ease {
@@ -23,13 +23,29 @@ textarea {
 .modal-window {
   box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
   z-index: 100;
+  @apply transition duration-300 ease-linear
 }
 
 .addmodal {
-  @apply  text-center w-[300px] rounded-xl p-7 absolute top-[25%] left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white  z-50;
+  @apply text-center w-[300px] rounded-xl p-7 absolute top-[25%] left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white  z-50;
 }
 
 .modal-blur {
-  @apply absolute w-full h-full rounded-3xl;
-  background: rgba(255,255,255, 0.3)
+  @apply absolute w-full h-full rounded-3xl transition duration-300 ease-linear;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+
+.spinner {
+  width: 11.2px;
+  height: 11.2px;
+  border-radius: 11.2px;
+  box-shadow: 28px 0px 0 0 rgba(71,255,124,0.2), 22.7px 16.5px 0 0 rgba(71,255,124,0.4), 8.68px 26.6px 0 0 rgba(71,255,124,0.6), -8.68px 26.6px 0 0 rgba(71,255,124,0.8), -22.7px 16.5px 0 0 #47ff7c;
+  animation: spinner-b87k6z 1s infinite linear;
+}
+
+@keyframes spinner-b87k6z {
+  to {
+     transform: rotate(360deg);
+  }
 }

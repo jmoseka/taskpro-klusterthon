@@ -12,7 +12,6 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
     const [loadMessage, setLoadMessage] = useState(false)
     const [loadingAnime, setLoadingAnime] = useState(false);
 
-
     let emailClient = ''
     let addressClient = ''
     let taskClient = ''
@@ -28,11 +27,14 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
 
     }
 
+    
 
     const handleCreateClient = (event) => {
         event.preventDefault();
         setLoadMessage(!loadMessage)
         setLoadingAnime(true);
+
+
         setTimeout(() => {
             setLoadingAnime(false);
             setTimeout(() => {
@@ -48,7 +50,9 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                 <div className='modal-window addmodal '>
 
                     {
-                        loadingAnime ? <span>Loading anime</span>
+                        loadingAnime ? 
+                            <span className='animate-spin'>Loading spinner</span>
+                        
                             :
 
                             <span className='flex  flex-col justify-center items-center gap-4'>
