@@ -2,15 +2,9 @@ import paid from '../../../icons/0.75x/paid.png';
 import unpaid from '../../../icons/0.75x/unpaid.png';
 
 import './TableInvoice.css';
-import data from '../../../Database/ClientsData';
+import { getClientInvoices } from '../../../modules/GetClientInvoices';
 
 
-function getClientInvoices(clientName) {
-    const client = data.find(client => client.name.toLowerCase() === clientName.toLowerCase());
-    if (client) {
-        return client.invoice;
-    }
-}
 
 function DashboardTableInvoice({ clientName, invoiceStatus }) {
 
@@ -29,9 +23,6 @@ function DashboardTableInvoice({ clientName, invoiceStatus }) {
     } else {
         filterArray = listInvoice;
     }
-
-
-
 
 
     return (
