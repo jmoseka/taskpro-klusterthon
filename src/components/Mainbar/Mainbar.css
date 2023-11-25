@@ -1,3 +1,6 @@
+textarea {
+  resize: none;
+}
 .card {
   box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
   @apply rounded-3xl;
@@ -6,7 +9,7 @@
 .modal {
   box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
   z-index: 100;
-  @apply rounded-lg  translate-y-2 bg-white;
+  @apply rounded-lg   translate-y-2 bg-white;
 }
 
 .card-padding {
@@ -15,4 +18,17 @@
 
 .animation-ease {
   @apply transition duration-300 ease-in-out;
+}
+
+.modal-window {
+  box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
+  z-index: 100;
+}
+
+.addmodal {
+  @apply  text-center w-[300px] rounded-xl p-7 absolute top-[25%] left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white  z-50;
+}
+
+.modal-blur {
+  background: rgba(0,0,0, 0.2)
 }

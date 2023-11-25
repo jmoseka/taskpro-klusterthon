@@ -7,7 +7,7 @@ function Mainbar({ selectedMenu }) {
     const component = selectedMenu;
 
     return (
-        <div className="px-10 py-6 w-full overflow-auto">
+        <div className="relative px-10 py-6 w-full overflow-auto">
             {
                 component === 'dashboard' ?
                     <Dashboard />
