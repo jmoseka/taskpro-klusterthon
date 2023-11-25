@@ -26,6 +26,8 @@ function ListInvoice({ onAddInvoice }) {
         setIsOpen(!isOpen);
     };
 
+
+    // remove modal window when anywhere else is clicked 
     const handleClickOutside = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setIsOpen(false);
@@ -39,6 +41,8 @@ function ListInvoice({ onAddInvoice }) {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
+
+    ///////////*****/////////////////////////////// */
 
     return (
 
