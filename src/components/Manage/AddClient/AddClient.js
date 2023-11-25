@@ -4,6 +4,9 @@ import cancel from '../../../icons/0.75x/trash.png';
 import data from '../../../Database/ClientsData'
 import success from '../../../icons/1x/check_small.png'
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createClientAndSendToAPI } from '../../../Redux/createClientApi';
+
 
 
 const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
@@ -11,6 +14,11 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
     const client = data.find(client => client.name.toLowerCase() === editClient.toLowerCase());
     const [loadMessage, setLoadMessage] = useState(false)
     const [loadingAnime, setLoadingAnime] = useState(false);
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
+    const [task, setTask] = useState('');
+
 
     let emailClient = ''
     let addressClient = ''
@@ -26,22 +34,37 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
     const handleInputChange = () => {
 
     }
-
-
+    const dispatch = useDispatch()
 
     const handleCreateClient = (event) => {
         event.preventDefault();
-        setLoadMessage(!loadMessage)
-        setLoadingAnime(true);
+        const clientData = {
+            // Provide the data for creating a client
+            name: 'John Doe',
+            email: 'john@example.com',
+            address: 'Kisii',
+            task_details: 'Event planner for a ceremony',
+            contact: '',
+            // Add other necessary fields for creating a client
+        };
+
+        dispatch(createClientAndSendToAPI(clientData)); // Dispatch the action to create a client
+        // setLoadMessage(!loadMessage)
+        // setLoadingAnime(true);
 
 
-        setTimeout(() => {
-            setLoadingAnime(false);
-            setTimeout(() => {
-                onSaveClient(false)
-            }, 1000);
-        }, 3000);
+
+
+        // setTimeout(() => {
+        //     setLoadingAnime(false);
+        //     setTimeout(() => {
+        //         onSaveClient(false)
+        //     }, 1000);
+        // }, 3000);
     }
+
+
+
 
 
     return (

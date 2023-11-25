@@ -38,14 +38,13 @@ const SignUp = () => {
           },
         }).then(res => res.json())
         .then(data =>{
-          console.log(data)
           if(data.success){
             toast.success('Account Created Successfully')
             setTimeout(()=>{
               navigate('/signin')
             },2500)
           }else if(data.failure){
-            console.log(data)
+
             toast.error('Email or Company Already Exist')
           }
         })
