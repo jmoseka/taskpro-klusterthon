@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  @apply text-black;
 }
 
 .App-logo {
@@ -37,7 +38,11 @@
   }
 }
 
-.instant-anime {
-  opacity: 0; 
-  transition: opacity 0.2s; 
+.tab-buttons {
+  @apply capitalize pb-2 border-b-[2px] transition duration-200 ease-linear;
+  
+}
+
+.text-icon-container { 
+  @apply flex items-center justify-center;
 }

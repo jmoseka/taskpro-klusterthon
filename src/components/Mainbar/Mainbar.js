@@ -1,11 +1,27 @@
+import Dashboard from "../Dashboard/Dashboard";
+import Invoice from "../Invoices/Invoice";
+import Manage from "../Manage/Manage";
+import './Mainbar.css';
 
-function Mainbar() {
+function Mainbar({ selectedMenu }) {
+    const component = selectedMenu;
+
     return (
-        <div className="">
-            <h1 className='text-3xl'>Dashboard</h1>
+        <div className="px-10 py-6 w-full overflow-auto">
+            {
+                component === 'dashboard' ?
+                    <Dashboard />
+                    :
+                    component === 'manage' ?
+                        <Manage />
+                        :
+                        component === 'invoices' ?
+                            <Invoice />
+                            :
+                            <Dashboard />
+            }
         </div>
     );
 }
 
-export default Mainbar
-    ;
+export default Mainbar;

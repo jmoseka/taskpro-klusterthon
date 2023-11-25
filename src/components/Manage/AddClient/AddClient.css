@@ -1,0 +1,33 @@
+.form-control {
+  @apply w-full flex ;
+}
+
+.form-control label {
+  @apply normal-case text-start font-medium w-72;
+}
+
+.form-control input {
+    @apply w-full border outline-none rounded-lg px-4 py-2;
+
+    border: 1.2px solid rgba(51, 51, 51, 0.22);
+}
+
+.form-control input:focus {
+    border: 1.2px solid rgba(51, 51, 51, 0.7);
+}
+
+.form-currency-dropdown {
+    border: 1.2px solid rgba(51, 51, 51, 0.22);
+}
+
+.gray-twentypercent {
+    border: 1.2px solid rgba(51, 51, 51, 0.22);
+}
+
+.addClientTextarea {
+  @apply  w-full rounded-lg border border-grey outline-none px-4 py-2 ;
+}
+
+.addClientTextarea :focus {
+  border: 1.2px solid rgba(51, 51, 51, 0.7);
+}

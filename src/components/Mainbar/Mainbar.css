@@ -1,0 +1,18 @@
+.card {
+  box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
+  @apply rounded-3xl;
+}
+
+.modal {
+  box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
+  z-index: 100;
+  @apply rounded-lg;
+}
+
+.card-padding {
+    @apply py-3 px-7;
+}
+
+.animation-ease {
+  @apply transition duration-300 ease-in-out;
+}

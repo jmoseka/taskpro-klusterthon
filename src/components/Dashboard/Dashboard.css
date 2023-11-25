@@ -1,0 +1,19 @@
+.profile-spans {
+    @apply flex items-center justify-center gap-2;
+}
+
+.table-invoice th {
+    @apply text-start normal-case text-sm py-1 font-medium;
+}
+
+.table-invoice-body td {
+    @apply text-start normal-case text-sm py-1 font-normal;
+}
+
+.filter-invoices {
+    @apply  py-3 flex gap-1 flex-col ;
+}
+
+.filterChoice {
+    @apply text-start font-medium w-full px-5 py-1;
+}
