@@ -5,7 +5,7 @@ import search from '../../icons/0.75x/search-status.png';
 import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
 import data from '../../Database/ClientsData'
-import DashboardTableInvoice from './DashboardTableInvoice';
+import DashboardTableInvoice from '../Invoices/TableInvoice/DashboardTableInvoice';
 
 function Dashboard() {
     const clientsArr = data.map(client => client.name);
