@@ -5,7 +5,7 @@ import search from '../../icons/0.75x/search-status.png';
 import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
 import data from '../../Database/ClientsData'
-import DashboardTableInvoice from './DashboardTableInvoice';
+import DashboardTableInvoice from '../Invoices/TableInvoice/DashboardTableInvoice';
 
 function Dashboard() {
     const clientsArr = data.map(client => client.name);
@@ -135,7 +135,7 @@ function Dashboard() {
                                         <img src={arrowdown} alt='arrow-down' />
                                     </button>
 
-                                    <div className='overflow-auto absolute text-start bg-white w-[200px] text-[13px] translate-y-2 modal'>
+                                    <div className='overflow-auto absolute text-start w-[200px] text-[13px] translate-y-2 modal'>
                                         {
                                             isOpen && (
                                                 <span className='filter-invoices'>

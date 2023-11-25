@@ -5,3 +5,11 @@
 .table-invoice-body td {
     @apply text-start normal-case text-sm py-1 font-normal;
 }
+
+.invoice-modal {
+    @apply py-2 w-64 absolute flex flex-col gap-1 items-start text-sm ;
+}
+
+.invoice-modal button {
+    @apply px-3 w-full py-2 text-start;
+}

@@ -19,7 +19,7 @@ const ClientData = [
                 date: '12-04-2024',
                 title: 'Invoice for Supplies',
                 amount: '$50.45',
-                status: true,
+                status: false,
             },
 
             {
@@ -48,21 +48,23 @@ const ClientData = [
         address: 'Rwanda',
         task: '1000 tones of plastic cup, plates and other utenstils',
         invoice: [
+
             {
-                invoiceId: 'INV002',
-                date: '2023-11-24',
+                invoiceId: 'INV001',
+                date: '12-04-2024',
                 title: 'Invoice for Supplies',
-                amount: '$80.20',
-                status: false
+                amount: '$50.45',
+                status: false,
             },
 
             {
-                invoiceId: 'INV002',
-                date: '2023-11-24',
+                invoiceId: 'INV001',
+                date: '12-04-2024',
                 title: 'Invoice for Supplies',
-                amount: '$80.20',
-                staus: true
+                amount: '$50.45',
+                status: false,
             },
+
         ]
     },
 

@@ -1,12 +1,47 @@
+import { useState } from 'react';
 import arrowdown from '../../../icons/0.75x/arrow-down.png'
-import trash from '../../../icons/0.75x/trash.png'
-import add from '../../../icons/0.75x/pluswhite.png'
 import save from '../../../icons/0.75x/save.png'
 import cancel from '../../../icons/0.75x/trash.png'
+import { getAllClients } from '../../../modules/GetClient';
 
 import './AddInvoice.css';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
+    const allClients = getAllClients();
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const [clientName, setClientName] = useState(allClients.length > 0 ? allClients[0] : 'No client found');
+    const [clientIndex, setClientIndex] = useState(0);
+
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleClientClick = (index, name) => {
+        setClientIndex(index)
+        setClientName(name);
+    }
+    // remove modal window when anywhere else is clicked 
+    const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+    ///////////*****/////////////////////////////// */
+
+
 
     return (
         <div className="card py-4">
@@ -15,10 +50,31 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
                 <div className="px-7 flex flex-col items-start gap-2">
                     <p className="capitalize font-semibold">New Invoices</p>
 
-                    <button type="button" className="w-64 flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
-                        <span className="font-medium text-sm capitalize">Dangote refiniries </span>
-                        <span><img src={arrowdown} alt="add client" /></span>
-                    </button>
+                    <div className='relative text-start w-52 min-w-fit'>
+                        <button ref={dropdownRef} onClick={() => toggleDropdown()} type="button" className=" w-full flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
+                            <span className="font-medium text-sm capitalize">{clientName} </span>
+                            <span><img src={arrowdown} alt="add client" /></span>
+                        </button>
+
+                        {
+                            isOpen && (
+                                <span className='w-full addclientmodal modal'>
+                                    {
+                                        allClients.map((e, index) => (
+                                            <button onClick={() => handleClientClick(index, e)} key={index} className={`${index === clientIndex ? 'bg-grey' : ''}`} type='button'>{e}</button>
+                                        ))
+                                    }
+
+                                </span>
+                            )
+                        }
+                    </div>
+
+
+
+
+
+
                 </div>
             </div>
 
@@ -106,9 +162,7 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
                         <tr>
                             <td className='w-48 flex items-start pt-3'>
                                 <div className='flex justify-between gap-6'>
-                                    <button type="button" className="flex items-center justify-between gap-3 rounded-lg border p-2">
-                                        <span><img src={trash} alt="trash button" /></span>
-                                    </button>
+
 
                                     <button type="button" className="w-full flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
                                         <span className="font-medium text-sm capitalize">Service </span>
@@ -128,41 +182,9 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
 
                         </tr>
 
-
-                        <tr>
-                            <td className='w-48 flex items-start pt-3'>
-                                <div className='flex justify-between gap-6'>
-                                    <button type="button" className="flex items-center justify-between gap-3 rounded-lg border p-2">
-                                        <span><img src={trash} alt="trash button" /></span>
-                                    </button>
-
-                                    <button type="button" className="w-full flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
-                                        <span className="font-medium text-sm capitalize">Service </span>
-                                        <span><img src={arrowdown} alt="add client" /></span>
-                                    </button>
-                                </div>
-
-                            </td>
-
-
-                            <td className='pt-3'>
-                                <div className='h-[135px]'>
-                                    <textarea className='rounded-lg border border-grey w-full h-full' type='text' />
-
-                                </div>
-                            </td>
-
-                        </tr>
 
                     </tbody>
                 </table>
-
-
-                <div className=' w-full text-end'>
-                    <button type='button' className='p-2 bg-yellow rounded-lg'>
-                        <img src={add} alt='add description' />
-                    </button>
-                </div>
 
 
                 <div className='w-full  flex justify-center'>
