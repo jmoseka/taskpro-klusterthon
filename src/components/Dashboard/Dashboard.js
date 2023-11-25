@@ -135,7 +135,7 @@ function Dashboard() {
                                         <img src={arrowdown} alt='arrow-down' />
                                     </button>
 
-                                    <div className='overflow-auto absolute text-start bg-white w-[200px] text-[13px] translate-y-2 modal'>
+                                    <div className='overflow-auto absolute text-start w-[200px] text-[13px] translate-y-2 modal'>
                                         {
                                             isOpen && (
                                                 <span className='filter-invoices'>
