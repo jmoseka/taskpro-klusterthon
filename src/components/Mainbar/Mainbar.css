@@ -1,18 +1,53 @@
+textarea {
+  resize: none;
+}
 .card {
   box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
   @apply rounded-3xl;
+  transition: all 0.3s ease-linear;
 }
 
 .modal {
   box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
   z-index: 100;
-  @apply rounded-lg  translate-y-2 bg-white;
+  @apply rounded-lg translate-y-2 bg-white;
 }
 
 .card-padding {
-    @apply py-3 px-7;
+  @apply py-3 px-7;
 }
 
 .animation-ease {
   @apply transition duration-300 ease-in-out;
+}
+
+.modal-window {
+  box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
+  z-index: 100;
+  @apply transition duration-300 ease-linear;
+}
+
+.addmodal {
+  @apply text-center w-[300px] rounded-xl p-7 absolute top-[25%] left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white  z-50;
+}
+
+.modal-blur {
+  @apply absolute w-full h-full rounded-3xl transition duration-300 ease-linear;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.custom-loader {
+  width: 32px;
+  height: 32px;
+  --c: radial-gradient(farthest-side, #efda21 92%, #0000);
+  background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%,
+    var(--c) 0 50%;
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  animation: s7 1s infinite;
+}
+@keyframes s7 {
+  to {
+    transform: rotate(0.5turn);
+  }
 }

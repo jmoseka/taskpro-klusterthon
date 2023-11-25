@@ -31,7 +31,7 @@ function Manage() {
 
 
     return (
-        <div className="h-fit flex flex-col gap-5 ">
+        <div className="h-fit flex flex-col gap-5 relative">
             <MessageBoard />
             {
                 openClient === true ?
