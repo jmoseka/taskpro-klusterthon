@@ -35,9 +35,9 @@ const SignIn = () => {
           if(data.token){
             toast.success('Welcome Back')
             setTimeout(()=>{
+              localStorage.setItem('bizToken', data.token)
               navigate('/')
-        localStorage.setItem('bizToken', data.token)
-            },4000)
+            },2500)
           }
       })
         .catch(err => toast.error('An Error Occured, Please Try Again'))
