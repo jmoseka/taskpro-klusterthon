@@ -4,12 +4,13 @@ textarea {
 .card {
   box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
   @apply rounded-3xl;
+  transition: all 0.3s ease-linear;
 }
 
 .modal {
   box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
   z-index: 100;
-  @apply rounded-lg   translate-y-2 bg-white;
+  @apply rounded-lg translate-y-2 bg-white;
 }
 
 .card-padding {
