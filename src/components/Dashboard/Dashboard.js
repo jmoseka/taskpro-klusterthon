@@ -6,9 +6,12 @@ import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
 import data from '../../Database/ClientsData'
 import DashboardTableInvoice from '../Invoices/TableInvoice/DashboardTableInvoice';
+import axios from 'axios';
 
 function Dashboard() {
     const clientsArr = data.map(client => client.name);
+    const [currentUser, setCurrentUser] = useState(null);
+    const [error, setError] = useState(null);
 
     const [clientClick, setClientClick] = useState(0);
     const [searchClient, setSearchClient] = useState('');
@@ -21,6 +24,22 @@ function Dashboard() {
     const filteredClients = clientsArr.filter((client) =>
         client.toLowerCase().includes(searchClient.toLowerCase())
     );
+
+    useEffect(() => {
+        const fetchCurrentUser = async () => {
+            try {
+                const response = await axios.get('https://bizhub-8955b30ff7e1.herokuapp.com/account/current-user/');
+                setCurrentUser(response.data);
+                console.log(currentUser);
+                setError(null);
+            } catch (error) {
+                setError('Error fetching current user');
+                setCurrentUser(null);
+            }
+        };
+
+        fetchCurrentUser();
+    }, []);
 
 
     const handleClientClick = (index, name) => {
