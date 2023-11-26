@@ -6,7 +6,6 @@ import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
 import data from '../../Database/ClientsData'
 import DashboardTableInvoice from '../Invoices/TableInvoice/DashboardTableInvoice';
-import { fetchCurrentUser } from '../../modules/FetchCurrentUser';
 import FetchAllClients from '../../modules/FetchAllClients';
 
 

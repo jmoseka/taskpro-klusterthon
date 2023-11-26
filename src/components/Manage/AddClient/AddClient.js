@@ -1,7 +1,7 @@
 import './AddClient.css'
 import save from '../../../icons/0.75x/save.png';
 import cancel from '../../../icons/0.75x/trash.png';
-import data from '../../../Database/ClientsData'
+// import data from '../../../Database/ClientsData'
 import success from '../../../icons/1x/check_small.png'
 import { useState } from 'react';
 import GetToken from '../../../modules/GetToken';
@@ -10,7 +10,7 @@ import axios from 'axios';
 
 const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
 
-    const client = data.find(client => client.name.toLowerCase() === editClient.toLowerCase());
+    // const client = data.find(client => client.name.toLowerCase() === editClient.toLowerCase());
     const [loadMessage, setLoadMessage] = useState(false)
     const [loadingAnime, setLoadingAnime] = useState(false);
     const [clientName, setClientName] = useState()
@@ -19,16 +19,16 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
     const [clientTask, setClientTask] = useState()
     const [clientContact, setClientContact] = useState()
 
-    let emailClient = ''
-    let addressClient = ''
-    let taskClient = ''
+    // let emailClient = ''
+    // let addressClient = ''
+    // let taskClient = ''
 
-    if (client) {
-        const { email, address, task } = client;
-        emailClient = email;
-        addressClient = address;
-        taskClient = task;
-    }
+    // if (client) {
+    //     const { email, address, task } = client;
+    //     emailClient = email;
+    //     addressClient = address;
+    //     taskClient = task;
+    // }
 
     const handleInputChangeName = (e) => {
         setClientName(e.target.value)

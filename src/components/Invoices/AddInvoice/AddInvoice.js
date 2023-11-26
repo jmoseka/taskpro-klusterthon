@@ -22,13 +22,13 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
     const [isTypeOpen, setIsTypeOpen] = useState(false)
     const [itemTypeIndex, setItemTypeIndex] = useState(0);
     const [itemTypeName, setItemTypeName] = useState('Supplies');
-    const [loadMessage, setLoadMessage] = useState(false)
-    const [loadingAnime, setLoadingAnime] = useState(false);
-    const [clientId, setClientId] = useState('');
-    const [dataNames, setDataNames] = useState(null);
-    const [cost, setCost] = useState('');
-    const [title, setTitle] = useState('');
-    const [desc, setDesc] = useState('')
+    // const [loadMessage, setLoadMessage] = useState(false)
+    // const [loadingAnime, setLoadingAnime] = useState(false);
+    // const [clientId, setClientId] = useState('');
+    // const [dataNames, setDataNames] = useState(null);
+    // const [cost, setCost] = useState('');
+    // const [title, setTitle] = useState('');
+    // const [desc, setDesc] = useState('')
 
 
     const arr = [];

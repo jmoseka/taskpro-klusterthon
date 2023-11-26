@@ -2,7 +2,6 @@
 
 import add from '../../../icons/0.75x/pluswhite.png';
 import edit from '../../../icons/0.75x/edit.png';
-import data from '../../../Database/ClientsData';
 
 import { useEffect, useState } from "react";
 import FetchAllClients from '../../../modules/FetchAllClients';
