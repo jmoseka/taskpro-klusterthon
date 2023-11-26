@@ -10,7 +10,7 @@ import axios from 'axios';
 const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, editClientAddress, editClientTask, editClientContact, onCloseClient, onSaveClient }) => {
     const [loadMessage, setLoadMessage] = useState(false)
     const [loadingAnime, setLoadingAnime] = useState(false);
-    const [loadingAnimeEdit, setLoadingAnimeEdit] = useState(true);
+    const [loadingAnimeEdit, setLoadingAnimeEdit] = useState(false);
     const [clientName, setClientName] = useState()
     const [clientEmail, setClientEmail] = useState()
     const [clientAddress, setClientAddress] = useState()
@@ -35,7 +35,7 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
 
     useEffect(() => {
         if (editStatus === 'edit') {
-
+            setLoadingAnime(true)
             setTimeout(() => {
                 setLoadingAnimeEdit(false)
                 setClientName(editClientName);
