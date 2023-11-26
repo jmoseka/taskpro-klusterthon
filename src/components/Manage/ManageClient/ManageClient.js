@@ -11,9 +11,6 @@ function ManageClient({ onAddClient, onEditClient }) {
     const [activeTab, setActiveTab] = useState('1');
     const [dataClients, setDataClients] = useState([])
 
-    const clientsAll = async () => {
-
-    }
 
     useEffect(() => {
         // Simulating data retrieval (replace this with your actual data fetching logic)
@@ -63,7 +60,7 @@ function ManageClient({ onAddClient, onEditClient }) {
                             <li key={`${index}${client[0]}`} className="bg-grey w-full py-2">
                                 <div className="px-7 flex justify-between">
                                     <span className="flex items-center gap-6">
-                                        <button onClick={() => onEditClient(true, client)} type="button" className="border border-white p-2 bg-white rounded-lg text-icon-container gap-2">
+                                        <button onClick={() => onEditClient(true, client.name)} type="button" className="border border-white p-2 bg-white rounded-lg text-icon-container gap-2">
                                             <img src={edit} alt="edit icon" />
                                             <span className="text-[0.8rem]">Edit</span>
                                         </button>

@@ -8,6 +8,17 @@ const FetchAllClients = async () => {
         },
     });
 
+
+    // const clients = await axios.get('https://bizhub-8955b30ff7e1.herokuapp.com/order/filter/2/', {
+    //     headers: {
+    //         Authorization: `Token ${GetToken()}`,
+    //     },
+    // });
+
+    // console.log(clients);
+
+    
+
     // allClients.data = data.map(client => client.name);
     return allClients.data;
 }
