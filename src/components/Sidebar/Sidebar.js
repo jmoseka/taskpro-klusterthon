@@ -39,8 +39,8 @@ function Sidebar({ onMenuClick }) {
   }
 
   return (
-    <div className="sidebar w-[336px] max-w-[336px] capitalize h-[100%] 
-    flex flex-col justify-center text-base font-medium text-black 
+    <div className="sidebar w-[336px] max-w-[336px] capitalize h-[100vh] 
+    flex flex-col text-base font-medium text-black 
     ">
       {/* logo*/}
       <div className="min-h-[105.29px] flex justify-center items-center ">

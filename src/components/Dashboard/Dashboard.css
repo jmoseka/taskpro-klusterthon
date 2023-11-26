@@ -17,3 +17,6 @@
 .filterChoice {
     @apply text-start font-medium w-full px-5 py-1;
 }
+.greetings {
+    opacity: 0;
+}

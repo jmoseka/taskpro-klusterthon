@@ -1,5 +1,4 @@
 import { useState } from "react";
-import MessageBoard from "../MessageBoard/MessageBoard";
 import AddInvoice from "./AddInvoice/AddInvoice";
 import ListInvoice from "./ListInvoice/ListInvoice";
 
@@ -20,9 +19,6 @@ function Invoice() {
 
     return (
         <div className=" flex flex-col gap-5  ">
-            <MessageBoard />
-
-    
                 {
                     openInvoice === true ?
                     <AddInvoice onCloseInvoice={handleCloseInvoice} onSaveInvoice={handleSaveInvoice} />

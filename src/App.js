@@ -5,6 +5,7 @@ import SignIn from './pages/Forms/SignIn';
 import SignUp from './pages/Forms/SignUp';
 import {Route, Routes} from 'react-router-dom';
 import Landing from './pages/Landingpage/Landing';
+import Invoice from './components/Invoices/Invoice';
 
 
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/" element={<Landing />}/>
         <Route path="/dashboard" element={<Home />}/>
+        <Route path="/invoices" element={<Invoice />}/>
 
       </Routes>
     </div>

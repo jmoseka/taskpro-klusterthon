@@ -30,7 +30,6 @@ function DashboardTableInvoice({ clientID, clientName, invoiceStatus }) {
     }
 
 
-
     // Simulating data retrieval (replace this with your actual data fetching logic)
     const fetchInvoice = async (clientID) => {
         try {
@@ -46,7 +45,7 @@ function DashboardTableInvoice({ clientID, clientName, invoiceStatus }) {
     }
 
     useEffect(() => {
-        fetchInvoice(clientID); // Call fetchInvoice when the component mounts or clientID changes
+        fetchInvoice(clientID); 
     }, [clientID]);
 
     console.log(dataInvoice);
