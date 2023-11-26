@@ -3,10 +3,15 @@ import unpaid from '../../../icons/0.75x/unpaid.png';
 
 import './TableInvoice.css';
 import { getClientInvoices } from '../../../modules/GetClientInvoices';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import GetToken from '../../../modules/GetToken';
 
 
 
-function DashboardTableInvoice({ clientName, invoiceStatus }) {
+function DashboardTableInvoice({ clientID, clientName, invoiceStatus }) {
+    console.log(clientID);
+    const [dataInvoice, setDataInvoice] = useState([])
 
     let listInvoice = {}
     let filterArray = {};
@@ -16,13 +21,40 @@ function DashboardTableInvoice({ clientName, invoiceStatus }) {
     }
 
     if (invoiceStatus === 2) {
-        filterArray = listInvoice.filter(invoice => invoice.status === false);
-        console.log(filterArray);
+        filterArray = dataInvoice.filter(invoice => invoice.status === false);
+      
     } else if (invoiceStatus === 1) {
-        filterArray = listInvoice.filter(invoice => invoice.status === true);
+        filterArray = dataInvoice.filter(invoice => invoice.status === true);
     } else {
-        filterArray = listInvoice;
+        filterArray = dataInvoice;
     }
+
+
+
+    // Simulating data retrieval (replace this with your actual data fetching logic)
+    const fetchInvoice = async (clientID) => {
+        try {
+            const invoices = await axios.get(`https://bizhub-8955b30ff7e1.herokuapp.com/order/filter/${clientID}/`, {
+                headers: {
+                    Authorization: `Token ${GetToken()}`,
+                },
+            });
+            setDataInvoice(invoices.data);
+        } catch (error) {
+            return [];
+        }
+    }
+
+    useEffect(() => {
+        fetchInvoice(clientID); // Call fetchInvoice when the component mounts or clientID changes
+    }, [clientID]);
+
+    console.log(dataInvoice);
+
+
+
+
+
 
 
     return (
@@ -44,9 +76,9 @@ function DashboardTableInvoice({ clientName, invoiceStatus }) {
                                 <td className='mx-auto flex items-center justify-center'>
                                     <img className='p-1' src={item.status === true ? paid : unpaid} alt='paid status' />
                                 </td>
-                                <td>{item.invoiceId}</td>
-                                <td>{item.date}</td>
-                                <td>{item.title}</td>
+                                <td>{item.id}</td>
+                                <td>{item.due_date}</td>
+                                <td>{item.description}</td>
                                 <td>{item.amount}</td>
                             </tr>
                         ))

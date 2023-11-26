@@ -8,6 +8,9 @@ import { getAllClients } from '../../../modules/GetClient';
 import './AddInvoice.css';
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import FetchAllClients from '../../../modules/FetchAllClients';
+import GetToken from '../../../modules/GetToken';
+import axios from 'axios';
 
 function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
     const allClients = getAllClients();
@@ -21,6 +24,27 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
     const [itemTypeName, setItemTypeName] = useState('Supplies');
     const [loadMessage, setLoadMessage] = useState(false)
     const [loadingAnime, setLoadingAnime] = useState(false);
+    const [clientId, setClientId] = useState('');
+    const [dataNames, setDataNames] = useState(null);
+    const [cost, setCost] = useState('');
+    const [title, setTitle] = useState('');
+    const [desc, setDesc] = useState('')
+
+
+    const arr = [];
+
+    useEffect(() => {
+        // Simulating data retrieval (replace this with your actual data fetching logic)
+        const fetchData = async () => {
+            const clients = await FetchAllClients()
+            setDataNames(clients)
+        };
+
+        fetchData();
+    }, []);
+
+
+
 
 
     const toggleDropdown = () => {
@@ -35,12 +59,10 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
     const toggleTypeDropdown = () => {
         setIsTypeOpen(!isOpen);
     };
-
     const handleItemTypeClick = (index, n) => {
         setItemTypeIndex(index)
         setItemTypeName(n)
     }
-
     const handleClientClick = (index, name) => {
         setClientIndex(index)
         setClientName(name);
@@ -59,7 +81,7 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
 
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
-        
+
 
         return () => {
             document.removeEventListener('click', handleClickOutside);
@@ -71,16 +93,51 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
 
     const handleCreateInvoice = (event) => {
         event.preventDefault();
-        setLoadMessage(!loadMessage)
-        setLoadingAnime(true);
-        setTimeout(() => {
-            setLoadingAnime(false);
-            setTimeout(() => {
-                onSaveInvoice(false)
-            }, 2000);
-        }, 3000);
+        // setLoadMessage(!loadMessage)
+        // setLoadingAnime(true);
+        // setTimeout(() => {
+        //     setLoadingAnime(false);
+        //     setTimeout(() => {
+        //         onSaveInvoice(false)
+        //     }, 2000);
+        // }, 3000);
+        const headers = {
+            Authorization: `Token ${GetToken()}`,
+        };
+
+
+        const postData = {
+            due_date: '2022-04-11',
+            description: 'sales for perfumes',
+            order_type: 'SALES',
+            amount: 123,
+        };
+
+        axios.post('https://bizhub-8955b30ff7e1.herokuapp.com/order/create/2/',
+         postData, { headers })
+            .then(response => {
+                console.log('this',response.data);
+      
+            })
+            .catch(error => {
+                console.log('error',error);
+                return error;
+            });
     }
 
+
+
+    const handleChangeCost = (e) => {
+        setCost(e.target.value)
+    }
+
+    const handleChangeTitle =(e) => {
+        setTitle(e.target.value)
+    }
+
+    const handleChangeDesc = (e) => {
+        setDesc(e.target.value)
+    }
 
     return (
         <div className="card relative">
@@ -89,9 +146,9 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
                 <div className='modal-window addmodal '>
 
                     {
-                        loadingAnime ? 
+                        loadingAnime ?
                             <div className='mx-auto custom-loader'></div>
-                        
+
                             :
 
                             <span className='flex  flex-col justify-center items-center gap-4'>
@@ -104,7 +161,7 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
 
 
             <div>
-       
+
 
                 <div className='py-4 border-b-[1px] border-b-grey pb-3'>
                     <div className="px-7 flex flex-col items-start gap-2">
@@ -139,70 +196,51 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
                 </div>
 
 
-                <form className='px-8 pt-2 overflow-y-scroll flex flex-col gap-6'>
+                <form onSubmit={handleCreateInvoice} className='px-8 py-3 overflow-y-scroll flex flex-col gap-6'>
                     <div className='form-ctrl-group'>
-                        <div className='form-ctrl'>
-                            <label htmlFor='firstName'>Invoice ID </label>
-                            <input
-                                type='text'
-                                id='firstName'
-                                name='firstName'
-                            />
+                        <div className='duedate-group'>
+                            <label htmlFor='firstName'>Due date </label>
+                            <div className='w-full text-start'>
+                                <p className='due-date font'>Upon recepit</p>
+                            </div>
 
                         </div>
 
-                        <div className='form-ctrl normal-case'>
+                        <div className='duedate-group'>
                             <label htmlFor='firstName'>Currency </label>
-                            <input
-                                type='text'
-                                id='firstName'
-                                name='firstName'
-                            />
-
-                        </div>
-                    </div>
-
-
-
-                    <div className='form-ctrl-group'>
-                        <div className='form-ctrl'>
-                            <label htmlFor='firstName'>Issue date </label>
-                            <input
-                                type='text'
-                                id='firstName'
-                                name='firstName'
-                            />
+                            <div className='w-full text-start'>
+                                <p className='due-date font-medium'>Nigerian Naira - NGN</p>
+                            </div>
 
                         </div>
 
-                        <div className='form-ctrl normal-case'>
-                            <label htmlFor='firstName'>Total cost </label>
-                            <input
-                                type='text'
-                                id='firstName'
-                                name='firstName'
-                            />
-
-                        </div>
-                    </div>
-
-                    <div className='duedate-group'>
-                        <label htmlFor='firstName'>Due date </label>
-                        <div className='w-full text-start'>
-                            <p className='due-date font-medium'>Upon recepit</p>
-                        </div>
 
                     </div>
 
 
                     <div className='form-ctrl'>
-                        <label htmlFor='firstName'>Invoice title </label>
+                        <label htmlFor='cost'>Total cost </label>
+                        <div className='w-full text-start'>
                         <input
-                            type='text'
-                            id='firstName'
-                            name='firstName'
+                        className='w-48'
+                            type='number'
+                            id='costInvoice'
+                            name='costInvoice'
+                            onChange={handleChangeCost}
                         />
+                        </div>
+                    </div>
 
+
+                    <div className='form-ctrl'>
+                        <label htmlFor='invoiceTitle'>Invoice title </label>
+                        <input
+                        className='w-full'
+                            type='text'
+                            id='invoiceTitle'
+                            name='invoiceTitle'
+                            onChange={handleChangeTitle}
+                        />
                     </div>
 
 
@@ -249,14 +287,12 @@ function AddInvoice({ onCloseInvoice, onSaveInvoice }) {
 
                                 <td className='pt-3'>
                                     <div className='h-[135px]'>
-                                        <textarea className='rounded-lg border border-grey w-full h-full' type='text' />
+                                        <textarea className='rounded-lg border border-grey w-full h-full' type='text' onChange={handleChangeDesc} />
 
                                     </div>
                                 </td>
 
                             </tr>
-
-
                         </tbody>
                     </table>
 

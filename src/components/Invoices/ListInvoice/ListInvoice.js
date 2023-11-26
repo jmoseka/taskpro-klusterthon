@@ -4,6 +4,7 @@ import arrowdown from '../../../icons/0.75x/arrow-down.png'
 import data from '../../../Database/ClientsData';
 import './ListInvoice.css';
 import DashboardTableInvoice from "../TableInvoice/DashboardTableInvoice";
+import FetchAllClients from "../../../modules/FetchAllClients";
 
 
 function ListInvoice({ onAddInvoice }) {
@@ -14,13 +15,16 @@ function ListInvoice({ onAddInvoice }) {
     const [isOpen, setIsOpen] = useState(false);
     const [clientName, setClientName] = useState(dataClients.length > 0 ? dataClients[0] : 'No client added');
     const dropdownRef = useRef(null);
+    const [dataNames, setDataNames] = useState([]);
+    const [clientId, setClientID] = useState('')
 
     const handleTabClick = (index) => {
         setActiveTab(index)
     }
-    const handleModalClick = (index, name) => {
+    const handleModalClick = (index, name, id) => {
         setModalIndex(index)
         setClientName(name);
+        setClientID(id)
     }
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -43,6 +47,17 @@ function ListInvoice({ onAddInvoice }) {
     }, []);
 
     ///////////*****/////////////////////////////// */
+
+    useEffect(() => {
+        // Simulating data retrieval (replace this with your actual data fetching logic)
+        const fetchData = async () => {
+            const clients = await FetchAllClients()
+            setDataNames(clients)
+            setClientID(clients[0].id);
+        };
+
+        fetchData();
+    }, []);
 
     return (
 
@@ -70,9 +85,9 @@ function ListInvoice({ onAddInvoice }) {
 
                             <span className="modal invoice-modal">
                                 {
-                                    dataClients.map((e, index) => (
-                                        <button onClick={() => handleModalClick(index, e)} key={`${index}e`} type="button"
-                                            className={` ${index === modalIndex ? 'bg-grey' : ''}`}>{e}</button>
+                                    dataNames.map((e, index) => (
+                                        <button onClick={() => handleModalClick(index, e, e.id)} key={`${index}e`} type="button"
+                                            className={` ${index === modalIndex ? 'bg-grey' : ''}`}>{e.client}</button>
                                     ))
                                 }
                             </span>
@@ -95,7 +110,7 @@ function ListInvoice({ onAddInvoice }) {
 
 
                 <div className='h-auto overflow-y-scroll listinvoice'>
-                    <DashboardTableInvoice clientName={clientName} invoiceStatus={activeTab} />
+                    <DashboardTableInvoice clientID={clientId} clientName={clientName} invoiceStatus={activeTab} />
                 </div>
 
 

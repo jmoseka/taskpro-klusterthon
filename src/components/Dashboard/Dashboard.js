@@ -6,16 +6,21 @@ import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
 import data from '../../Database/ClientsData'
 import DashboardTableInvoice from '../Invoices/TableInvoice/DashboardTableInvoice';
+import { fetchCurrentUser } from '../../modules/FetchCurrentUser';
+import FetchAllClients from '../../modules/FetchAllClients';
+
+
 
 function Dashboard() {
     const clientsArr = data.map(client => client.name);
-
     const [clientClick, setClientClick] = useState(0);
     const [searchClient, setSearchClient] = useState('');
     const [clientName, setClientName] = useState(clientsArr[0]);
     const [initialName, setInitialName] = useState(clientName);
     const [filterIndex, setFilterIndex] = useState(0);
     const [filteredOption, setFilteredOption] = useState('All');
+    const [dataNames, setDataNames] = useState([]);
+    const [clientId, setClientID] = useState('')
 
 
     const filteredClients = clientsArr.filter((client) =>
@@ -23,10 +28,25 @@ function Dashboard() {
     );
 
 
-    const handleClientClick = (index, name) => {
+    useEffect(() => {
+        // Simulating data retrieval (replace this with your actual data fetching logic)
+        const fetchData = async () => {
+            const clients = await FetchAllClients()
+            setDataNames(clients)
+            setClientID(clients[0].id);
+        };
+
+        fetchData();
+    }, []);
+   
+
+
+    const handleClientClick = (index, name, id) => {
         setClientClick(index);
         setClientName(name.toLowerCase());
         setInitialName(name);
+        setClientID(id)
+    
     }
 
     const handleSearchClient = (event) => {
@@ -73,7 +93,10 @@ function Dashboard() {
     ]
 
     return (
-        <div className=" h-full flex flex-col gap-5">
+        <div className="relative h-full flex flex-col gap-5">
+            {/* <div className='bg-red absolute w-full h-full '>
+
+            </div> */}
             <MessageBoard />
 
             <div className='card'>
@@ -93,21 +116,20 @@ function Dashboard() {
                 <div className='client-list h-[120px]  overflow-y-scroll'>
                     <ul className={`p-0 m-0 h-full flex flex-col gap-1 ${clientsArr.length <= 0 || filteredClients.length <= 0 ? 'justify-center' : ''} `}>
                         {
-                            clientsArr.length > 0 ?
-                                filteredClients.length > 0 ?
+          
+                                dataNames?
 
-                                    filteredClients.map((client, index) => (
-                                        <button onClick={() => handleClientClick(index, client)} key={`${index}client`}
+                                    dataNames.map((client, index) => (
+                                        <button onClick={() => handleClientClick(index, client.name, client.id)} key={`${index}client`}
                                             className={`capitalize text-left text-sm px-7 py-2 w-full outline-0 ${clientClick === index ?
-                                                'bg-lightBlue' : ''} `}>{client}</button>
+                                                'bg-lightBlue' : ''} `}>{client.name}</button>
 
                                     ))
 
                                     :
 
                                     <p>Not found client</p>
-                                :
-                                <p className='mx-auto'>You have no clients </p>
+                      
 
 
                         }
@@ -129,13 +151,13 @@ function Dashboard() {
                                 <span className='text-sm'>Filter:</span>
                                 <div>
 
-                                    <button onClick={() => toggleDropdown()} ref={dropdownRef} type='button' className='animation-ease relative flex items-center justify-between
+                                    <button onClick={() => toggleDropdown()} ref={dropdownRef} type='button' className='animation-ease flex items-center justify-between
                                         border border-grey  rounded-3xl py-2 px-4 w-[200px]  '>
                                         <p>{filteredOption}</p>
                                         <img src={arrowdown} alt='arrow-down' />
                                     </button>
 
-                                    <div className='overflow-auto absolute text-start w-[200px] text-[13px] translate-y-2 modal'>
+                                    <div className='overflow-auto  text-start w-[200px] text-[13px] translate-y-2 absolute modal'>
                                         {
                                             isOpen && (
                                                 <span className='filter-invoices'>
@@ -163,7 +185,7 @@ function Dashboard() {
                 </div>
 
                 <div className='h-[150px] overflow-y-scroll'>
-                    <DashboardTableInvoice clientName={clientName} invoiceStatus={filterIndex} />
+                    <DashboardTableInvoice clientID={clientId} clientName={clientName} invoiceStatus={filterIndex} />
 
                 </div>
 
