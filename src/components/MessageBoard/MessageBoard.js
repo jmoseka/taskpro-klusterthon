@@ -1,20 +1,33 @@
 import calendar from '../../icons/0.75x/calendar.png';
 import bell from '../../icons/0.75x/bell.png';
+import { fetchCurrentUser } from '../../modules/FetchCurrentUser';
+import { useState } from 'react';
 
 function MessageBoard() {
+    const [currentUser, setCurrentUser] = useState('')
     const name = 'Hussein';
     const msg = `Let's help you simplify your business.`
 
     const today = new Date();
     const options = { year: 'numeric', month: 'short', day: '2-digit' };
     const formatter = new Intl.DateTimeFormat('en-US', options);
-
     const formattedDate = formatter.format(today);
+
+    async function getCurrentUser() {
+        await fetchCurrentUser();
+        const { first_name } = await fetchCurrentUser();
+        if (first_name) {
+            setCurrentUser(first_name)
+            console.log(currentUser);
+        }
+    }
+
+    getCurrentUser();
 
 
     return (
         <div className="card w-full flex text-start flex-col py-2 px-7 ">
-            <p className='font-medium text-lg'>Hello, {name}!</p>
+            <p className='font-medium text-lg'>Hello, {currentUser}!</p>
 
             <div className='flex items-center gap-2 self-end text-sm'>
 
@@ -25,8 +38,8 @@ function MessageBoard() {
 
                 <span className='profile-spans'>
                     <span><img src={bell} alt='no notification icon' /></span>
-                    <span className='text-white rounded-full h-8 w-8 bg-yellow flex justify-center items-center'>
-                        <p className='mx-auto text-sm'>{name[0]}</p>
+                    <span className='text-white rounded-full h-8 w-8 bg-purple flex justify-center items-center'>
+                        <p className='mx-auto text-sm'>{currentUser[0]}</p>
                     </span>
                 </span>
             </div>

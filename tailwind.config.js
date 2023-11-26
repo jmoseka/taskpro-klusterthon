@@ -22,7 +22,8 @@ module.exports = {
         lightBlue: '#BCF6F3',
         grey: '#E6E6E6',
         borderColor: '#7878781A',
-        red: '#FD0404'
+        red: '#FD0404',
+        purple: 'rgba(110, 5, 245, 1)'
         
 
       }

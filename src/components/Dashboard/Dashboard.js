@@ -6,10 +6,12 @@ import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
 import data from '../../Database/ClientsData'
 import DashboardTableInvoice from '../Invoices/TableInvoice/DashboardTableInvoice';
+import { fetchCurrentUser } from '../../modules/FetchCurrentUser';
+
+
 
 function Dashboard() {
     const clientsArr = data.map(client => client.name);
-
     const [clientClick, setClientClick] = useState(0);
     const [searchClient, setSearchClient] = useState('');
     const [clientName, setClientName] = useState(clientsArr[0]);
@@ -21,6 +23,8 @@ function Dashboard() {
     const filteredClients = clientsArr.filter((client) =>
         client.toLowerCase().includes(searchClient.toLowerCase())
     );
+
+   
 
 
     const handleClientClick = (index, name) => {
