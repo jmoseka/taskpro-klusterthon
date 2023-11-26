@@ -10,12 +10,12 @@ function Home() {
   useEffect(()=>{
     let bizToken = localStorage.getItem('bizToken')
     if(bizToken){
-      navigate('/')
+      navigate('/dashboard')
     }
     else if(!bizToken){
       navigate('/signin')
     }
-  },[])
+  })
 
   const [selectedMenu, setSelectedMenu] = useState('dashboard');
 
