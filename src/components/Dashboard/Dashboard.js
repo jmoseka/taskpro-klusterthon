@@ -92,7 +92,7 @@ function Dashboard() {
     return (
         <div className="relative pt-8 h-full flex flex-col gap-5 ">
             {
-                !dataNames ?
+                dataNames.length <= 0 ?
                     <div className='modal-blur absolute w-full h-[100vh] '>
                         <div className='mx-auto custom-loader'></div>
                     </div>

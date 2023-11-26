@@ -52,7 +52,7 @@ function MessageBoard() {
                 <span className='profile-spans'>
                     <span><img src={bell} alt='no notification icon' /></span>
                     <span className='text-white rounded-full h-8 w-8 bg-purple flex justify-center items-center'>
-                        <p className='mx-auto text-sm'>{currentUser[0]}</p>
+                        <p className='mx-auto text-sm'>{!currentUser? 'B' : currentUser[0]}</p>
                     </span>
                 </span>
             </div>
