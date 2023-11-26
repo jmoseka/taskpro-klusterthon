@@ -3,7 +3,6 @@ import arrowdown from '../../icons/0.75x/arrow-down.png';
 import search from '../../icons/0.75x/search-status.png';
 
 import './Dashboard.css';
-import MessageBoard from '../MessageBoard/MessageBoard';
 import data from '../../Database/ClientsData'
 import DashboardTableInvoice from '../Invoices/TableInvoice/DashboardTableInvoice';
 import FetchAllClients from '../../modules/FetchAllClients';

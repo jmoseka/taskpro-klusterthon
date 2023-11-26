@@ -1,5 +1,4 @@
 import { useState } from "react";
-import MessageBoard from "../MessageBoard/MessageBoard";
 import AddInvoice from "./AddInvoice/AddInvoice";
 import ListInvoice from "./ListInvoice/ListInvoice";
 
