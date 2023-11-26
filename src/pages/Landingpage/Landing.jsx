@@ -4,6 +4,9 @@ import Join from './Join'
 import MasteringPay from './MasteringPay'
 import Manage from './Manage'
 import Pricing from './Pricing'
+import Globe from './Globe'
+import Enhancebiz from './Enhancebiz'
+import Footer from './Footer'
 
 const Landing = () => {
   return (
@@ -13,6 +16,9 @@ const Landing = () => {
       <MasteringPay/>
       <Manage/>
       <Pricing/>
+      <Globe/>
+      <Enhancebiz/>
+      <Footer/>
     </div>
   )
 }

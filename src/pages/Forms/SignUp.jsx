@@ -55,32 +55,19 @@ const SignUp = () => {
     }
   });
   return (
-    <div className="flex justify-center h-screen">
+    <div className="flex justify-center ">
       <div className="flex flex-col w-[90%] max-w-[550px]">
         <header className="flex flex-row justify-center">
           <img src="assets/BizHubLogo.png" alt="BizHub Logo" className="w-44" />
         </header>
         <main className="mt-16">
-          <h2 className="text-3xl font-semibold mb-6">
+          <h2 className="text-3xl text-center font-semibold mb-6">
             Sign Up To Biz Hub
           </h2>
           <form className="text-black p-8 " onSubmit={(e)=>{
             e.preventDefault()
             formik.handleSubmit()
           }}>
-            <div className="flex items-center bg-white p-2 rounded-xl cursor-pointer input">
-              <img src="assets/googleIcon.png" alt="Google Logo" />
-              <div className="w-[90%]">
-                <h4 className="text-xl md:text-2xl font-medium">
-                  Sign Up With Google
-                </h4>
-              </div>
-            </div>
-            <div className="flex items-center justify-center py-4">
-              <hr className=" w-[25%] max-w-[150px]" />
-              <p className="text-base md:text-lg">or with your email below</p>
-              <hr className="w-[25%] max-w-[150px]" />
-            </div>
             <div className="flex flex-col gap-3">
               <div className="flex items-center bg-white gap-3 p-2 input">
                 <img src="assets/user.png" alt="Email Icon" />

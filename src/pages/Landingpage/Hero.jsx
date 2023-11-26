@@ -16,7 +16,7 @@ const Hero = () => {
           Streamline your operations with ease by creating clients profiles, tracking transactions, and receiving real-time alerts for unpaid invoices. Stay in control of your finances and focus on what matters growing your business.
           </p>
           <div className='py-4 flex items-center gap-2 md:gap-5 text-xs'>
-          <NavLink to='/signup' className='bg-veryGreen text-white hover:text-veryGreen hover:bg-transparent px-4 py-4 rounded-3xl'>Get Started for free</NavLink>
+          <NavLink to='/signup' className='bg-veryGreen text-white hover:text-veryGreen hover:bg-lightGreen px-4 py-4 rounded-3xl'>Get Started for free</NavLink>
           <NavLink className='flex items-center'>
             <img src="assets/play.png" alt="Biz Hub Demo" />
             View Demo
