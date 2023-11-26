@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 function MessageBoard() {
     const [currentUser, setCurrentUser] = useState('')
-    const name = 'Hussein';
     const msg = `Let's help you simplify your business.`
 
     const today = new Date();
