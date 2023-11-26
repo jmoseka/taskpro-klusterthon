@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -14,9 +17,6 @@ body {
 main .signin{
   background: rgba(188, 246, 243, 0.50);
 }
-
-code {
-}
 .input{
   border-radius: 12px;
   border: 1.4px solid rgba(0, 0, 0, 0.22);
@@ -25,4 +25,10 @@ code {
 }
 .input:focus-within{
   border: 2px solid rgba(0, 0, 0, 0.50);
+}
+.cardi{
+  box-shadow: 12px 12px 68px 0px rgba(0, 0, 0, 0.20)
+}
+.paymentbg{
+  background-size: 100%;
 }

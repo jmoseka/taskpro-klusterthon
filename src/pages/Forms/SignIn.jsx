@@ -36,7 +36,7 @@ const SignIn = () => {
             toast.success('Welcome Back')
             setTimeout(()=>{
               localStorage.setItem('bizToken', data.token)
-              navigate('/')
+              navigate('/dashboard')
             },2500)
           }
       })
