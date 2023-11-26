@@ -38,7 +38,7 @@ function ManageClient({ onAddClient, onEditClient }) {
             <div className=" px-7 flex justify-between items-center">
                 <p className="font-medium">Manage</p>
                 <button onClick={() => onAddClient(true)} type="button" className=" bg-yellow rounded-lg 
-                     font-medium text-icon-container gap-1 p-2">
+                     font-medium text-icon-container flex gap-1 p-2">
                     <span><img src={add} alt="add client" /></span>
                     <span className="capitalize text-sm text-white">New client</span>
                 </button>

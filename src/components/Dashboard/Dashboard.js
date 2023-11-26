@@ -6,7 +6,6 @@ import './Dashboard.css';
 import MessageBoard from '../MessageBoard/MessageBoard';
 import data from '../../Database/ClientsData'
 import DashboardTableInvoice from '../Invoices/TableInvoice/DashboardTableInvoice';
-import { fetchCurrentUser } from '../../modules/FetchCurrentUser';
 import FetchAllClients from '../../modules/FetchAllClients';
 
 
@@ -21,8 +20,6 @@ function Dashboard() {
     const [filteredOption, setFilteredOption] = useState('All');
     const [dataNames, setDataNames] = useState([]);
     const [clientId, setClientID] = useState('')
-    const [nameStatus, setNameStatus] = useState('');
-
 
     const filteredClients = clientsArr.filter((client) =>
         client.toLowerCase().includes(searchClient.toLowerCase())
@@ -78,9 +75,6 @@ function Dashboard() {
             setIsOpen(false);
         }
     };
-    const handleNameStatus = (name) => {
-        setNameStatus(name)
-    }
 
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
@@ -109,7 +103,7 @@ function Dashboard() {
 
 
 
-            <MessageBoard handleNameStatus={handleNameStatus} />
+           
 
             <div className='card'>
                 <div className='flex flex-col gap-2 pt-3 px-8 '>
@@ -197,7 +191,7 @@ function Dashboard() {
                 </div>
 
                 <div className='h-[150px] overflow-y-scroll'>
-                    <DashboardTableInvoice clientID={clientId} clientName={clientName} invoiceStatus={filterIndex} />
+                    {/* <DashboardTableInvoice clientID={clientId} clientName={clientName} invoiceStatus={filterIndex} /> */}
 
                 </div>
 

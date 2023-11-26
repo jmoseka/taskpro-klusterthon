@@ -20,9 +20,6 @@ function Invoice() {
 
     return (
         <div className=" flex flex-col gap-5  ">
-            <MessageBoard />
-
-    
                 {
                     openInvoice === true ?
                     <AddInvoice onCloseInvoice={handleCloseInvoice} onSaveInvoice={handleSaveInvoice} />

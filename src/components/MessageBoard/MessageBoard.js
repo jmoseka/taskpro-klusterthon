@@ -2,8 +2,9 @@ import calendar from '../../icons/0.75x/calendar.png';
 import bell from '../../icons/0.75x/bell.png';
 import { fetchCurrentUser } from '../../modules/FetchCurrentUser';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
-function MessageBoard({handleNameStatus}) {
+function MessageBoard() {
     const [currentUser, setCurrentUser] = useState('')
     const msg = `Let's help you simplify your business.`
 
@@ -12,16 +13,21 @@ function MessageBoard({handleNameStatus}) {
     const formatter = new Intl.DateTimeFormat('en-US', options);
     const formattedDate = formatter.format(today);
 
-    async function getCurrentUser() {
-        await fetchCurrentUser();
-        const { first_name } = await fetchCurrentUser();
-        if (first_name) {
-            setCurrentUser(first_name)
-            handleNameStatus(first_name)
-        }
-    }
+    useEffect(() => {
 
+        async function getCurrentUser() {
+            await fetchCurrentUser();
+            const { first_name } = await fetchCurrentUser();
+            if (first_name) {
+                setCurrentUser(first_name)
+            }
+        }
     getCurrentUser();
+
+    }, [currentUser])
+
+
+
 
 
     return (
@@ -29,12 +35,12 @@ function MessageBoard({handleNameStatus}) {
 
 
             <p className='font-medium text-lg animation-ease'>
-                
-                
-                {!currentUser ? 
-                <span className='greetings'>Hello</span>
 
-                : `Hello ${currentUser}!`}</p>
+
+                {!currentUser ?
+                    <span className='greetings'>Hello</span>
+
+                    : `Hello ${currentUser}!`}</p>
 
             <div className='flex items-center gap-2 self-end text-sm'>
 
