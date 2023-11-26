@@ -10,7 +10,7 @@ import Landing from './pages/Landingpage/Landing';
 
 function App() {
   return (
-    <div className="App font-poppins pb-11 overflow-hidden">
+    <div className="App font-poppins overflow-hidden">
       <Routes>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/signin" element={<SignIn/>}/>
