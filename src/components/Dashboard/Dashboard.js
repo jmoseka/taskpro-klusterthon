@@ -94,9 +94,9 @@ function Dashboard() {
 
     return (
         <div className="relative h-full flex flex-col gap-5">
-            {/* <div className='bg-red absolute w-full h-full '>
+            <div className=' absolute w-full h-full '>
 
-            </div> */}
+            </div>
             <MessageBoard />
 
             <div className='card'>
