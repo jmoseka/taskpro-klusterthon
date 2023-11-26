@@ -15,6 +15,8 @@ export const fetchCurrentUser = async () => {
         Authorization: `Token ${token}`,
       },
     });
+
+    
     return response.data;
   } catch (error) {
     throw new Error('Error fetching current user');
