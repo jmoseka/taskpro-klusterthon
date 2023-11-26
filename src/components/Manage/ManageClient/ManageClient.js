@@ -52,7 +52,6 @@ function ManageClient({ onAddClient, onEditClient }) {
                 </div>
             </div>
 
-
             <ul className='py-4 flex flex-col gap-2 min-h[200px]'>
                 {
                     dataClients !== null && dataClients.length > 0 ?
