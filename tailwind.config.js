@@ -8,13 +8,17 @@ module.exports = {
 
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
+        satisfy: 'Satisfy',
+        inter: 'Inter'
       },
 
       colors: {
         green: '#2ECC71',
         veryGreen: '#048929',
         lightGreen: 'rgba(4, 137, 41, 0.2)',
+        paleGreeen: 'rgba(4,137,41,0.08)',
         darkGreen: '#048929',
+        paleYellow: '#F4CD00',
         yellow: '#EFDA21',
         white: '#FFFFFF',
         black: '#333333',
