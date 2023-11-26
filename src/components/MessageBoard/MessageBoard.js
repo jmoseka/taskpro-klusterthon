@@ -31,7 +31,7 @@ function MessageBoard() {
 
 
     return (
-        <div className="card w-full flex text-start flex-col py-2 px-7 transition duration-600 ease-in-out">
+        <div className="card w-full flex text-start flex-col py-3 px-7 transition duration-600 ease-in-out">
 
 
             <p className='font-medium text-lg animation-ease'>

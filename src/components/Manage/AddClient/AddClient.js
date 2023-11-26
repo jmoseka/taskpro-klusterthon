@@ -1,60 +1,62 @@
 import './AddClient.css'
 import save from '../../../icons/0.75x/save.png';
 import cancel from '../../../icons/0.75x/trash.png';
-import data from '../../../Database/ClientsData'
 import success from '../../../icons/1x/check_small.png'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GetToken from '../../../modules/GetToken';
 import axios from 'axios';
 
 
-const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
-
-    const client = data.find(client => client.name.toLowerCase() === editClient.toLowerCase());
+const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, editClientAddress, editClientTask, editClientContact, onCloseClient, onSaveClient }) => {
     const [loadMessage, setLoadMessage] = useState(false)
     const [loadingAnime, setLoadingAnime] = useState(false);
+    const [loadingAnimeEdit, setLoadingAnimeEdit] = useState(true);
     const [clientName, setClientName] = useState()
     const [clientEmail, setClientEmail] = useState()
     const [clientAddress, setClientAddress] = useState()
     const [clientTask, setClientTask] = useState()
     const [clientContact, setClientContact] = useState()
 
-    let emailClient = ''
-    let addressClient = ''
-    let taskClient = ''
-
-    if (client) {
-        const { email, address, task } = client;
-        emailClient = email;
-        addressClient = address;
-        taskClient = task;
-    }
-
     const handleInputChangeName = (e) => {
         setClientName(e.target.value)
     }
-
     const handleInputChangeEmail = (e) => {
         setClientEmail(e.target.value);
     }
     const handleInputChangeAddress = (e) => {
         setClientAddress(e.target.value);
     }
-
     const handleInputChangeTask = (e) => {
         setClientTask(e.target.value);
     }
-
     const handleInputChangeContact = (e) => {
         setClientContact(e.target.value);
     }
+
+    useEffect(() => {
+        if (editStatus === 'edit') {
+
+            setTimeout(() => {
+                setLoadingAnimeEdit(false)
+                setClientName(editClientName);
+                setClientEmail(editClientEmail)
+                setClientAddress(editClientAddress)
+                setClientContact(editClientContact)
+                setClientTask(editClientTask)
+            }, 2000);
+
+        }
+
+    }, [editStatus, setClientName, editClientName, editClientEmail, setClientEmail, editClientContact, setClientContact, editClientAddress, setClientAddress, editClientTask, setClientTask]); // Add dependencies as needed
+
+
 
     const handleCreateClient = (event) => {
         event.preventDefault();
         const headers = {
             Authorization: `Token ${GetToken()}`,
         };
-        
+
         const postData = {
             name: clientName,
             email: clientEmail,
@@ -78,6 +80,38 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
             });
     }
 
+    const handleEditClient = (event) => {
+        event.preventDefault();
+
+        const headers = {
+            Authorization: `Token ${GetToken()}`,
+        };
+
+        const postData = {
+            name: clientName,
+            email: clientEmail,
+            address: clientAddress,
+            task_details: clientTask,
+            contact: clientContact
+        };
+        setLoadingAnime(!loadMessage)
+
+        axios.put(`https://bizhub-8955b30ff7e1.herokuapp.com/client/update/${editClientId}/`, postData, { headers })
+            .then(response => {
+                setLoadMessage(!loadMessage)
+                setLoadingAnime(false);
+                setTimeout(() => {
+                    onSaveClient(false)
+                }, 2000);
+                console.log(success);
+                return response.data;
+            })
+            .catch(error => {
+                return error;
+            });
+    }
+
+
 
     return (
         <div className="card relative">
@@ -91,25 +125,36 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             :
 
                             <span className='flex  flex-col justify-center items-center gap-4'>
-                                <span>Client created successfully</span>
+                                <span>{editStatus === 'edit' ? 'Client updated successfully!' : 'Client created successfully!'}</span>
                                 <span><img src={success} alt='green check tick box' /></span>
                             </span>
                     }
                 </div>
             </div>
 
+            {
+                loadingAnimeEdit ?
+
+                    <div className='modal-blur'>
+
+                    </div>
+
+
+                    : ''
+            }
+
 
             <div className='pt-8 pb-4'>
                 <div className="flex flex-col gap-3">
-                    <div className="flex flex-col items-start px-7 gap-2">
-                        <p className=" font-semibold">New client </p>
-                        <span className="text-sm italic">Once you  have added a client, you can add contacts and projects</span>
+                    <div className="flex flex-col items-start px-4">
+                        <p className=" font-semibold">{editStatus === 'edit' ? 'Update Client' : 'New client '}</p>
+
                     </div>
 
                     <span className="line h-[1px] w-full bg-grey"></span>
                 </div>
 
-                <form onSubmit={handleCreateClient} className="py-4 flex flex-col items-start px-7  gap-4">
+                <form onSubmit={editStatus === 'edit' ? handleEditClient : handleCreateClient} className="py-4 flex flex-col items-start px-7  gap-4">
 
                     <div className='form-control'>
                         <label htmlFor='clientName'>Client name </label>
@@ -117,7 +162,7 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             type='text'
                             id='clientName'
                             name='clientName'
-
+                            value={clientName}
                             onChange={handleInputChangeName}
                         />
 
@@ -129,6 +174,7 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             type='text'
                             id='emailAddress'
                             name='emailAddress'
+                            value={clientEmail}
                             onChange={handleInputChangeEmail}
 
                         />
@@ -142,6 +188,7 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             id='addressClient'
                             name='addressClient'
                             className="h-[70px] addClientTextarea "
+                            value={clientAddress}
                             onChange={handleInputChangeAddress}
 
                         />
@@ -154,6 +201,7 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             type='text'
                             id='taskDetails'
                             name='taskDetails'
+                            value={clientTask}
                             className="h-[120px] addClientTextarea "
                             onChange={handleInputChangeTask}
                         />
@@ -167,6 +215,7 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                             id='contactClient'
                             name='contactClient'
                             onChange={handleInputChangeContact}
+                            value={clientContact}
 
                         />
 
@@ -185,9 +234,9 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
 
 
                     <div className='pt-6 mx-auto flex gap-5'>
-                        <button type='submit' onSubmit={handleCreateClient} className='bg-green p-2 rounded-lg flex items-center justify-center gap-1'>
+                        <button type='submit' onSubmit={editStatus === 'edit' ? handleEditClient : handleCreateClient} className='bg-green p-2 rounded-lg flex items-center justify-center gap-1'>
                             <span><img src={save} alt='save client' /></span>
-                            <span className='capitalize text-[0.85rem] font-semibold'>save client</span>
+                            <span className='capitalize text-[0.85rem] font-semibold'>{editStatus ? 'edit ' : 'save '} client</span>
                         </button>
 
 
@@ -200,9 +249,6 @@ const AddClient = ({ onCloseClient, onSaveClient, editClient }) => {
                 </form>
 
             </div>
-
-
-
 
         </div>
     )
