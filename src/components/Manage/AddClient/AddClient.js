@@ -159,6 +159,7 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                     <div className='form-control'>
                         <label htmlFor='clientName'>Client name </label>
                         <input
+                        required
                             type='text'
                             id='clientName'
                             name='clientName'
@@ -171,6 +172,7 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                     <div className='form-control'>
                         <label htmlFor='emailAddress'>Email address </label>
                         <input
+                        required
                             type='text'
                             id='emailAddress'
                             name='emailAddress'
@@ -184,6 +186,7 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                     <div className='form-control'>
                         <label htmlFor='addressClient'>Address </label>
                         <textarea
+                        required
                             type='text'
                             id='addressClient'
                             name='addressClient'
@@ -211,6 +214,7 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                     <div className='form-control'>
                         <label htmlFor='emailAddress'>Contact </label>
                         <input
+                        required
                             type='number'
                             id='contactClient'
                             name='contactClient'
