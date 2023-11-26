@@ -25,7 +25,7 @@ function Home() {
 
 
   return (
-    <div className="mx-auto flex h-[100vh]  pb-1 ">
+    <div className="relative mx-auto flex h-[100vh] ">
       <Sidebar onMenuClick={handleMenuClick} />
       <Mainbar selectedMenu={selectedMenu} />
     </div>

@@ -21,6 +21,7 @@ function Dashboard() {
     const [filteredOption, setFilteredOption] = useState('All');
     const [dataNames, setDataNames] = useState([]);
     const [clientId, setClientID] = useState('')
+    const [nameStatus, setNameStatus] = useState('');
 
 
     const filteredClients = clientsArr.filter((client) =>
@@ -77,6 +78,9 @@ function Dashboard() {
             setIsOpen(false);
         }
     };
+    const handleNameStatus = (name) => {
+        setNameStatus(name)
+    }
 
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
@@ -93,11 +97,19 @@ function Dashboard() {
     ]
 
     return (
-        <div className="relative h-full flex flex-col gap-5">
-            <div className=' absolute w-full h-full '>
+        <div className="relative h-full flex flex-col gap-5 ">
+            {
+                !dataNames ? 
+                <div className='modal-blur absolute w-full h-[100vh] '>
+                    <div className='mx-auto custom-loader'></div>
+                </div>
+                :
+                ''
+            }
 
-            </div>
-            <MessageBoard />
+
+
+            <MessageBoard handleNameStatus={handleNameStatus} />
 
             <div className='card'>
                 <div className='flex flex-col gap-2 pt-3 px-8 '>
