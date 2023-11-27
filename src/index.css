@@ -69,3 +69,6 @@ footer p{
 .twit:hover{
   content: url("assets/twitt.svg");
 }
+button:disabled{
+  background-color: rgba(4, 137, 41, 0.2);
+}
