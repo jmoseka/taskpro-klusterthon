@@ -4,7 +4,7 @@ const MasteringPay = () => {
   return (
     <div className='bg-paleGreeen py-12 md:py-32 px-5 lg:px-20' id='feature'>
       <div>
-        <h2 className='text-black text-4xl md:text-5xl text-center font-semibold'>
+        <h2 className='text-black text-3xl md:text-5xl text-center font-semibold'>
         Mastering Payments For Business Prosperity 
         </h2>
         <p className='pt-3 font-medium text-[#3A3A3A] text-base md:text-xl'>

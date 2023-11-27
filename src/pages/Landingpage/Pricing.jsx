@@ -21,7 +21,7 @@ export default Pricing
 
 const Card = ({price, status, offers, button})=>{
     return(<>
-    <div className='w-full max-w-[380px] h-[421px] flex flex-col gap-3'>
+    <div className='w-full max-w-[350px] h-[451px] flex flex-col gap-3 border-2 border-[#EBEBEB] rounded-2xl'>
         <div className='bg-[url(assets/paymentbg.png)] bg-contain bg-no-repeat px-6  text-white py-4 pb-8 h-44 w-full'>
             <h1 className='text-2xl font-medium'>{status}</h1>
             <div>
@@ -37,7 +37,7 @@ const Card = ({price, status, offers, button})=>{
             ))}
         </div>
         <div className='flex mt-auto justify-center'>
-        <Link to='/signup' className='bg-veryGreen text-white hover:text-veryGreen hover:bg-lightGreen px-6 py-2 rounded-3xl mb-3'>{button}</Link>
+        <Link to='/signup' className='bg-veryGreen text-white button px-6 py-2 md:text-sm lg:text-base w-56 text-center rounded-3xl mb-3'>{button}</Link>
         </div>
 
     </div>

@@ -8,10 +8,13 @@ import invoice from '../../icons/0.75x/invoices.png';
 
 import './Sidebar.css';
 import { useState } from 'react';
+import GetToken from '../../modules/GetToken';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 function Sidebar({ onMenuClick }) {
   const [activeMenu, setActiveMenu] = useState(0);
-
+  let navigate = useNavigate()
 
   const menuArray = [
     {
@@ -38,6 +41,25 @@ function Sidebar({ onMenuClick }) {
     onMenuClick(menutext)
   }
 
+  const handleLogOut = () => {
+    const headers = {
+      Authorization: `Token ${GetToken()}`,
+
+    };
+    axios.post('https://bizhub-8955b30ff7e1.herokuapp.com/account/logout/', {}, { headers })
+      .then(response => {
+        console.log('clicked')
+        navigate('/signin')
+        localStorage.removeItem('bizToken');
+
+        return response.data;
+      })
+      .catch(error => {
+        return error;
+      });
+
+  }
+
   return (
     <div className="sidebar w-[336px] max-w-[336px] capitalize h-[100vh] 
     flex flex-col text-base font-medium text-black 
@@ -54,8 +76,8 @@ function Sidebar({ onMenuClick }) {
 
           {
             menuArray.map((menu, index) => (
-              <button onClick={()=> handleMenuLink(index, menu.text.toLocaleLowerCase())} type='button' key={index}
-               className={`list-menu-item ${activeMenu === index  ? 'active-menu' : '' }`}>
+              <button onClick={() => handleMenuLink(index, menu.text.toLocaleLowerCase())} type='button' key={index}
+                className={`list-menu-item ${activeMenu === index ? 'active-menu' : ''}`}>
                 <div className='w-32'>
                   <div className='menu-text-icon'>
                     <span><img src={menu.icon} alt={`icon-${menu.icon}`} /></span>
@@ -72,23 +94,15 @@ function Sidebar({ onMenuClick }) {
         {/* bottom support and exit content */}
         <div className='border-t w-full'>
           <ul>
-            <li className='list-menu-item '>
-              <div className='w-32'>
-                <div className='menu-text-icon'>
-                  <span><img src={support} alt='icon-support' /></span>
-                  <span>Support</span>
-                </div>
-              </div>
-            </li>
 
-            <li className='list-menu-item '>
+            <button onClick={() => handleLogOut()} type='button' className='list-menu-item'>
               <div className='w-32'>
-                <div className='menu-text-icon'>
+                <div className=' menu-text-icon'>
                   <span><img src={logout} alt='icon-support' /></span>
                   <span>logout</span>
                 </div>
               </div>
-            </li>
+            </button>
           </ul>
         </div>
 

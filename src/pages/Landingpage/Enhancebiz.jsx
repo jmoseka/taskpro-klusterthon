@@ -1,4 +1,5 @@
 import React from 'react'
+import star from '../../assets/Star10.png'
 
 const Enhancebiz = () => {
   return (
@@ -11,14 +12,14 @@ const Enhancebiz = () => {
         Enhance your business today with <span className='text-paleYellow'>BizHub</span>
         </h1>
         <form action="" className='py-4 flex flex-col gap-4 items-start'>
-            <input type="email" className='w-[75%] py-2 px-3 text-[#7C7B7B] rounded-2xl' placeholder='Email'/>
+            <input type="email" className='w-[75%] py-3 px-3 text text-[#7C7B7B] rounded-2xl' placeholder='Email'/>
             <button type='submit' onClick={(e)=>{
                 e.preventDefault()
                 e.stopPropagation()
-            }} className='bg-veryGreen text-white hover:text-veryGreen hover:bg-lightGreen px-4 py-4 rounded-3xl'>Get Started for free</button>
-            <div className='flex items-center'>
-                <img src="assets/star10.png" alt="Biz Star" />
-                <p>Get 30 days trail period</p>
+            }} className='bg-veryGreen text-white button px-4 py-4 rounded-3xl'>Get Started for free</button>
+            <div className='flex items-center gap-3'>
+                <img src={star} alt="Biz Star" />
+                <p>Get 30 days trial period</p>
             </div>
         </form>
       </div>

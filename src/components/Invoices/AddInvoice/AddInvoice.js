@@ -311,8 +311,6 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                                             }
                                         </div>
 
-
-
                                     </td>
 
 

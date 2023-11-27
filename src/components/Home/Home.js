@@ -7,15 +7,16 @@ function Home() {
 
   let navigate = useNavigate()
 
-  useEffect(()=>{
+  useEffect(() => {
     let bizToken = localStorage.getItem('bizToken')
-    if(bizToken){
+    if (bizToken) {
       navigate('/dashboard')
     }
-    else if(!bizToken){
+    else if (!bizToken) {
       navigate('/signin')
     }
-  })
+
+  }, [navigate])
 
   const [selectedMenu, setSelectedMenu] = useState('dashboard');
 
@@ -25,10 +26,13 @@ function Home() {
 
 
   return (
+
     <div className="relative mx-auto flex h-[100vh] ">
       <Sidebar onMenuClick={handleMenuClick} />
       <Mainbar selectedMenu={selectedMenu} />
     </div>
+
+
   );
 }
 

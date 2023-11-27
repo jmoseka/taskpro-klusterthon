@@ -2,7 +2,7 @@ import React from 'react'
 
 const Globe = () => {
   return (
-    <div className='py-12 md:py-28 pl-5 lg:px-20 flex items-center flex-wrap lg:flex-nowrap justify-center' id='about'>
+    <div className='py-12 md:py-28 px-5 lg:px-20 flex items-center flex-wrap lg:flex-nowrap justify-center' id='about'>
         <div className='w-[80%]'>
             <h1 className='text-4xl md:text-5xl text-start font-semibold'>
              <span className='text-veryGreen'>1 Million+ Users</span>  Across The Globe

@@ -78,6 +78,7 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
             .catch(error => {
                 return error;
             });
+            
     }
 
     const handleEditClient = (event) => {
