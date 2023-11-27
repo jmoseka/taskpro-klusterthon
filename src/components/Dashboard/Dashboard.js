@@ -26,7 +26,6 @@ function Dashboard() {
 
 
     useEffect(() => {
-        // Simulating data retrieval (replace this with your actual data fetching logic)
         const fetchData = async () => {
             const clients = await FetchAllClients()
             setDataNames(clients)
@@ -187,7 +186,7 @@ function Dashboard() {
                 </div>
 
                 <div className='h-[150px] overflow-y-scroll'>
-                    {/* <DashboardTableInvoice clientID={clientId} clientName={clientName} invoiceStatus={filterIndex} /> */}
+                    <DashboardTableInvoice clientID={clientId} clientName={clientName} invoiceStatus={filterIndex} />
 
                 </div>
 
