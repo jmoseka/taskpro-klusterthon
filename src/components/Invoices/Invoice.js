@@ -4,9 +4,13 @@ import ListInvoice from "./ListInvoice/ListInvoice";
 
 function Invoice() {
     const [openInvoice, setOpenInvoice] = useState(false)
+    const [dataNames, setDataNames] = useState([])
+    const [clientId, setClientId] = useState('')
 
-    const handleOpenInvoice = (selection) => {
+    const handleOpenInvoice = (selection, data, id) => {
         setOpenInvoice(selection);
+        setDataNames(data)
+        setClientId(id)
     }
 
     const handleCloseInvoice = (selection) => {
@@ -21,9 +25,9 @@ function Invoice() {
         <div className=" flex flex-col gap-5  ">
                 {
                     openInvoice === true ?
-                    <AddInvoice onCloseInvoice={handleCloseInvoice} onSaveInvoice={handleSaveInvoice} />
+                    <AddInvoice dataNameInvoice={dataNames} clientInvoiceId={clientId} onCloseInvoice={handleCloseInvoice} onSaveInvoice={handleSaveInvoice} />
                     :
-                    <ListInvoice onAddInvoice={handleOpenInvoice} />
+                    <ListInvoice onAddInvoice={handleOpenInvoice} dataNameInvoice={dataNames} clientInvoiceId={clientId} />
             }
             
         </div>

@@ -8,29 +8,9 @@ import axios from 'axios';
 import GetToken from '../../../modules/GetToken';
 
 
-
 function DashboardTableInvoice({ clientID, clientName, invoiceStatus }) {
-    console.log(clientID);
     const [dataInvoice, setDataInvoice] = useState([])
 
-    let listInvoice = {}
-    let filterArray = {};
-
-    if (getClientInvoices(clientName) !== undefined) {
-        listInvoice = getClientInvoices(clientName)
-    }
-
-    if (invoiceStatus === 2) {
-        filterArray = dataInvoice.filter(invoice => invoice.status === false);
-      
-    } else if (invoiceStatus === 1) {
-        filterArray = dataInvoice.filter(invoice => invoice.status === true);
-    } else {
-        filterArray = dataInvoice;
-    }
-
-
-    // Simulating data retrieval (replace this with your actual data fetching logic)
     const fetchInvoice = async (clientID) => {
         try {
             const invoices = await axios.get(`https://bizhub-8955b30ff7e1.herokuapp.com/order/filter/${clientID}/`, {
@@ -44,16 +24,26 @@ function DashboardTableInvoice({ clientID, clientName, invoiceStatus }) {
         }
     }
 
+    
+
     useEffect(() => {
-        fetchInvoice(clientID); 
+        fetchInvoice(clientID);
     }, [clientID]);
 
-    console.log(dataInvoice);
+    let filterArray = {};
 
+    // if (getClientInvoices(clientName) !== undefined) {
+    //     listInvoice = getClientInvoices(clientName)
+    // }
 
+    if (invoiceStatus === 2) {
+        filterArray = dataInvoice.filter(invoice => invoice.billing_status === false);
 
-
-
+    } else if (invoiceStatus === 1) {
+        filterArray = dataInvoice.filter(invoice => invoice.billing_status === true);
+    } else {
+        filterArray = dataInvoice;
+    }
 
 
     return (
@@ -69,11 +59,11 @@ function DashboardTableInvoice({ clientID, clientName, invoiceStatus }) {
             </thead>
             <tbody className="table-invoice-body">
                 {
-                    filterArray !== undefined & listInvoice.length > 0 ?
+                    filterArray !== undefined & filterArray.length > 0 ?
                         filterArray.map((item, index) => (
                             <tr className=' text-sm' key={index}>
                                 <td className='mx-auto flex items-center justify-center'>
-                                    <img className='p-1' src={item.status === true ? paid : unpaid} alt='paid status' />
+                                    <img className='p-1' src={item.billing_status === true ? paid : unpaid} alt='paid status' />
                                 </td>
                                 <td>{item.id}</td>
                                 <td>{item.due_date}</td>

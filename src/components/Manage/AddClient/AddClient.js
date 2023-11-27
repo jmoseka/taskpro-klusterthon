@@ -103,7 +103,6 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                 setTimeout(() => {
                     onSaveClient(false)
                 }, 2000);
-                console.log(success);
                 return response.data;
             })
             .catch(error => {

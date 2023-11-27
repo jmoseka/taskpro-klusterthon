@@ -37,9 +37,7 @@ function ListInvoice({ onAddInvoice }) {
     };
 
     useEffect(() => {
-
         if (dataNames.length > 0) {
-            console.log(dataNames[0]);
             setClientName(dataNames[0].name)
             setClientID(dataNames[0].id);
         }
@@ -52,6 +50,10 @@ function ListInvoice({ onAddInvoice }) {
     }, [dataNames, setClientName]);
 
     ///////////*****/////////////////////////////// */
+
+    const handleAddInvoice = () => {
+        onAddInvoice(true, dataNames, clientId)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -77,20 +79,18 @@ function ListInvoice({ onAddInvoice }) {
             }
 
 
-
-
             <div className="card py-4">
                 <div className="px-7 flex justify-between items-center">
                     <p className="font-semibold">Invoices</p>
 
-                    <button onClick={() => onAddInvoice(true)} type="button" className=" bg-yellow rounded-lg 
+                    <button onClick={() => handleAddInvoice()} type="button" className=" bg-yellow rounded-lg 
                      font-medium text-icon-container flex items-center gap-1 p-2">
                         <span><img src={add} alt="add client" /></span>
                         <span className="capitalize text-sm text-white">New invoice</span>
                     </button>
                 </div>
 
-                <div className="px-7 pt-7 py-6  text-start">
+                <div className="px-7 py-4  text-start">
                     <button ref={dropdownRef} onClick={() => toggleDropdown()} type="button" className="w-64 flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
                         <span className="font-medium text-sm capitalize">{clientName} </span>
                         <span><img src={arrowdown} alt="add client" /></span>
@@ -114,15 +114,17 @@ function ListInvoice({ onAddInvoice }) {
                 </div>
 
 
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
+                    <div className="flex flex-col">
                         <div className="px-7 flex text-center gap-4 ">
-                            <button index={1} onClick={() => handleTabClick(0)} type="button" className={`tab-buttons text-sm  border-b ${activeTab === 0 ? ' border-b-green' : 'border-b-transparent'} `}>All</button>
-                            <button index={2} onClick={() => handleTabClick(1)} type="button" className={`tab-buttons text-sm border-b ${activeTab === 1 ? 'border-b-green' : 'border-b-transparent' } `}>Paid invoices</button>
-                            <button index={3} onClick={() => handleTabClick(2)} type="button" className={`tab-buttons text-sm border-b ${activeTab === 2 ? 'border-b-green' : 'border-b-transparent'} `}>Outstanding invoices</button>
+                            <button index={1} onClick={() => handleTabClick(0)} type="button" className={`tab-buttons text-sm  border-b-2 ${activeTab === 0 ? ' border-b-green' : 'border-b-transparent'} `}>All</button>
+                            <button index={2} onClick={() => handleTabClick(1)} type="button" className={`tab-buttons text-sm border-b-2 ${activeTab === 1 ? 'border-b-green' : 'border-b-transparent'} `}>Paid invoices</button>
+                            <button index={3} onClick={() => handleTabClick(2)} type="button" className={`tab-buttons text-sm border-b-2 ${activeTab === 2 ? 'border-b-green' : 'border-b-transparent'} `}>Outstanding invoices</button>
                         </div>
 
-                        {/* <div className="w-full h-[1px] bg-grey"></div> */}
-                    
+                        <div className="w-full  h-[1px] bg-grey"></div>
+                    </div>
+
 
 
                     <div className='h-auto overflow-y-scroll listinvoice'>
