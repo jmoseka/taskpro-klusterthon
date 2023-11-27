@@ -42,7 +42,6 @@ function Sidebar({ onMenuClick }) {
   }
 
   const handleLogOut = () => {
-    console.log('log out');
     const headers = {
       Authorization: `Token ${GetToken()}`,
 
@@ -51,12 +50,9 @@ function Sidebar({ onMenuClick }) {
       .then(response => {
         localStorage.removeItem('bizToken');
         navigate('/signin')
-        
-
         return response.data;
       })
       .catch(error => {
-        console.log(error)
         return error;
       });
 
