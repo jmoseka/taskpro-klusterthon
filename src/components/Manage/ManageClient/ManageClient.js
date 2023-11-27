@@ -31,13 +31,7 @@ function ManageClient({ onAddClient, onEditClient }) {
 
         <div className='py-9 relative'>
 
-            {
-                dataClients.length <= 0 ? <div className='modal-blur absolute flex justify-center items-center h-full'>
-                    <div className='custom-loader mx-auto h-14 w-14'></div>
-                </div>
-                    :
-                    ''
-            }
+         
 
 
             <div className="card py-3">
