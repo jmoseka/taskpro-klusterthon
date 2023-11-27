@@ -32,10 +32,6 @@ function DashboardTableInvoice({ clientID, clientName, invoiceStatus }) {
 
     let filterArray = {};
 
-    // if (getClientInvoices(clientName) !== undefined) {
-    //     listInvoice = getClientInvoices(clientName)
-    // }
-
     if (invoiceStatus === 2) {
         filterArray = dataInvoice.filter(invoice => invoice.billing_status === false);
 

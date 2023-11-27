@@ -125,9 +125,6 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                 setTimeout(() => {
                     onSaveInvoice(false)
                 }, 2000);
-
-
-                console.log(response.data);
                 return response.data;
 
             })
