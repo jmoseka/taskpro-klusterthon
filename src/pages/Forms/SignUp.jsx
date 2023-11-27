@@ -145,7 +145,7 @@ const SignUp = () => {
               <div className="text-red text-start font-medium italic">{formik.errors.password}</div>
             ) : null }
             </div>
-            <button className="bg-veryGreen w-full text-lg text-white py-3 font-medium rounded-xl" type="submit">
+            <button className="bg-veryGreen button w-full text-lg text-white py-3 font-medium rounded-xl" disabled={!formik.isValid} type="submit">
               Sign Up
             </button>
           </form>

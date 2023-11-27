@@ -14,8 +14,8 @@ const SignIn = () => {
       passwords: ""
     },
     validationSchema: Yup.object({
-      password: Yup.string(),
-      email: Yup.string().email("Invalid email address!!"),
+      passwords: Yup.string().required('please enter your password'),
+      emails: Yup.string().email("Invalid email address!!").required('Please Enter your Email Address'),
     }),
     onSubmit: (values) => {
       let signInData = new FormData()
@@ -91,10 +91,10 @@ const SignIn = () => {
                 className="outline-none w-full text-xl"
               />
             </div>
-            {formik.touched.password && formik.errors.passwords ? (
+            {formik.touched.passwords && formik.errors.passwords ? (
               <div className="text-red text-start font-medium italic">{formik.errors.passwords}</div>
             ) : null}
-            <button className="bg-veryGreen w-full text-lg text-white py-3 font-medium rounded-xl" type="submit" onClick={(e )=> e.stopPropagation()}>Sign In</button>
+            <button className="bg-veryGreen button w-full text-lg text-white py-3 font-medium rounded-xl" disabled={formik.isValid ? false : true} type="submit" onClick={(e )=> e.stopPropagation()}>Sign In</button>
           </form>
           <ToastContainer/>
           <div className="p-2">

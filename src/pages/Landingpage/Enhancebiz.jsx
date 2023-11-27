@@ -1,4 +1,5 @@
 import React from 'react'
+import star from '../../assets/Star10.png'
 
 const Enhancebiz = () => {
   return (
@@ -17,7 +18,7 @@ const Enhancebiz = () => {
                 e.stopPropagation()
             }} className='bg-veryGreen text-white button px-4 py-4 rounded-3xl'>Get Started for free</button>
             <div className='flex items-center gap-3'>
-                <img src="assets/star10.png" alt="Biz Star" />
+                <img src={star} alt="Biz Star" />
                 <p>Get 30 days trial period</p>
             </div>
         </form>
