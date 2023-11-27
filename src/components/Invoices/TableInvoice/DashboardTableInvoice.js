@@ -7,7 +7,8 @@ import axios from 'axios';
 import GetToken from '../../../modules/GetToken';
 
 
-function DashboardTableInvoice({ clientID, invoiceStatus }) {
+
+function DashboardTableInvoice({getUnpaidInvoiceID, handlePayInvoice, clientID, invoiceStatus }) {
     const [dataInvoice, setDataInvoice] = useState([])
 
     const fetchInvoice = async (clientID) => {
@@ -23,7 +24,12 @@ function DashboardTableInvoice({ clientID, invoiceStatus }) {
         }
     }
 
-    
+
+    const payInvoice =(value, unpaidId) => {
+        handlePayInvoice(value)
+        getUnpaidInvoiceID(unpaidId)
+    }
+
 
     useEffect(() => {
         fetchInvoice(clientID);
@@ -40,6 +46,7 @@ function DashboardTableInvoice({ clientID, invoiceStatus }) {
         filterArray = dataInvoice;
     }
 
+    console.log(filterArray);
 
     return (
         <table className='w-full table-invoice'>
@@ -58,7 +65,9 @@ function DashboardTableInvoice({ clientID, invoiceStatus }) {
                         filterArray.map((item, index) => (
                             <tr className=' text-sm' key={index}>
                                 <td className='mx-auto flex items-center justify-center'>
-                                    <img className='p-1' src={item.billing_status === true ? paid : unpaid} alt='paid status' />
+                                    <button onClick={() => payInvoice(item.billing_status, item.id)}>
+                                        <img className='p-1' src={item.billing_status === true ? paid : unpaid} alt='paid status' />
+                                    </button>
                                 </td>
                                 <td>{item.id}</td>
                                 <td>{item.due_date}</td>

@@ -4,6 +4,7 @@ import arrowdown from '../../../icons/0.75x/arrow-down.png'
 import './ListInvoice.css';
 import DashboardTableInvoice from "../TableInvoice/DashboardTableInvoice";
 import FetchAllClients from "../../../modules/FetchAllClients";
+import PayInvoice from "../TableInvoice/PayInvoice";
 
 function ListInvoice({ onAddInvoice }) {
     const [activeTab, setActiveTab] = useState(0);
@@ -63,69 +64,93 @@ function ListInvoice({ onAddInvoice }) {
 
     }, [setDataNames]);
 
+    const [payInvoice, setPayInvoice] = useState(true);
+    const [unpaidInvoiceID, setUnpaidInvoiceID] = useState('');
+
+    const handlePayInvoice = (value,id) => {
+        setPayInvoice(value)
+    }
+    
+
+    const getUnpaidInvoiceID = (id) => {
+        setUnpaidInvoiceID(id)
+        
+    }
+
+    
+
     return (
+
 
         <div className="py-9 relative">
 
+            {
+                payInvoice === false ? <PayInvoice getUnpaidInvoiceID={unpaidInvoiceID} clientID={clientId} />
 
-            <div className="card py-4">
-                <div className="px-7 flex justify-between items-center">
-                    <p className="font-semibold">Invoices</p>
+                    :
 
-                    <button onClick={() => handleAddInvoice()} type="button" className=" bg-yellow rounded-lg 
+
+                    <div className="card py-4">
+                        <div className="px-7 flex justify-between items-center">
+                            <p className="font-semibold">Invoices</p>
+
+                            <button onClick={() => handleAddInvoice()} type="button" className=" bg-yellow rounded-lg 
                      font-medium text-icon-container flex items-center gap-1 p-2">
-                        <span><img src={add} alt="add client" /></span>
-                        <span className="capitalize text-sm text-white">New invoice</span>
-                    </button>
-                </div>
-
-                <div className="px-7 py-4  text-start">
-                    <button ref={dropdownRef} onClick={() => toggleDropdown()} type="button" className="w-64 flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
-                        <span className="font-medium text-sm capitalize">{clientName} </span>
-                        <span><img src={arrowdown} alt="add client" /></span>
-                    </button>
-
-                    <span className="">
-                        {
-                            isOpen && (
-
-                                <span className="modal invoice-modal max-h-[250px] overflow-y-scroll">
-                                    {
-                                        dataNames.map((e, index) => (
-                                            <button onClick={() => handleModalClick(index, e.name, e.id)} key={`${index}e`} type="button"
-                                                className={` ${index === modalIndex ? 'bg-grey' : ''}`}>{e.name}</button>
-                                        ))
-                                    }
-                                </span>
-                            )
-                        }
-                    </span>
-                </div>
-
-
-                <div className="flex flex-col gap-4">
-                    <div className="flex flex-col">
-                        <div className="px-7 flex text-center gap-4 ">
-                            <button index={1} onClick={() => handleTabClick(0)} type="button" className={`tab-buttons text-sm  border-b-2 ${activeTab === 0 ? ' border-b-green' : 'border-b-transparent'} `}>All</button>
-                            <button index={2} onClick={() => handleTabClick(1)} type="button" className={`tab-buttons text-sm border-b-2 ${activeTab === 1 ? 'border-b-green' : 'border-b-transparent'} `}>Paid invoices</button>
-                            <button index={3} onClick={() => handleTabClick(2)} type="button" className={`tab-buttons text-sm border-b-2 ${activeTab === 2 ? 'border-b-green' : 'border-b-transparent'} `}>Outstanding invoices</button>
+                                <span><img src={add} alt="add client" /></span>
+                                <span className="capitalize text-sm text-white">New invoice</span>
+                            </button>
                         </div>
 
-                        <div className="w-full  h-[1px] bg-grey"></div>
+                        <div className="px-7 py-4  text-start">
+                            <button ref={dropdownRef} onClick={() => toggleDropdown()} type="button" className="w-64 flex items-center justify-between gap-3 rounded-lg border py-2 px-3">
+                                <span className="font-medium text-sm capitalize">{clientName} </span>
+                                <span><img src={arrowdown} alt="add client" /></span>
+                            </button>
+
+                            <span className="">
+                                {
+                                    isOpen && (
+
+                                        <span className="modal invoice-modal max-h-[250px] overflow-y-scroll">
+                                            {
+                                                dataNames.map((e, index) => (
+                                                    <button onClick={() => handleModalClick(index, e.name, e.id)} key={`${index}e`} type="button"
+                                                        className={` ${index === modalIndex ? 'bg-grey' : ''}`}>{e.name}</button>
+                                                ))
+                                            }
+                                        </span>
+                                    )
+                                }
+                            </span>
+                        </div>
+
+
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col">
+                                <div className="px-7 flex text-center gap-4 ">
+                                    <button index={1} onClick={() => handleTabClick(0)} type="button" className={`tab-buttons text-sm  border-b-2 ${activeTab === 0 ? ' border-b-green' : 'border-b-transparent'} `}>All</button>
+                                    <button index={2} onClick={() => handleTabClick(1)} type="button" className={`tab-buttons text-sm border-b-2 ${activeTab === 1 ? 'border-b-green' : 'border-b-transparent'} `}>Paid invoices</button>
+                                    <button index={3} onClick={() => handleTabClick(2)} type="button" className={`tab-buttons text-sm border-b-2 ${activeTab === 2 ? 'border-b-green' : 'border-b-transparent'} `}>Outstanding invoices</button>
+                                </div>
+
+                                <div className="w-full  h-[1px] bg-grey"></div>
+                            </div>
+
+
+
+                            <div className='h-auto overflow-y-scroll listinvoice'>
+                                <DashboardTableInvoice getUnpaidInvoiceID={getUnpaidInvoiceID} handlePayInvoice={handlePayInvoice} clientID={dataNames.length > 0 ? clientId : ''} clientName={dataNames.length > 0 ? clientName : ''} invoiceStatus={activeTab} />
+                            </div>
+
+
+
+                        </div>
+
+
                     </div>
+            }
 
 
-
-                    <div className='h-auto overflow-y-scroll listinvoice'>
-                        <DashboardTableInvoice clientID={dataNames.length > 0 ? clientId : ''} clientName={dataNames.length > 0 ? clientName : ''} invoiceStatus={activeTab} />
-                    </div>
-
-
-
-                </div>
-
-
-            </div>
 
         </div>
     )
