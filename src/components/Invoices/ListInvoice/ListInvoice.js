@@ -68,14 +68,6 @@ function ListInvoice({ onAddInvoice }) {
 
         <div className="py-9 relative">
 
-            {
-                dataNames.length <= 0 ? <div className='modal-blur absolute flex justify-center items-center h-full'>
-                    <div className='custom-loader mx-auto h-14 w-14'></div>
-                </div>
-                    :
-                    ''
-            }
-
 
             <div className="card py-4">
                 <div className="px-7 flex justify-between items-center">
