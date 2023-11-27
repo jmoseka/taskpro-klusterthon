@@ -11,16 +11,13 @@ function ManageClient({ onAddClient, onEditClient }) {
 
 
     useEffect(() => {
-        // Simulating data retrieval (replace this with your actual data fetching logic)
         const fetchData = async () => {
             const clients = await FetchAllClients()
             setDataClients(clients)
-            console.log('data', clients);
         };
 
         fetchData();
     }, [setDataClients]);
-
 
 
     const handleTabClick = (index) => {
