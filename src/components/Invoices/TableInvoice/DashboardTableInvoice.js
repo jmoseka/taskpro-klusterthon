@@ -8,7 +8,7 @@ import GetToken from '../../../modules/GetToken';
 
 
 
-function DashboardTableInvoice({getUnpaidInvoiceID, handlePayInvoice, clientID, invoiceStatus }) {
+function DashboardTableInvoice({ getUnpaidInvoiceID, handlePayInvoice, clientID, invoiceStatus }) {
     const [dataInvoice, setDataInvoice] = useState([])
 
     const fetchInvoice = async (clientID) => {
@@ -25,7 +25,7 @@ function DashboardTableInvoice({getUnpaidInvoiceID, handlePayInvoice, clientID, 
     }
 
 
-    const payInvoice =(value, unpaidId) => {
+    const payInvoice = (value, unpaidId) => {
         handlePayInvoice(value)
         getUnpaidInvoiceID(unpaidId)
     }
@@ -52,7 +52,7 @@ function DashboardTableInvoice({getUnpaidInvoiceID, handlePayInvoice, clientID, 
         <table className='w-full table-invoice'>
             <thead>
                 <tr className='bg-grey '>
-                    <th className='w-32'></th>
+                    <th className='w-28'></th>
                     <th>Invoice no</th>
                     <th>Date</th>
                     <th>Title</th>
