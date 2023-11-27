@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <div className='bg-paleGreeen'>
       <Navbar/>
-      <main className='py-12 md:py-32 px-5 lg:px-20 flex justify-between flex-wrap lg:flex-nowrap'>
+      <main className='py-12 md:py-32 px-5 lg:px-20 flex items-center justify-between flex-wrap lg:flex-nowrap'>
         <div className='md:w-[85%]'>
           <h2 className='text-2xl md:text-5xl pb-3 font-semibold h2'>
           Your all-in-one payment management solution for small businesses
@@ -25,7 +25,7 @@ const Hero = () => {
           </div>
         </div>
         <div className='flex lg:pl-16'>
-          <img src='assets/biglaptop.png' alt="" className="w-full max-w-[610px]" />
+          <img src='assets/biglaptop.png' alt="" className="w-full" />
         </div>
       </main>
     </div>
