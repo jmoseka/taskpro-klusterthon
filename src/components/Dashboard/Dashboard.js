@@ -187,7 +187,7 @@ function Dashboard() {
                 </div>
 
                 <div className='h-[150px] overflow-y-scroll'>
-                    {/* <DashboardTableInvoice clientID={clientId} clientName={clientName} invoiceStatus={filterIndex} /> */}
+                    <DashboardTableInvoice clientID={clientId} clientName={clientName} invoiceStatus={filterIndex} />
 
                 </div>
 
