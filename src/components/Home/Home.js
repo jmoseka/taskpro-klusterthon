@@ -17,7 +17,7 @@ function Home() {
     }
   })
 
-  const [selectedMenu, setSelectedMenu] = useState('invoices');
+  const [selectedMenu, setSelectedMenu] = useState('dashboard');
 
   const handleMenuClick = (menuItem) => {
     setSelectedMenu(menuItem);
