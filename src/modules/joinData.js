@@ -2,6 +2,8 @@ import slack from '../assets/Slack.png'
 import reddit from '../assets/reddit.png'
 import redbull from '../assets/redbull.png'
 import upwork from '../assets/upwork.png'
+import intel from '../assets/intel.png'
+import mic from '../assets/Microsoft.png'
 export const images = [
     {
         image: slack
@@ -13,10 +15,10 @@ export const images = [
         image: upwork
     },
     {
-        image: 'assets/intel.png'
+        image: intel
     },
     {
-        image: 'assets/microsoft.png'
+        image: mic
     },
     {
         image: redbull
