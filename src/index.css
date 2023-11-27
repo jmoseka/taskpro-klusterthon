@@ -32,8 +32,19 @@ main .signin{
 .paymentbg{
   background-size: 100%;
 }
-nav a:hover{
-  color: #048929;
+nav .nav:hover{
+  background-color: rgba(4, 137, 41, 0.2);
+}
+footer a, footer .maj{
+  padding: 10px 8px;
+}
+footer a:hover, footer .maj:hover{
+  cursor: pointer;
+  border-radius: 8px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%);
+}
+.button:hover{
+  background: rgb(3, 97, 31);
 }
 footer h4{
   font-size: 25px;
@@ -41,4 +52,20 @@ footer h4{
 }
 footer p{
   font-size: 12px;
+}
+
+.ig:hover{
+  content: url("assets/ig.svg");
+}
+.in:hover{
+  content: url("assets/in.svg");
+}
+.fb:hover{
+  content: url("assets/fb.svg");
+}
+.yt:hover{
+  content: url("assets/yt.svg");
+}
+.twit:hover{
+  content: url("assets/twitt.svg");
 }
