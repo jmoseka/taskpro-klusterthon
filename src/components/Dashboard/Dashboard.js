@@ -97,7 +97,7 @@ function Dashboard() {
 
     const filterOptions = [
         'All',
-        'Payed Invoices',
+        'Paid Invoices',
         'Outstanding Invoices',
     ]
 
