@@ -24,8 +24,8 @@ const Hero = () => {
           </NavLink>
           </div>
         </div>
-        <div className='flex lg:pl-10'>
-          <img src='assets/biglaptop.png' alt="" />
+        <div className='flex lg:pl-16'>
+          <img src='assets/biglaptop.png' alt="" className="w-full max-w-[610px]" />
         </div>
       </main>
     </div>
