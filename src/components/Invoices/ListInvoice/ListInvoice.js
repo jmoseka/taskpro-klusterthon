@@ -5,7 +5,6 @@ import './ListInvoice.css';
 import DashboardTableInvoice from "../TableInvoice/DashboardTableInvoice";
 import FetchAllClients from "../../../modules/FetchAllClients";
 
-
 function ListInvoice({ onAddInvoice }) {
     const [activeTab, setActiveTab] = useState(0);
     const [modalIndex, setModalIndex] = useState(0);
