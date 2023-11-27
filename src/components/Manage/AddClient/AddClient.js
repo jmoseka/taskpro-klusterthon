@@ -16,6 +16,8 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
     const [clientAddress, setClientAddress] = useState()
     const [clientTask, setClientTask] = useState()
     const [clientContact, setClientContact] = useState()
+    const [msg, setMsg] = useState('')
+    const [sendAlert, setSendAlert] = useState(false)
 
     const handleInputChangeName = (e) => {
         setClientName(e.target.value)
@@ -78,8 +80,15 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
             .catch(error => {
                 return error;
             });
-            
+
     }
+
+
+    const validateEmail = (email) => {
+        // Basic email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      };
 
     const handleEditClient = (event) => {
         event.preventDefault();
@@ -88,27 +97,43 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
             Authorization: `Token ${GetToken()}`,
         };
 
-        const postData = {
-            name: clientName,
-            email: clientEmail,
-            address: clientAddress,
-            task_details: clientTask,
-            contact: clientContact
-        };
-        setLoadingAnime(!loadMessage)
+        // Basic email format validation
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        axios.put(`https://bizhub-8955b30ff7e1.herokuapp.com/client/update/${editClientId}/`, postData, { headers })
-            .then(response => {
-                setLoadMessage(!loadMessage)
-                setLoadingAnime(false);
-                setTimeout(() => {
-                    onSaveClient(false)
-                }, 2000);
-                return response.data;
-            })
-            .catch(error => {
-                return error;
-            });
+        if (clientName === '' || clientEmail === '' || clientAddress === '' || clientTask === '' || clientContact === '') {
+            return;
+        }
+
+        
+           else {
+            
+            const postData = {
+                name: clientName,
+                email: clientEmail,
+                address: clientAddress,
+                task_details: clientTask,
+                contact: clientContact
+            };
+
+            setLoadingAnime(!loadMessage)
+
+            axios.put(`https://bizhub-8955b30ff7e1.herokuapp.com/client/update/${editClientId}/`, postData, { headers })
+                .then(response => {
+                    setLoadMessage(!loadMessage)
+                    setLoadingAnime(false);
+                    setTimeout(() => {
+                        onSaveClient(false)
+                    }, 2000);
+                    return response.data;
+                })
+                .catch(error => {
+                    return error;
+                });
+        
+
+            }
+
+
     }
 
 
@@ -155,10 +180,11 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                         <span className="line h-[1px] w-full bg-grey"></span>
                     </div>
 
-                    <form onSubmit={editStatus === 'edit' ? handleEditClient : handleCreateClient} className="py-4 flex flex-col items-start px-7  gap-4">
+                    <form onSubmit={editStatus === 'edit' ? handleEditClient : handleCreateClient} className="py-4 flex flex-col items-start px-7  gap-2">
 
                         <div className='form-control'>
                             <label htmlFor='clientName'>Client name </label>
+
                             <input
                                 required
                                 type='text'
@@ -167,8 +193,8 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                                 value={clientName}
                                 onChange={handleInputChangeName}
                             />
-
                         </div>
+
 
                         <div className='form-control'>
                             <label htmlFor='emailAddress'>Email address </label>
@@ -237,6 +263,15 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
 
                         </div>
 
+                        <div className='text-center w-full'>
+                            {
+                                sendAlert === true ?
+                                    <p className=' text-sm text-red py-1'>{msg}</p>
+                                    :
+                                    ''
+                            }
+                        </div>
+
 
                         <div className='pt-6 mx-auto flex gap-5'>
                             <button type='submit' onSubmit={editStatus === 'edit' ? handleEditClient : handleCreateClient} className='bg-green p-2 rounded-lg flex items-center justify-center gap-1'>
@@ -251,6 +286,10 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                             </button>
 
                         </div>
+
+
+
+
                     </form>
 
                 </div>

@@ -94,14 +94,6 @@ function Sidebar({ onMenuClick }) {
         {/* bottom support and exit content */}
         <div className='border-t w-full'>
           <ul>
-            <li className='list-menu-item '>
-              <div className='w-32'>
-                <div className='menu-text-icon'>
-                  <span><img src={support} alt='icon-support' /></span>
-                  <span>Support</span>
-                </div>
-              </div>
-            </li>
 
             <button onClick={() => handleLogOut()} type='button' className='list-menu-item'>
               <div className='w-32'>

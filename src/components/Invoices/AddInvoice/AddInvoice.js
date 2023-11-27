@@ -45,7 +45,7 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                 setIsBriefLoad(false)
             }, 1200);
 
-            
+
         }
 
 
@@ -99,33 +99,43 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
 
     const handleCreateInvoice = (event) => {
         event.preventDefault();
+
         const headers = {
             Authorization: `Token ${GetToken()}`,
         };
 
-        const postData = {
-            due_date: date,
-            description: desc,
-            order_type: itemTypeName,
-            amount: cost,
-        };
 
-        setLoadingAnime(true);
 
-        axios.post(`https://bizhub-8955b30ff7e1.herokuapp.com/order/create/${clientId}/`,
-            postData, { headers })
-            .then(response => {
-                setLoadingAnime(false);
-                setLoadMessage(!loadMessage)
-                setTimeout(() => {
-                    onSaveInvoice(false)
-                }, 2000);
-                return response.data;
+        if (date === '' || desc === '' || itemTypeName === '' || cost === '') {
+            return;
+        }
 
-            })
-            .catch(error => {
-                return error;
-            });
+        else {
+            const postData = {
+                due_date: date,
+                description: desc,
+                order_type: itemTypeName,
+                amount: cost,
+            };
+
+            setLoadingAnime(true);
+            axios.post(`https://bizhub-8955b30ff7e1.herokuapp.com/order/create/${clientId}/`,
+                postData, { headers })
+                .then(response => {
+                    setLoadingAnime(false);
+                    setLoadMessage(!loadMessage)
+                    setTimeout(() => {
+                        onSaveInvoice(false)
+                    }, 2000);
+                    return response.data;
+
+                })
+                .catch(error => {
+                    return error;
+                });
+        }
+
+
     }
 
 
@@ -170,7 +180,7 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                     : ''
             }
 
-            
+
 
 
 
@@ -270,7 +280,7 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                                 type='text'
                                 id='invoiceTitle'
                                 name='invoiceTitle'
-                                
+
                             />
                         </div>
 
@@ -330,7 +340,7 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                             <div className='flex gap-5'>
                                 <button type='submit' onClick={handleCreateInvoice} className='bg-green p-2 rounded-lg flex items-center justify-center gap-1'>
                                     <span><img src={save} alt='save client' /></span>
-                                    <span className='capitalize text-[0.85rem] font-semibold'>save client</span>
+                                    <span className='capitalize text-[0.85rem] font-semibold'>save invoice</span>
                                 </button>
 
 
