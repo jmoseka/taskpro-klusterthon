@@ -31,7 +31,7 @@ function Home() {
 
 
   return (
-    <div className="h-[100vh] w-[100vh]">
+    <div className="">
       {
         openScreen ?
           <div className="h-[100vh] w-[100vh] bg-veryGreen flex justify-center items-center">

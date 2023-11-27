@@ -48,8 +48,10 @@ function Sidebar({ onMenuClick }) {
     };
     axios.post('https://bizhub-8955b30ff7e1.herokuapp.com/account/logout/', {}, { headers })
       .then(response => {
-        localStorage.removeItem('bizToken');
+        console.log('clicked')
         navigate('/signin')
+        localStorage.removeItem('bizToken');
+
         return response.data;
       })
       .catch(error => {
@@ -101,14 +103,14 @@ function Sidebar({ onMenuClick }) {
               </div>
             </li>
 
-            <li className='list-menu-item '>
+            <button onClick={() => handleLogOut()} type='button' className='list-menu-item'>
               <div className='w-32'>
-                <button onClick={() => handleLogOut()} type='button' className='menu-text-icon'>
+                <div className=' menu-text-icon'>
                   <span><img src={logout} alt='icon-support' /></span>
                   <span>logout</span>
-                </button>
+                </div>
               </div>
-            </li>
+            </button>
           </ul>
         </div>
 
