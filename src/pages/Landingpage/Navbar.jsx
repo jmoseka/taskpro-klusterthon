@@ -17,15 +17,15 @@ const Navbar = () => {
             <ul>
                 <img src="assets/BizHubLogo.png" alt="Bizhub" className='w-36 lg:w-44'/>
             </ul>
-            <ul className='hidden md:flex items-center gap-10 md:text-sm lg:text-lg'>
+            <ul className='hidden md:flex items-center gap-6 md:text-sm lg:text-base'>
                 <NavLink to='/' style={activeLink} className='h-16 flex items-center' >Home</NavLink>
-                <NavHashLink smooth to='/#feature' className='h-16 flex items-center'>Features</NavHashLink>
-                <NavHashLink smooth to='/#pricing' className='h-16 flex items-center'>Pricing</NavHashLink>
-                <NavHashLink smooth to='/#about' className='h-16 flex items-center'>About Us</NavHashLink>
+                <NavHashLink smooth to='/#feature' className='h-16 px-4 flex items-center nav'>Features</NavHashLink>
+                <NavHashLink smooth to='/#pricing' className='h-16 px-4 flex items-center nav'>Pricing</NavHashLink>
+                <NavHashLink smooth to='/#about' className='h-16 px-4 flex items-center nav'>About Us</NavHashLink>
             </ul>
-            <ul className='hidden md:flex items-center gap-4 md:text-sm lg:text-lg font-inter'>
-                <NavLink to='/signin'>Sign In</NavLink>
-                <NavLink to='/signup' className='bg-veryGreen text-white hover:text-veryGreen hover:bg-lightGreen px-4 py-4 rounded-3xl'>Try Bizhub for free</NavLink>
+            <ul className='hidden md:flex items-center gap-4 md:text-sm lg:text-base font-inter'>
+                <button className='text-veryGreen hover:border-2 hover:border-veryGreen px-4 py-2 rounded-2xl'><NavLink to='/signin'>Sign In</NavLink></button>
+                <NavLink to='/signup' className='bg-veryGreen text-white px-4 py-3 button rounded-2xl'>Try Bizhub for free</NavLink>
             </ul>
         </nav>
     </div>
