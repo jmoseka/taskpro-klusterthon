@@ -1,12 +1,16 @@
+import slack from '../assets/Slack.png'
+import reddit from '../assets/reddit.png'
+import redbull from '../assets/redbull.png'
+import upwork from '../assets/upwork.png'
 export const images = [
     {
-        image: 'assets/slack.png'
+        image: slack
     },
     {
-        image: 'assets/reddit.png'
+        image: reddit
     },
     {
-        image: 'assets/upwork.png'
+        image: upwork
     },
     {
         image: 'assets/intel.png'
@@ -15,7 +19,7 @@ export const images = [
         image: 'assets/microsoft.png'
     },
     {
-        image: 'assets/redbull.png'
+        image: redbull
     },
     {
         image: 'assets/google.png'

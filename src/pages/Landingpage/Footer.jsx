@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import bizWhite from '../../assets/bizhubwhite.png'
 
 const Footer = () => {
   return (
     <footer className="bg-veryGreen py-6 px-5 lg:px-20 text-white ">
       <div className="flex flex-col md:flex md:flex-row md:justify-between gap-6 md:items-start pb-12">
       <div>
-        <img src="assets/BizHubLogo.png" alt="BizHub Logo" className="w-56" />
+        <img src={bizWhite} alt="BizHub Logo" className="w-56" />
         <Link to='/signin'>Log in</Link>
       </div>
       <div className="w-48 maj">
