@@ -6,6 +6,7 @@ import './Dashboard.css';
 import data from '../../Database/ClientsData'
 import DashboardTableInvoice from '../Invoices/TableInvoice/DashboardTableInvoice';
 import FetchAllClients from '../../modules/FetchAllClients';
+import { useNavigate } from 'react-router';
 
 
 
@@ -19,21 +20,32 @@ function Dashboard() {
     const [filteredOption, setFilteredOption] = useState('All');
     const [dataNames, setDataNames] = useState([]);
     const [clientId, setClientID] = useState('')
+    
 
     const filteredClients = clientsArr.filter((client) =>
         client.toLowerCase().includes(searchClient.toLowerCase())
     );
 
+    let navigate = useNavigate();
 
     useEffect(() => {
-        const fetchData = async () => {
-            const clients = await FetchAllClients()
-            setDataNames(clients)
-            setClientID(clients[0].id);
-        };
+        const token = localStorage.getItem('bizToken');
+        if (!token) {
+            navigate('/signin')
+        }
 
-        fetchData();
-    }, []);
+        else {
+            console.log(token);
+            const fetchData = async () => {
+                const clients = await FetchAllClients()
+                setDataNames(clients)
+                setClientID(clients[0].id);
+            };
+
+            fetchData();
+        }
+
+    }, [navigate]);
 
 
 
@@ -115,13 +127,13 @@ function Dashboard() {
                             <ul className={`p-0 m-0 h-full flex flex-col gap-1 ${clientsArr.length <= 0 || filteredClients.length <= 0 ? 'justify-center' : ''} `}>
                                 {
 
-                                    
-                                        dataNames.map((client, index) => (
-                                            <button onClick={() => handleClientClick(index, client.name, client.id)} key={`${index}client`}
-                                                className={`capitalize text-left text-sm px-7 py-2 w-full outline-0 ${clientClick === index ?
-                                                    'bg-lightBlue' : ''} `}>{client.name}</button>
 
-                                        ))
+                                    dataNames.map((client, index) => (
+                                        <button onClick={() => handleClientClick(index, client.name, client.id)} key={`${index}client`}
+                                            className={`capitalize text-left text-sm px-7 py-2 w-full outline-0 ${clientClick === index ?
+                                                'bg-lightBlue' : ''} `}>{client.name}</button>
+
+                                    ))
 
 
                                 }

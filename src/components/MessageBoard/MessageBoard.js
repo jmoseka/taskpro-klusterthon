@@ -17,6 +17,7 @@ function MessageBoard() {
 
         async function getCurrentUser() {
             await fetchCurrentUser();
+            console.log(await fetchCurrentUser());
             const { first_name } = await fetchCurrentUser();
             if (first_name) {
                 setCurrentUser(first_name)
