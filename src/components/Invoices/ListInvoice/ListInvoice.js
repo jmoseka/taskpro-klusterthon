@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import add from '../../../icons/0.75x/pluswhite.png'
 import arrowdown from '../../../icons/0.75x/arrow-down.png'
-import data from '../../../Database/ClientsData';
 import './ListInvoice.css';
 import DashboardTableInvoice from "../TableInvoice/DashboardTableInvoice";
 import FetchAllClients from "../../../modules/FetchAllClients";

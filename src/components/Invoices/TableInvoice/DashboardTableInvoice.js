@@ -2,13 +2,12 @@ import paid from '../../../icons/0.75x/paid.png';
 import unpaid from '../../../icons/0.75x/unpaid.png';
 
 import './TableInvoice.css';
-import { getClientInvoices } from '../../../modules/GetClientInvoices';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import GetToken from '../../../modules/GetToken';
 
 
-function DashboardTableInvoice({ clientID, clientName, invoiceStatus }) {
+function DashboardTableInvoice({ clientID, invoiceStatus }) {
     const [dataInvoice, setDataInvoice] = useState([])
 
     const fetchInvoice = async (clientID) => {
