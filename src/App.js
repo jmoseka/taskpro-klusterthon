@@ -11,7 +11,7 @@ import Invoice from './components/Invoices/Invoice';
 
 function App() {
   return (
-    <div className="App font-poppins overflow-hidden">
+    <div className=" App font-poppins overflow-hidden">
       <Routes>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/signin" element={<SignIn/>}/>
