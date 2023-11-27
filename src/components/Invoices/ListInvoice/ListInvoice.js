@@ -63,7 +63,6 @@ function ListInvoice({ onAddInvoice }) {
 
     }, [setDataNames]);
 
-
     return (
 
         <div className="py-9 relative">
