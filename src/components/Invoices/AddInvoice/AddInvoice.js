@@ -3,7 +3,6 @@ import arrowdown from '../../../icons/0.75x/arrow-down.png'
 import save from '../../../icons/0.75x/save.png'
 import cancel from '../../../icons/0.75x/trash.png'
 import success from '../../../icons/1x/check_small.png'
-import { getAllClients } from '../../../modules/GetClient';
 
 import './AddInvoice.css';
 import { useEffect } from 'react';
@@ -12,7 +11,6 @@ import GetToken from '../../../modules/GetToken';
 import axios from 'axios';
 
 function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvoiceId }) {
-    const [allClients, setAllClients] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
     const typeRef = useRef(null);
@@ -26,12 +24,9 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
 
     const [loadMessage, setLoadMessage] = useState(false)
     const [loadingAnime, setLoadingAnime] = useState(false);
-    const [formLoad, setFormLoadAnime] = useState(false);
     const [clientId, setClientId] = useState('');
     const [date, setDate] = useState('');
-    const [dataNames, setDataNames] = useState();
     const [cost, setCost] = useState('');
-    const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('')
 
 
@@ -50,11 +45,11 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                 setIsBriefLoad(false)
             }, 1200);
 
-            setAllClients(dataNameInvoice);
+            
         }
 
 
-    }, [dataNameInvoice, onCloseInvoice, setAllClients]);
+    }, [dataNameInvoice, onCloseInvoice]);
 
 
 
@@ -137,10 +132,6 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
 
     const handleChangeCost = (e) => {
         setCost(e.target.value)
-    }
-
-    const handleChangeTitle = (e) => {
-        setTitle(e.target.value)
     }
 
     const handleChangeDesc = (e) => {
@@ -279,7 +270,7 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                                 type='text'
                                 id='invoiceTitle'
                                 name='invoiceTitle'
-                                onChange={handleChangeTitle}
+                                
                             />
                         </div>
 
