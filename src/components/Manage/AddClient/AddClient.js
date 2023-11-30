@@ -8,38 +8,30 @@ import axios from 'axios';
 
 
 const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, editClientAddress, editClientTask, editClientContact, onCloseClient, onSaveClient }) => {
-    const [loadMessage, setLoadMessage] = useState(false)
-    const [loadingAnime, setLoadingAnime] = useState(false);
-    const [loadingAnimeEdit, setLoadingAnimeEdit] = useState(false);
-    const [clientName, setClientName] = useState()
-    const [clientEmail, setClientEmail] = useState()
-    const [clientAddress, setClientAddress] = useState()
-    const [clientTask, setClientTask] = useState()
-    const [clientContact, setClientContact] = useState()
+    const [loadingAnime, setLoadingAnime] = useState(null);
     const initialValues = { client: '', email: '', address: '', task: '', contact: null }
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
     const [overlay, setOverlay] = useState(false);
     const [notice, setNotice] = useState('')
 
 
     useEffect(() => {
+        setOverlay(true)
 
-        if (editStatus === 'edit') {
-            setLoadingAnime(true)
-            setTimeout(() => {
-                setLoadingAnimeEdit(false)
-                setClientName(editClientName);
-                setClientEmail(editClientEmail)
-                setClientAddress(editClientAddress)
-                setClientContact(editClientContact)
-                setClientTask(editClientTask)
-            }, 2000);
+        setTimeout(() => {
+            setOverlay(false)
+            if (editStatus === 'edit') {
 
-        }
+                const res = { client: editClientName, email: editClientEmail, address: editClientAddress, task: editClientTask, contact: editClientContact }
+                setFormValues(res)
 
-    }, [editStatus, setClientName, editClientName, editClientEmail, setClientEmail, editClientContact, setClientContact, editClientAddress, setClientAddress, editClientTask, setClientTask, formErrors, isSubmit, formValues]); // Add dependencies as needed
+            }
+        }, 1000);
+
+
+
+    }, [editStatus, editClientName, editClientEmail, editClientContact, editClientAddress, editClientTask]); // Add dependencies as needed
 
 
 
@@ -62,7 +54,6 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                 task_details: formValues.task,
                 contact: formValues.contact
             };
-            setLoadingAnime(!loadMessage)
 
             axios.post('https://bizhub-8955b30ff7e1.herokuapp.com/client/create/', postData, { headers })
                 .then(response => {
@@ -112,8 +103,6 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value })
-
-
     }
 
     const validate = (values) => {
@@ -149,34 +138,43 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
 
     const handleEditClient = (event) => {
         event.preventDefault();
-        setFormErrors(validate(formValues))
-        setIsSubmit(true);
-
         const headers = {
             Authorization: `Token ${GetToken()}`,
         };
 
-        const postData = {
-            name: clientName,
-            email: clientEmail,
-            address: clientAddress,
-            task_details: clientTask,
-            contact: clientContact
-        };
-        setLoadingAnime(!loadMessage)
+        setFormErrors(validate(formValues))
+        if (formValues.client && formValues.email && formValues.address && formValues.task && formValues.contact) {
+            setOverlay(true)
+            setLoadingAnime(true)
 
-        axios.put(`https://bizhub-8955b30ff7e1.herokuapp.com/client/update/${editClientId}/`, postData, { headers })
-            .then(response => {
-                setLoadMessage(!loadMessage)
-                setLoadingAnime(false);
-                setTimeout(() => {
-                    onSaveClient(false)
-                }, 2000);
-                return response.data;
-            })
-            .catch(error => {
-                return error;
-            });
+            const postData = {
+                name: formValues.client,
+                email: formValues.email,
+                address: formValues.address,
+                task_details: formValues.task,
+                contact: formValues.contact
+            };
+
+
+            axios.put(`https://bizhub-8955b30ff7e1.herokuapp.com/client/update/${editClientId}/`, postData, { headers })
+                .then(response => {
+                    setNotice('Client updated successfully!')
+                    setLoadingAnime(false);
+                    setTimeout(() => {
+                        setOverlay(false)
+                        onSaveClient(false)
+                    }, 2000);
+                    return response.data;
+                })
+                .catch(error => {
+                    return error;
+                });
+
+        }
+
+
+
+
     }
 
 
@@ -185,7 +183,7 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
         <div className='py-9'>
             <div className="card relative">
                 {
-                    overlay ?
+                    overlay === true ?
                         <div className='modal-blur'>
                             {
                                 loadingAnime === true ?
@@ -193,14 +191,19 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                                         <div class="custom-loader mx-auto"></div>
                                     </div>
                                     :
+                                    ''
+                            }
 
+                            {
+                                loadingAnime === false ?
                                     <div className='addmodal'>
                                         <span className='flex flex-col justify-center items-center gap-4'>
-                                        <span>{editStatus === 'edit' ? notice : notice }</span>
-                                        <span><img src={success} alt='green check tick box' /></span>
-                                    </span>
-                                     </div>
-                                    
+                                            <span>{editStatus === 'edit' ? notice : notice}</span>
+                                            <span><img src={success} alt='green check tick box' /></span>
+                                        </span>
+                                    </div>
+                                    :
+                                    ''
                             }
 
                         </div>
@@ -222,7 +225,7 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
 
                 <div className='pt-8 pb-4'>
                     <div className="flex flex-col gap-3">
-                        <div className="flex flex-col items-start px-4">
+                        <div className="flex flex-col items-start px-7">
                             <p className=" font-semibold">{editStatus === 'edit' ? 'Update Client' : 'New client '}</p>
 
                         </div>
