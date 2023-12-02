@@ -21,14 +21,11 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
     const [itemTypeName, setItemTypeName] = useState('SERVICES');
     const [overlay, setOverlay] = useState(false)
     const [notfiyMsg, setNotifyMsg] = useState('');
-    const [isCloseInvoice, setIsCloseInvoice] = useState(false);
-    const [isBriefLoad, setIsBriefLoad] = useState(false);
 
     const initialValues = { invoiceDate: '', invoiceTitle: '', invoiceCost: null, invoiceDesc: '' }
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
 
-    const [loadMessage, setLoadMessage] = useState(false)
     const [loadingAnime, setLoadingAnime] = useState(null);
     const [clientId, setClientId] = useState('');
 
@@ -41,18 +38,10 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
         }, 1000);
 
         if (dataNameInvoice.length <= 0) {
-            setIsCloseInvoice(true);
-            setTimeout(() => {
-                onCloseInvoice(false)
-            }, 3000);
         }
         else {
-            setIsBriefLoad(true);
             setClientName([dataNameInvoice[0].name])
             setClientId([dataNameInvoice[0].id])
-            setTimeout(() => {
-                setIsBriefLoad(false)
-            }, 1200);
         }
 
 
@@ -221,22 +210,6 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
 
 
             <div className="card">
-
-                <div className={`modal-blur ${loadMessage === true ? 'block' : 'hidden'}`}>
-                    <div className='modal-window addmodal '>
-
-                        {
-                            loadingAnime === true ?
-                                <div className='mx-auto custom-loader'></div>
-                                :
-
-                                <span className='flex  flex-col justify-center items-center gap-4'>
-                                    <span>Invoice created successfully</span>
-                                    <span><img src={success} alt='green check tick box' /></span>
-                                </span>
-                        }
-                    </div>
-                </div>
 
                 <div>
 

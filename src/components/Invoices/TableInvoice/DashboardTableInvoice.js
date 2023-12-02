@@ -46,7 +46,6 @@ function DashboardTableInvoice({ getUnpaidInvoiceID, handlePayInvoice, clientID,
         filterArray = dataInvoice;
     }
 
-    console.log(filterArray);
 
     return (
         <table className='w-full table-invoice'>
