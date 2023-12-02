@@ -19,6 +19,8 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
     const [isTypeOpen, setIsTypeOpen] = useState(false)
     const [itemTypeIndex, setItemTypeIndex] = useState(0);
     const [itemTypeName, setItemTypeName] = useState('SERVICES');
+    const [overlay, setOverlay] = useState(false)
+    const [notfiyMsg, setNotifyMsg] = useState('');
     const [isCloseInvoice, setIsCloseInvoice] = useState(false);
     const [isBriefLoad, setIsBriefLoad] = useState(false);
 
@@ -27,11 +29,17 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
     const [formErrors, setFormErrors] = useState({});
 
     const [loadMessage, setLoadMessage] = useState(false)
-    const [loadingAnime, setLoadingAnime] = useState(false);
+    const [loadingAnime, setLoadingAnime] = useState(null);
     const [clientId, setClientId] = useState('');
 
 
     useEffect(() => {
+        setOverlay(true)
+
+        setTimeout(() => {
+            setOverlay(false)
+        }, 1000);
+
         if (dataNameInvoice.length <= 0) {
             setIsCloseInvoice(true);
             setTimeout(() => {
@@ -45,8 +53,6 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
             setTimeout(() => {
                 setIsBriefLoad(false)
             }, 1200);
-
-
         }
 
 
@@ -57,6 +63,7 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+      
 
     const itemType = [
         'SERVICES',
@@ -104,9 +111,9 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
         const headers = {
             Authorization: `Token ${GetToken()}`,
         };
-        
-   
+
         if (formValues.invoiceCost && formValues.invoiceDate && formValues.invoiceDesc) {
+
             const postData = {
                 due_date: formValues.invoiceDate,
                 description: formValues.invoiceDesc,
@@ -114,23 +121,37 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                 amount: formValues.invoiceCost,
             };
 
+
+
+            setOverlay(true);
             setLoadingAnime(true);
 
-            // axios.post(`https://bizhub-8955b30ff7e1.herokuapp.com/order/create/${clientId}/`,
-            //     postData, { headers })
-            //     .then(response => {
-            //         setLoadingAnime(false);
-            //         setLoadMessage(!loadMessage)
-            //         setTimeout(() => {
-            //             onSaveInvoice(false)
-            //         }, 2000);
+            axios.post(`https://bizhub-8955b30ff7e1.herokuapp.com/order/create/${clientId}/`,
+                postData, { headers })
+                .then(response => {
                     
-            //         return response.data;
+                    setLoadingAnime(false);
+                    setNotifyMsg('Invoice created succesfully!')
+                    setTimeout(() => {
+                        setOverlay(false)
+                        setFormValues(initialValues);
+                        onSaveInvoice(false)
+                        
+                    }, 2000);
 
-            //     })
-            //     .catch(error => {
-            //         return error;
-            //     });
+                    return response.data;
+
+                })
+                .catch(error => {
+          
+                    setLoadingAnime(false);
+                    setNotifyMsg('Please try again!')
+                    setTimeout(() => {
+                        setFormValues(initialValues);
+                        setOverlay(false)
+                    }, 2000);
+                    return error;
+                });
         }
 
 
@@ -169,19 +190,34 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
         <div className="py-9 relative">
 
             {
-                isCloseInvoice ?
-                    <div className='modal-blur absolute flex justify-center items-center h-full'>
-                        <p>No client added</p>
+                overlay === true ?
+                    <div className='modal-blur'>
+                        {
+                            loadingAnime === true ?
+                                <div className='position-loader'>
+                                    <div class="custom-loader mx-auto"></div>
+                                </div>
+                                :
+                                ''
+                        }
+
+                        {
+                            loadingAnime === false ?
+                                <div className='addmodal'>
+                                    <span className='flex flex-col justify-center items-center gap-4'>
+                                        <span>{notfiyMsg}</span>
+                                        <span><img src={success} alt='green check tick box' /></span>
+                                    </span>
+                                </div>
+                                :
+                                ''
+                        }
+
                     </div>
-                    : ''
+                    :
+                    ''
             }
 
-            {
-                isBriefLoad ?
-                    <div className='modal-blur absolute flex justify-center items-center h-full'>
-                    </div>
-                    : ''
-            }
 
 
             <div className="card">

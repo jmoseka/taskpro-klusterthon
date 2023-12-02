@@ -67,9 +67,12 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                     return response.data;
                 })
                 .catch(error => {
-                    setNotice('Please try again!')
                     setLoadingAnime(false);
-                    setOverlay(false)
+                    setNotice('Please try again')
+                    setTimeout(() => {
+                        setFormValues(initialValues);
+                        setOverlay(false)
+                    }, 2000);
                     return error;
                 });
 
@@ -158,15 +161,24 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
 
             axios.put(`https://bizhub-8955b30ff7e1.herokuapp.com/client/update/${editClientId}/`, postData, { headers })
                 .then(response => {
+                   
                     setNotice('Client updated successfully!')
                     setLoadingAnime(false);
                     setTimeout(() => {
+                        setFormValues(initialValues);
                         setOverlay(false)
                         onSaveClient(false)
                     }, 2000);
                     return response.data;
                 })
                 .catch(error => {
+                
+                    setLoadingAnime(false);
+                    setNotice('Please try again')
+                    setTimeout(() => {
+                        setFormValues(initialValues);
+                        setOverlay(false)
+                    }, 2000);
                     return error;
                 });
 
@@ -211,16 +223,6 @@ const AddClient = ({ editClientId, editStatus, editClientName, editClientEmail, 
                         ''
                 }
 
-                {/* {
-                    loadingAnimeEdit ?
-
-                        <div className='modal-blur'>
-
-                        </div>
-
-
-                        : ''
-                } */}
 
 
                 <div className='pt-8 pb-4'>
