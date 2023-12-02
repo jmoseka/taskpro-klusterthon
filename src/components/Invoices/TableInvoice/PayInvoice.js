@@ -1,5 +1,4 @@
 import axios from "axios";
-import GetToken from "../../../modules/GetToken";
 import { useEffect, useState } from "react";
 
 const PayInvoice = ({ getUnpaidInvoiceID, clientID }) => {
@@ -12,7 +11,6 @@ const PayInvoice = ({ getUnpaidInvoiceID, clientID }) => {
     ref: "",
   });
 
-  console.log(getUnpaidInvoiceID);
 
   useEffect(() => {
     const InvoiceDataFetch = async () => {
@@ -26,7 +24,6 @@ const PayInvoice = ({ getUnpaidInvoiceID, clientID }) => {
           }
         )
         .then((response) => {
-            console.log(response.data)
           setInvoiceData(response.data);
         })
         .catch((error) => {

@@ -19,33 +19,29 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
     const [isTypeOpen, setIsTypeOpen] = useState(false)
     const [itemTypeIndex, setItemTypeIndex] = useState(0);
     const [itemTypeName, setItemTypeName] = useState('SERVICES');
-    const [isCloseInvoice, setIsCloseInvoice] = useState(false);
-    const [isBriefLoad, setIsBriefLoad] = useState(false);
+    const [overlay, setOverlay] = useState(false)
+    const [notfiyMsg, setNotifyMsg] = useState('');
 
-    const [loadMessage, setLoadMessage] = useState(false)
-    const [loadingAnime, setLoadingAnime] = useState(false);
+    const initialValues = { invoiceDate: '', invoiceTitle: '', invoiceCost: null, invoiceDesc: '' }
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
+
+    const [loadingAnime, setLoadingAnime] = useState(null);
     const [clientId, setClientId] = useState('');
-    const [date, setDate] = useState('');
-    const [cost, setCost] = useState('');
-    const [desc, setDesc] = useState('')
 
 
     useEffect(() => {
+        setOverlay(true)
+
+        setTimeout(() => {
+            setOverlay(false)
+        }, 1000);
+
         if (dataNameInvoice.length <= 0) {
-            setIsCloseInvoice(true);
-            setTimeout(() => {
-                onCloseInvoice(false)
-            }, 3000);
         }
         else {
-            setIsBriefLoad(true);
             setClientName([dataNameInvoice[0].name])
             setClientId([dataNameInvoice[0].id])
-            setTimeout(() => {
-                setIsBriefLoad(false)
-            }, 1200);
-
-            
         }
 
 
@@ -56,6 +52,7 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+      
 
     const itemType = [
         'SERVICES',
@@ -99,102 +96,122 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
 
     const handleCreateInvoice = (event) => {
         event.preventDefault();
+        setFormErrors(validate(formValues))
         const headers = {
             Authorization: `Token ${GetToken()}`,
         };
 
-        const postData = {
-            due_date: date,
-            description: desc,
-            order_type: itemTypeName,
-            amount: cost,
-        };
+        if (formValues.invoiceCost && formValues.invoiceDate && formValues.invoiceDesc) {
 
-        setLoadingAnime(true);
+            const postData = {
+                due_date: formValues.invoiceDate,
+                description: formValues.invoiceDesc,
+                order_type: itemTypeName,
+                amount: formValues.invoiceCost,
+            };
 
-        axios.post(`https://bizhub-8955b30ff7e1.herokuapp.com/order/create/${clientId}/`,
-            postData, { headers })
-            .then(response => {
-                setLoadingAnime(false);
-                setLoadMessage(!loadMessage)
-                setTimeout(() => {
-                    onSaveInvoice(false)
-                }, 2000);
-                return response.data;
 
-            })
-            .catch(error => {
-                return error;
-            });
+
+            setOverlay(true);
+            setLoadingAnime(true);
+
+            axios.post(`https://bizhub-8955b30ff7e1.herokuapp.com/order/create/${clientId}/`,
+                postData, { headers })
+                .then(response => {
+                    
+                    setLoadingAnime(false);
+                    setNotifyMsg('Invoice created succesfully!')
+                    setTimeout(() => {
+                        setOverlay(false)
+                        setFormValues(initialValues);
+                        onSaveInvoice(false)
+                        
+                    }, 2000);
+
+                    return response.data;
+
+                })
+                .catch(error => {
+          
+                    setLoadingAnime(false);
+                    setNotifyMsg('Please try again!')
+                    setTimeout(() => {
+                        setFormValues(initialValues);
+                        setOverlay(false)
+                    }, 2000);
+                    return error;
+                });
+        }
+
+
+
+    }
+
+
+    const handleOnChange = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value })
+    }
+
+    const validate = (values) => {
+        const errors = {}
+        if (!values.invoiceDate) {
+            errors.invoiceDate = 'Date is required'
+        }
+        if (!values.invoiceCost) {
+            errors.invoiceCost = 'Amount is required'
+        }
+
+        if (!values.invoiceDesc) {
+            errors.invoiceDesc = 'Description is required'
+        }
+        else if (values.invoiceDesc.length > 30) {
+            errors.task = 'Please give a short description'
+        }
+
+        return errors
     }
 
 
-
-    const handleChangeCost = (e) => {
-        setCost(e.target.value)
-    }
-
-    const handleChangeDesc = (e) => {
-        setDesc(e.target.value)
-    }
-
-    const handleDate = (e) => {
-        const value = e.target.value;
-        // Format the Date object to 'YYYY-MM-DD' string format
-        const dateObject = new Date(value);
-        const year = dateObject.getFullYear();
-        const month = String(dateObject.getMonth() + 1).padStart(2, '0');
-        const day = String(dateObject.getDate()).padStart(2, '0');
-        // Constructing the formatted date string 'YY-MM-DD'
-        const formattedDateString = `${year}-${month}-${day}`;
-        setDate(formattedDateString)
-
-    }
 
     return (
 
         <div className="py-9 relative">
 
             {
-                isCloseInvoice ?
-                    <div className='modal-blur absolute flex justify-center items-center h-full'>
-                        <p>No client added</p>
-                    </div>
-                    : ''
-            }
+                overlay === true ?
+                    <div className='modal-blur'>
+                        {
+                            loadingAnime === true ?
+                                <div className='position-loader'>
+                                    <div class="custom-loader mx-auto"></div>
+                                </div>
+                                :
+                                ''
+                        }
 
-            {
-                isBriefLoad ?
-                    <div className='modal-blur absolute flex justify-center items-center h-full'>
-                    </div>
-                    : ''
-            }
+                        {
+                            loadingAnime === false ?
+                                <div className='addmodal'>
+                                    <span className='flex flex-col justify-center items-center gap-4'>
+                                        <span>{notfiyMsg}</span>
+                                        <span><img src={success} alt='green check tick box' /></span>
+                                    </span>
+                                </div>
+                                :
+                                ''
+                        }
 
-            
+                    </div>
+                    :
+                    ''
+            }
 
 
 
             <div className="card">
 
-                <div className={`modal-blur ${loadMessage === true ? 'block' : 'hidden'}`}>
-                    <div className='modal-window addmodal '>
-
-                        {
-                            loadingAnime === true ?
-                                <div className='mx-auto custom-loader'></div>
-                                :
-
-                                <span className='flex  flex-col justify-center items-center gap-4'>
-                                    <span>Invoice created successfully</span>
-                                    <span><img src={success} alt='green check tick box' /></span>
-                                </span>
-                        }
-                    </div>
-                </div>
-
-
                 <div>
-
 
                     <div className='py-4 border-b-[1px] border-b-grey pb-3'>
                         <div className="px-7 flex flex-col items-start gap-2">
@@ -225,20 +242,22 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                     </div>
 
 
-                    <form onSubmit={handleCreateInvoice} className='px-8 py-3 overflow-y-scroll flex flex-col gap-6'>
-                        <div className='form-ctrl-group'>
-                            <div className='duedate-group'>
-                                <label htmlFor='firstName'>Due date </label>
+                    <form className='px-8 py-3 overflow-y-scroll flex flex-col gap-6'>
+                        <div className='form-ctrl-group '>
+                            <div className='sub-group'>
+                                <label htmlFor='invoiceLabel'>Due date </label>
                                 <div className='w-full text-start'>
-                                    <input required type='date' onChange={handleDate} className='due-date font' />
+                                    <input required type='date' name='invoiceDate' value={formValues.invoiceDate}
+                                        onChange={handleOnChange} className='w-full due-date font' />
+                                    <p className='error-mg'>{formErrors.invoiceDate}</p>
                                 </div>
 
                             </div>
 
-                            <div className='duedate-group'>
-                                <label htmlFor='firstName'>Currency </label>
-                                <div className='w-full text-start'>
-                                    <p className='due-date font-medium'>Nigerian Naira - NGN</p>
+                            <div className='sub-group'>
+                                <label htmlFor='invoiceCurrency'>Currency </label>
+                                <div className='w-full text-start '>
+                                    <p className='text-[0.78rem] font-medium rounded-lg border border-grey w-fit px-4 py-2'>Nigerian Naira - NGN</p>
                                 </div>
 
                             </div>
@@ -252,12 +271,15 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                             <div className='w-full text-start'>
                                 <input
                                     required
-                                    className='w-48'
+                                    className='w-full'
                                     type='number'
                                     id='costInvoice'
-                                    name='costInvoice'
-                                    onChange={handleChangeCost}
+                                    name='invoiceCost'
+                                    value={formValues.invoiceCost}
+                                    onChange={handleOnChange}
                                 />
+
+                                <p className='error-mg'>{formErrors.invoiceCost}</p>
                             </div>
                         </div>
 
@@ -270,7 +292,7 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
                                 type='text'
                                 id='invoiceTitle'
                                 name='invoiceTitle'
-                                
+
                             />
                         </div>
 
@@ -315,10 +337,11 @@ function AddInvoice({ dataNameInvoice, onCloseInvoice, onSaveInvoice, clientInvo
 
 
                                     <td className='pt-3'>
-                                        <div className='h-[135px]'>
-                                            <textarea className='rounded-lg border border-grey w-full h-full' type='text' onChange={handleChangeDesc} />
+                                        <div className='h-[115px]'>
+                                            <textarea className='px-4 py-2 rounded-lg border border-grey w-full h-full' type='text' name='invoiceDesc' value={formValues.invoiceDesc} onChange={handleOnChange} />
 
                                         </div>
+                                        <p className='error-mg'>{formErrors.invoiceDesc}</p>
                                     </td>
 
                                 </tr>

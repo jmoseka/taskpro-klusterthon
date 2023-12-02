@@ -28,7 +28,8 @@ textarea {
 }
 
 .addmodal {
-  @apply text-center w-[300px] rounded-xl p-7 absolute top-[25%] left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white  z-50;
+  @apply  transition duration-300 ease-linear text-center w-[300px] rounded-xl p-7 absolute top-[25%] left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white  z-50;
+  box-shadow: -1px 1px 6px 0px rgba(0, 0, 0, 0.22);
 }
 
 .modal-blur {
@@ -37,10 +38,12 @@ textarea {
 }
 
 .custom-loader {
+  width:50px;
+  height:50px;
   --c: radial-gradient(farthest-side, #efda21 92%, #0000);
   background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%,
     var(--c) 0 50%;
-  background-size: 12px 12px;
+  background-size: 15px 15px;
   background-repeat: no-repeat;
   animation: s7 1s infinite;
 }
@@ -48,4 +51,12 @@ textarea {
   to {
     transform: rotate(0.5turn);
   }
+}
+
+.position-loader {
+  @apply absolute top-[25%] left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+}
+
+.error-mg {
+  @apply text-xs py-1 text-red;
 }
